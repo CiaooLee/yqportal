@@ -3,7 +3,7 @@ package com.yaqiu.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateTimeUtil {
+public class DateUtil {
     /**
      *@Description 获取当前日期&&时间（yyyy-MM-dd HH:mm:ss）
      *@author CiaoLee

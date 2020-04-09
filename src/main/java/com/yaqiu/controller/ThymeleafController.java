@@ -1,6 +1,5 @@
 package com.yaqiu.controller;
 
-import com.yaqiu.util.DateTimeUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,7 @@ public class ThymeleafController {
      */
     @RequestMapping("case")
     public String toCase(ModelMap map) {
-        map.addAttribute("domain", "case");
+        map.addAttribute("identifier", "case");
         return "content/index.html";
     }
 
@@ -23,16 +22,26 @@ public class ThymeleafController {
      */
     @RequestMapping("news")
     public String toNews(ModelMap map) {
-        map.addAttribute("domain", "news");
+        map.addAttribute("identifier", "news");
         return "content/index.html";
     }
 
     /**
-     *@Description “文章”面板跳转映射
+     *@Description “讨论区”面板跳转映射
      *@author CiaoLee
      */
-    @RequestMapping("detail")
-    public String toDetail(String type, String id) {
+    @RequestMapping("forum")
+    public String toForum(ModelMap map) {
+        map.addAttribute("identifier", "forum");
+        return "content/index.html";
+    }
+
+    /**
+     *@Description “帖子详情”跳转映射
+     *@author CiaoLee
+     */
+    @RequestMapping("content")
+    public String toDetail(String id) {
         return "content/show.html";
     }
 }
