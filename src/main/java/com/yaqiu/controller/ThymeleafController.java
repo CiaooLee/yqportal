@@ -7,6 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ThymeleafController {
     /**
+     *@Description “主页”跳转映射
+     *@author CiaoLee
+     */
+    @RequestMapping("index.html")
+    public String toPortal() {
+        return "index.html";
+    }
+
+    /**
      *@Description “案例”面板跳转映射
      *@author CiaoLee
      */
