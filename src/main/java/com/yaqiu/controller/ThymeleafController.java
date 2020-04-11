@@ -7,41 +7,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ThymeleafController {
     /**
-     *@Description “案例”面板跳转映射
+     *@Description foreground/index.html 前台-首页跳转映射
      *@author CiaoLee
      */
-    @RequestMapping("case")
-    public String toCase(ModelMap map) {
-        map.addAttribute("identifier", "case");
-        return "content/index.html";
+    @RequestMapping("/")
+    public String toPortal() {
+        return "foreground/index.html";
     }
 
     /**
-     *@Description “新闻”面板跳转映射
+     *@Description foreground/content/index.html 前台-各面板跳转映射
      *@author CiaoLee
      */
-    @RequestMapping("news")
-    public String toNews(ModelMap map) {
-        map.addAttribute("identifier", "news");
-        return "content/index.html";
+    @RequestMapping("domain")
+    public String toCase(ModelMap map, String type) {
+        map.addAttribute("identifier", type);
+        return "foreground/content/index.html";
     }
 
     /**
-     *@Description “讨论区”面板跳转映射
-     *@author CiaoLee
-     */
-    @RequestMapping("forum")
-    public String toForum(ModelMap map) {
-        map.addAttribute("identifier", "forum");
-        return "content/index.html";
-    }
-
-    /**
-     *@Description “帖子详情”跳转映射
+     *@Description foreground/content/show.html 前台-“帖子详情”跳转映射
      *@author CiaoLee
      */
     @RequestMapping("content")
     public String toDetail(String id) {
-        return "content/show.html";
+        return "foreground/content/show.html";
     }
 }
