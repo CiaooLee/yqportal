@@ -633,13 +633,13 @@
      *@author CiaoLee
      */
     /* 导航栏登录/注册点击事件 */
-    $(".navbar-btn").bind("click", function (event) {
+    $(".navbar-btn").bind("click", function () {
         $("#sign-modal").removeClass("show");
         $("#sign-modal").addClass("in");
     });
 
     /* 登录按钮点击事件 */
-    $(".sign-in").bind("click", function (event) {
+    $(".sign-in").bind("click", function () {
         $("#sign-modal").removeClass("show");
         $("#sign-modal").addClass("in");
         //给模态框登录按钮加上class[active]
@@ -670,12 +670,13 @@
     /* 模态框登录/注册点击事件 */
     $("#modal-sign-button").bind("click", function (event) {
         //获取当前按钮<a>
-        var target = $(event.target);
-        //给当前按钮<a> 和 父级<li> 加上class[active]
-        target.parent().addClass("active");
-        //给兄弟节点的<li> 和子<a> 去掉class[active]
-        target.removeClass("active");
-        target.children(0).removeClass("active");
+        var target = $(event.target).parent();
+        //给当前按钮<li> 加上class[active]
+        target.addClass("active");
+        target.children().removeClass("active");
+        //给兄弟节点<li> 去掉class[active]
+        target.siblings().removeClass("active");
+        target.siblings().children().removeClass("active");
     })
 </script>
 </html>
