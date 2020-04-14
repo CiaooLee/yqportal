@@ -16,9 +16,7 @@ public class PageVisitInterceptor implements HandlerInterceptor {
             mySession = request.getSession();
             SessionUtil.setMySession(mySession);
         }
-        /* 从session中取出当前登录用户信息 */
-        /* 获取当前用户的信息 组成操作记录 */
-
+        System.out.println(request.getRequestURI());
         return true;
     }
 

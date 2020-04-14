@@ -12,26 +12,30 @@
     <meta content="雅秋,重庆心理,重庆青少年心理,重庆心理咨询,重庆青少年心理咨询,心理,心理咨询,青少年心理咨询" name="keywords">
     <meta content="重庆雅秋,冰芒科技" name="author">
     <!-- css -->
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <link rel="stylesheet" href="css/font-awesome/font-awesome.min.css">
-    <link rel="stylesheet" href="css/highlight/monokai-sublime.min.css">
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="css/global/styles.css?=2016121272249">
-    <link rel="stylesheet" href="css/animate/animate.min.css">
+    <link rel="shortcut icon" href="foreground/common/img/favicon.ico">
+    <link rel="stylesheet" href="foreground/general/css/font-awesome/font-awesome.min.css">
+    <link rel="stylesheet" href="foreground/general/css/highlight/monokai-sublime.min.css">
+    <link rel="stylesheet" href="foreground/general/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="foreground/general/css/global/styles.css?=2016121272249">
+    <link rel="stylesheet" href="foreground/general/css/animate/animate.min.css">
     <!-- js -->
-    <script src="js/jquery/jquery.min.js"></script>
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="foreground/general/js/jquery/jquery.min.js"></script>
+    <script src="foreground/general/js/bootstrap/bootstrap.min.js"></script>
     <!-- 内联样式 -->
     <style>
         /* modal 模态框 */
-        .modal {
+        /*.modal {
             opacity: 1;
+        }*/
+
+        .show {
+            top: 200px;
         }
 
         /* 第一板块-主页 整体 */
         .navbar-banner {
             margin-top: 50px;
-            background: url("img/homepage.jpg");
+            background: url("foreground/general/img/homepage.jpg");
             background-size: cover;
             backgtound-repeat: no-repeat;
         }
@@ -49,7 +53,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">
-                <img src="img/logo_03.png">
+                <img src="foreground/img/logo_03.png">
             </a>
         </div>
         <div class="collapse navbar-collapse" id="header-navbar-collapse">
@@ -450,10 +454,10 @@
             <div class="modal-body">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#signin-form" aria-controls="signin-form" role="tab" data-toggle="tab">登录</a>
+                        <a class="modal-sign-button" href="#signin-form" aria-controls="signin-form" role="tab" data-toggle="tab">登录</a>
                     </li>
                     <li role="presentation">
-                        <a href="#signup-form" aria-controls="signup-form" role="tab" data-toggle="tab">注册</a>
+                        <a class="modal-sign-button" href="#signup-form" aria-controls="signup-form" role="tab" data-toggle="tab">注册</a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -475,20 +479,12 @@
                                     <input type="password" name="password" class="form-control" placeholder="请输入密码">
                                 </div>
                             </div>
-                            <div class="form-inline verify-code-item" style="display:none;">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text" name="captcha_v" class="form-control" placeholder="请输入验证码">
-                                    </div>
-                                </div>
-                                <img class="verify-code" src="" source="https://www.shiyanlou.com/captcha.gif">
-                            </div>
                             <div class="form-group remember-login">
                                 <input name="remember" type="checkbox" value="y"> 下次自动登录
                                 <a class="pull-right" href="reset_password/index.html">忘记密码？</a>
                             </div>
                             <div class="form-group">
-                                <input class="btn btn-primary" name="submit" type="submit" value="进入实验楼">
+                                <input class="btn btn-primary" name="submit" type="submit" value="开始探索">
                             </div>
                             <div class="form-group widget-signin">
                                 <span>快速登录</span>
@@ -521,13 +517,13 @@
                                     <input type="password" name="password" class="form-control" placeholder="请输入密码">
                                 </div>
                             </div>
-                            <div class="form-inline">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text" name="captcha_v" class="form-control" placeholder="请输入验证码">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-lock" style="margin:0;"></i>
                                     </div>
+                                    <input type="password" name="re-password" class="form-control" placeholder="请确认您的密码">
                                 </div>
-                                <img class="verify-code" src="" source="https://www.shiyanlou.com/captcha.gif">
                             </div>
                             <div class="form-group">
                                 <input class="btn btn-primary" name="submit" type="submit" value="注册">
@@ -631,5 +627,55 @@
     $(function() {
 
     });
+
+    /**
+     *@Description 绑定事件
+     *@author CiaoLee
+     */
+    /* 导航栏登录/注册点击事件 */
+    $(".navbar-btn").bind("click", function (event) {
+        $("#sign-modal").removeClass("show");
+        $("#sign-modal").addClass("in");
+    });
+
+    /* 登录按钮点击事件 */
+    $(".sign-in").bind("click", function (event) {
+        $("#sign-modal").removeClass("show");
+        $("#sign-modal").addClass("in");
+        //给模态框登录按钮加上class[active]
+        $(".modal-sign-buttons").eq(0).addClass("active");
+        $(".modal-sign-buttons").eq(1).removeClass("active");
+        //去掉模态框内容区域的class[active]
+    });
+
+    /* 登录/注册模态框出现时触发函数 */
+    $(".modal").on('show.bs.modal',function(){
+        //给模态框登录按钮加上class[active]
+        $(".modal-sign-buttons").eq(1).addClass("active");
+        $(".modal-sign-buttons").eq(0).removeClass("active");
+        //去掉模态框内容区域的class[active]
+        $("#signin-form").addClass("active");
+        $("#signup-form").removeClass("active");
+    });
+
+    /* 登录/注册模态框关闭时触发函数 */
+    $("#sign-modal").on("hide.bs.modal", function() {
+        $("#sign-modal").removeClass("in");
+        //去掉模态框按钮的class[active]
+        $(".modal-sign-buttons").removeClass("active");
+        //去掉模态框内容区域的class[active]
+        $(".tab-content").children().removeClass("active");
+    });
+
+    /* 模态框登录/注册点击事件 */
+    $("#modal-sign-button").bind("click", function (event) {
+        //获取当前按钮<a>
+        var target = $(event.target);
+        //给当前按钮<a> 和 父级<li> 加上class[active]
+        target.parent().addClass("active");
+        //给兄弟节点的<li> 和子<a> 去掉class[active]
+        target.removeClass("active");
+        target.children(0).removeClass("active");
+    })
 </script>
 </html>
