@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class ThymeleafController {
     /**
-     *@Description foreground/index.html 前台-首页跳转映射
-     *@author CiaoLee
+     * @Description foreground/index.html 前台-首页跳转映射
+     * @author CiaoLee
      */
     @RequestMapping("/")
     public String toPortal(HttpServletRequest request) {
@@ -26,16 +26,12 @@ public class ThymeleafController {
         /* 如果当前用户使用PC 则跳至PC端主页 */
         //if("COMPUTER".equals(deviceType)) return "foreground/general/index.html";
         /* 如果不能识别端类型 则跳至通用界面 */
-        HttpSession session = SessionUtil.get();
-        String id = session.getAttribute("id").toString();
-        //System.out.println(id);
-
         return "foreground/general/index.html";
     }
 
     /**
-     *@Description foreground/content/index.html 前台-各面板跳转映射
-     *@author CiaoLee
+     * @Description foreground/content/index.html 前台-各面板跳转映射
+     * @author CiaoLee
      */
     @RequestMapping("domain")
     public String toCase(ModelMap map, String type) {
@@ -44,8 +40,8 @@ public class ThymeleafController {
     }
 
     /**
-     *@Description foreground/content/show.html 前台-“帖子详情”跳转映射
-     *@author CiaoLee
+     * @Description foreground/content/show.html 前台-“帖子详情”跳转映射
+     *@ author CiaoLee
      */
     @RequestMapping("content")
     public String toDetail(String id) {

@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class VisitorUtil {
     /**
-     *@Description foreground/index.html 前台-首页跳转映射
-     *@author CiaoLee
+     * @Description foreground/index.html 前台-首页跳转映射
+     * @author CiaoLee
      */
     public static Map visitorInfoAnalyse() {
         /* 初始化返回结果集 */
