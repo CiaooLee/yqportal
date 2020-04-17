@@ -13,8 +13,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         /* 页面访问拦截器规则 */
         registry.addInterceptor(pageVisitInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/","/css/**","/js/**","/img/**");
+                .addPathPatterns("/*")
+                .excludePathPatterns("/error");
 
         /* 登录验证拦截器规则 */
         /*registry.addInterceptor(authenticationInterceptor())

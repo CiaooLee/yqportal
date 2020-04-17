@@ -453,7 +453,7 @@
             <button type="button" class="close-modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <div class="modal-body">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active">
+                    <li role="presentation">
                         <a class="modal-sign-button" href="#signin-form" aria-controls="signin-form" role="tab" data-toggle="tab">登录</a>
                     </li>
                     <li role="presentation">
@@ -461,7 +461,7 @@
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="signin-form">
+                    <div role="tabpanel" class="tab-pane" id="signin-form">
                         <form action="/login" method="post">
                             <div class="form-group">
                                 <div class="input-group">
@@ -490,9 +490,6 @@
                                 <span>快速登录</span>
                                 <a href="/auth/qq?next="><i class="fa fa-qq"></i></a>
                                 <a href="/auth/weibo?next="><i class="fa fa-weibo"></i></a>
-                                <a href="/auth/weixin?next="><i class="fa fa-weixin"></i></a>
-                                <a href="/auth/github?next="><i class="fa fa-github"></i></a>
-                                <a href="/auth/renren?next="><i class="fa fa-renren"></i></a>
                             </div>
                             <div class="form-group error-msg">
                                 <div class="alert alert-danger" role="alert"></div>
@@ -535,9 +532,6 @@
                                 <span>快速注册</span>
                                 <a href="/auth/qq?next="><i class="fa fa-qq"></i></a>
                                 <a href="/auth/weibo?next="><i class="fa fa-weibo"></i></a>
-                                <a href="/auth/weixin?next="><i class="fa fa-weixin"></i></a>
-                                <a href="/auth/github?next="><i class="fa fa-github"></i></a>
-                                <a href="/auth/renren?next="><i class="fa fa-renren"></i></a>
                             </div>
                             <div class="form-group error-msg">
                                 <div class="alert alert-danger" role="alert"></div>
@@ -621,6 +615,18 @@
 
 <script type="text/javascript">
     /**
+     *@Description 全局变量
+     *@author CiaoLee
+     */
+    var signModal = $("#sign-modal"); //登录/注册模态框
+    var modalSignInBtn = $(".modal-sign-button").eq(0); //模态框[登录]按钮最内层<a>标签
+    var modalSignInLi = modalSignInBtn.parent(); //模态框[登录]按钮最外层<li>标签
+    var modalSignUpBtn = $(".modal-sign-button").eq(1); //模态框[注册]按钮最内层<a>标签
+    var modalSignUpLi = modalSignUpBtn.parent(); //模态框[注册]按钮最外层<li>标签
+    var modalSignInForm = $("#signin-form"); //模态框登录表单区域
+    var modalSignUpForm = $("#signup-form"); //模态框注册表单区域
+
+    /**
      *@Description 初始化函数
      *@author CiaoLee
      */
@@ -632,51 +638,29 @@
      *@Description 绑定事件
      *@author CiaoLee
      */
-    /* 导航栏登录/注册点击事件 */
-    $(".navbar-btn").bind("click", function () {
-        $("#sign-modal").removeClass("show");
-        $("#sign-modal").addClass("in");
+    /* 导航栏按钮-点击事件 */
+    $(".navbar").click(function() {
+        signModal.addClass("in");
     });
 
-    /* 登录按钮点击事件 */
-    $(".sign-in").bind("click", function () {
-        $("#sign-modal").removeClass("show");
-        $("#sign-modal").addClass("in");
-        //给模态框登录按钮加上class[active]
-        $(".modal-sign-buttons").eq(0).addClass("active");
-        $(".modal-sign-buttons").eq(1).removeClass("active");
-        //去掉模态框内容区域的class[active]
+    /* 导航栏[登录]按钮-点击事件 */
+    $(".sign-in").click(function() {
+        //显示登录按钮 并隐藏注册按钮
+        modalSignInBtn.addClass("active");
+        modalSignUpBtn.removeClass("active");
+        //显示登录内容区域 并隐藏注册内容区域
+        modalSignInForm.addClass("active");
+        modalSignUpForm.removeClass("active");
     });
 
-    /* 登录/注册模态框出现时触发函数 */
-    $(".modal").on('show.bs.modal',function(){
-        //给模态框登录按钮加上class[active]
-        $(".modal-sign-buttons").eq(1).addClass("active");
-        $(".modal-sign-buttons").eq(0).removeClass("active");
-        //去掉模态框内容区域的class[active]
-        $("#signin-form").addClass("active");
-        $("#signup-form").removeClass("active");
+    /* 导航栏[注册]按钮-点击事件 */
+    $(".sign-up").click(function() {
+        //显示注册按钮 并隐藏登录按钮
+        modalSignUpBtn.addClass("active");
+        modalSignInBtn.removeClass("active");
+        //显示注册内容区域 并隐藏登录内容区域
+        modalSignUpForm.addClass("active");
+        modalSignInForm.removeClass("active");
     });
-
-    /* 登录/注册模态框关闭时触发函数 */
-    $("#sign-modal").on("hide.bs.modal", function() {
-        $("#sign-modal").removeClass("in");
-        //去掉模态框按钮的class[active]
-        $(".modal-sign-buttons").removeClass("active");
-        //去掉模态框内容区域的class[active]
-        $(".tab-content").children().removeClass("active");
-    });
-
-    /* 模态框登录/注册点击事件 */
-    $("#modal-sign-button").bind("click", function (event) {
-        //获取当前按钮<a>
-        var target = $(event.target).parent();
-        //给当前按钮<li> 加上class[active]
-        target.addClass("active");
-        target.children().removeClass("active");
-        //给兄弟节点<li> 去掉class[active]
-        target.siblings().removeClass("active");
-        target.siblings().children().removeClass("active");
-    })
 </script>
 </html>

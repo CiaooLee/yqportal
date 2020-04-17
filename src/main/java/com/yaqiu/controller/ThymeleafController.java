@@ -1,13 +1,13 @@
 package com.yaqiu.controller;
 
-import eu.bitwalker.useragentutils.Browser;
-import eu.bitwalker.useragentutils.OperatingSystem;
-import eu.bitwalker.useragentutils.UserAgent;
+import com.yaqiu.util.SessionUtil;
+import com.yaqiu.util.VisitorUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class ThymeleafController {
@@ -17,33 +17,20 @@ public class ThymeleafController {
      */
     @RequestMapping("/")
     public String toPortal(HttpServletRequest request) {
-        /* 获取请求头的user-agent对象 */
-        String userAgentStr = request.getHeader("User-Agent");
-        UserAgent userAgent = UserAgent.parseUserAgentString(userAgentStr);
-        /* 获取浏览器对象 */
-        Browser browser = userAgent.getBrowser();
-        /* 获取操作系统对象 */
-        OperatingSystem operatingSystem = userAgent.getOperatingSystem();
         //获取端类型(MOBILE/COMPUTER)
-        String deviceType = operatingSystem.getDeviceType().toString();
+        //String deviceType = .toString();
         //获取操作系统家族(ANDROID/IOS/WINDOWS/MAC_OS_X)
-        String group = operatingSystem.getGroup().toString();
-        System.out.println("浏览器名:"+browser.getName());
-        System.out.println("浏览器类型:"+browser.getBrowserType());
-        System.out.println("浏览器家族:"+browser.getGroup());
-        System.out.println("浏览器生产厂商:"+browser.getManufacturer());
-        System.out.println("浏览器使用的渲染引擎:"+browser.getRenderingEngine());
-        System.out.println("浏览器版本:"+userAgent.getBrowserVersion());
-
-        System.out.println("操作系统名:"+operatingSystem.getName());
-        //System.out.println("访问设备类型:"+);
-        //System.out.println("操作系统家族:"+);
-        System.out.println("操作系统生产厂商:"+operatingSystem.getManufacturer());
+        //String group = .toString();
+        //VisitorUtil.analyseVisitorInfo();
         /* 如果当前用户使用手机 则跳至手机主页 */
         /* 如果当前用户使用PC 则跳至PC端主页 */
-        if("COMPUTER".equals(deviceType)) return "foreground/general/index.html";
+        //if("COMPUTER".equals(deviceType)) return "foreground/general/index.html";
         /* 如果不能识别端类型 则跳至通用界面 */
-        return "error";
+        HttpSession session = SessionUtil.get();
+        String id = session.getAttribute("id").toString();
+        //System.out.println(id);
+
+        return "foreground/general/index.html";
     }
 
     /**
