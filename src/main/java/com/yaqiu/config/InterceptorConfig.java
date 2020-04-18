@@ -1,7 +1,7 @@
 package com.yaqiu.config;
 
 import com.yaqiu.interceptor.AuthenticationInterceptor;
-import com.yaqiu.interceptor.OperationLogInterceptor;
+import com.yaqiu.interceptor.VisitorLogInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -19,12 +19,12 @@ public class InterceptorConfig implements WebMvcConfigurer {
     }
 
     /**
-     * @Description 操作日志拦截器
+     * @Description 访问者日志拦截器
      * @author CiaoLee
      */
     @Bean
-    public OperationLogInterceptor operationLogInterceptor() {
-        return new OperationLogInterceptor();
+    public VisitorLogInterceptor visitorLogInterceptor() {
+        return new VisitorLogInterceptor();
     }
 
     /**
@@ -37,8 +37,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         /*registry.addInterceptor(authenticationInterceptor())
                 .addPathPatterns("/**");*/
 
-        /* 操作日志拦截器规则 */
-        registry.addInterceptor(operationLogInterceptor())
+        /* 访问者日志拦截器规则 */
+        registry.addInterceptor(visitorLogInterceptor())
                 .addPathPatterns("/*")
                 .excludePathPatterns("/error");
     }

@@ -1,16 +1,11 @@
 package com.yaqiu.constant;
 
+/**
+ * @Description 全局变量-常量类
+ * @author CiaoLee
+ */
 public class GlobalConstant {
-    /**
-     *@Description 字母表数组-用于生成短UUID
-     *@author CiaoLee
-     */
-    public static String[] ALPHABET = new String[] {
-            "a", "b", "c", "d", "e", "f",
-            "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
-            "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5",
-            "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I",
-            "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
-            "W", "X", "Y", "Z"
-    };
+    /* [OPERATION_LOG表]的[TYPE]字段 */
+    public static final int PAGE_VISIT_OPERATION_LOG_TYPE = 0; //"页面访问"类型
+    public static final int SEND_REQUEST_OPERATION_LOG_TYPE = 1; //"发送请求"类型
 }

@@ -1,13 +1,14 @@
 package com.yaqiu.controller;
 
+import com.yaqiu.constant.GlobalConstant;
+import com.yaqiu.util.DateUtil;
 import com.yaqiu.util.SessionUtil;
-import com.yaqiu.util.VisitorUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 public class ThymeleafController {
@@ -16,16 +17,20 @@ public class ThymeleafController {
      * @author CiaoLee
      */
     @RequestMapping("/")
-    public String toPortal(HttpServletRequest request) {
-        //获取端类型(MOBILE/COMPUTER)
-        //String deviceType = .toString();
-        //获取操作系统家族(ANDROID/IOS/WINDOWS/MAC_OS_X)
-        //String group = .toString();
-        //VisitorUtil.analyseVisitorInfo();
-        /* 如果当前用户使用手机 则跳至手机主页 */
-        /* 如果当前用户使用PC 则跳至PC端主页 */
-        //if("COMPUTER".equals(deviceType)) return "foreground/general/index.html";
-        /* 如果不能识别端类型 则跳至通用界面 */
+    public String toPortal() {
+        /* 获取session */
+        HttpSession session = SessionUtil.get();
+        /* 初始化日志信息 */
+        /* 从session中获取deviceType */
+        Map<String, String> visitorInfo = (Map<String, String>) session.getAttribute("visitorInfo");
+        String deviceType = visitorInfo.get("deviceType");
+        /* 如果访问者使用手机 则跳至手机主页 */
+        //if("Mobile".equals(deviceType)) return "foreground/mobile/index.html";
+        /* 将[OPERATION_LOG]日志信息存入session 交给[VisitorLogInterceptor]的afterComplement处理 */
+        session.setAttribute("operationLogType", GlobalConstant.PAGE_VISIT_OPERATION_LOG_TYPE);
+        session.setAttribute("operationLogContent", "访问了[首页]");
+        session.setAttribute("operationCreateTime", DateUtil.getCurrentDateTime());
+        /* 如果访问者使用电脑 或不明类型设备 则跳至通用界面 */
         return "foreground/general/index.html";
     }
 

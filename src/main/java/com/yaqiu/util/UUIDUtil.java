@@ -1,13 +1,24 @@
 package com.yaqiu.util;
 
-import com.yaqiu.constant.GlobalConstant;
-
 import java.util.UUID;
 
 public class UUIDUtil {
     /**
-     *@Description 生成随机8位UUID
-     *@author CiaoLee
+     * @Description 8位短UUID字典
+     * @author CiaoLee
+     */
+    public static String[] UUID_DICTIONARY = new String[] {
+            "a", "b", "c", "d", "e", "f",
+            "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
+            "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5",
+            "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I",
+            "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
+            "W", "X", "Y", "Z"
+    };
+
+    /**
+     * @Description 生成随机8位UUID
+     * @author CiaoLee
      */
     public static synchronized String getUUID() {
         StringBuffer shortBuffer = new StringBuffer();
@@ -15,14 +26,14 @@ public class UUIDUtil {
         for (int i = 0; i < 8; i++) {
             String str = uuid.substring(i * 4, i * 4 + 4);
             int x = Integer.parseInt(str, 16);
-            shortBuffer.append(GlobalConstant.ALPHABET[x % 0x3E]);
+            shortBuffer.append(UUID_DICTIONARY[x % 0x3E]);
         }
         return shortBuffer.toString();
     }
 
     /**
-     *@Description 生成随机游客UUID
-     *@author CiaoLee
+     * @Description 生成随机游客UUID
+     * @author CiaoLee
      */
     public static synchronized String getVisitorUUID() {
         StringBuffer shortBuffer = new StringBuffer();
@@ -30,7 +41,7 @@ public class UUIDUtil {
         for (int i = 0; i < 6; i++) {
             String str = uuid.substring(i * 4, i * 4 + 4);
             int x = Integer.parseInt(str, 16);
-            shortBuffer.append(GlobalConstant.ALPHABET[x % 0x3E]);
+            shortBuffer.append(UUID_DICTIONARY[x % 0x3E]);
         }
         return "游客" + shortBuffer.toString();
     }

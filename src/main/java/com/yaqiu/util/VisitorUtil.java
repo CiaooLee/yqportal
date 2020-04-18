@@ -12,15 +12,17 @@ import java.util.Map;
 
 public class VisitorUtil {
     /**
-     * @Description foreground/index.html 前台-首页跳转映射
+     * @Description 从request对象中分析出访问者的信息
+     * @param request 请求对象
      * @author CiaoLee
      */
-    public static Map visitorInfoAnalyse() {
+    public static Map<String, String> visitorInfoAnalyse(HttpServletRequest request) {
         /* 初始化返回结果集 */
         Map<String, String> visitorInfo = new HashMap<>();
-        /* 获取request对象 */
-        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = servletRequestAttributes.getRequest();
+        /* 获取当前时间 */
+        visitorInfo.put("createTime", DateUtil.getCurrentDateTime());
+        /* 从request中取出ip地址 */
+        visitorInfo.put("ip", request.getRemoteAddr());
         /* 从request中取出并分析User-Agent对象 */
         //获取请求头的user-agent对象
         String userAgentStr = request.getHeader("User-Agent");
@@ -29,12 +31,12 @@ public class VisitorUtil {
         Browser browser = userAgent.getBrowser();
         //获取操作系统对象
         OperatingSystem operatingSystem = userAgent.getOperatingSystem();
-        System.out.println("访问设备类型:"+operatingSystem.getDeviceType());
-        System.out.println("浏览器名:"+browser.getName());
-        System.out.println("浏览器家族:"+browser.getGroup());
-        System.out.println("浏览器版本:"+userAgent.getBrowserVersion());
-        System.out.println("操作系统名:"+operatingSystem.getName());
-        System.out.println("操作系统家族:"+operatingSystem.getGroup());
-        return null;
+        visitorInfo.put("deviceType", operatingSystem.getDeviceType().getName()); //访问设备类型
+        visitorInfo.put("browserName", browser.getName()); //浏览器名
+        visitorInfo.put("browserGroup", browser.getGroup().getName()); //浏览器家族
+        visitorInfo.put("browserVersion", userAgent.getBrowserVersion().getVersion()); //浏览器版本
+        visitorInfo.put("operatingSystemName", operatingSystem.getName()); //操作系统名
+        visitorInfo.put("operatingSystemGroup", operatingSystem.getGroup().getName()); //操作系统家族
+        return visitorInfo;
     }
 }
