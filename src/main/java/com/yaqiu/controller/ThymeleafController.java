@@ -20,17 +20,15 @@ public class ThymeleafController {
     public String toPortal() {
         /* 获取session */
         HttpSession session = SessionUtil.get();
-        /* 初始化日志信息 */
         /* 从session中获取deviceType */
-        Map<String, String> visitorInfo = (Map<String, String>) session.getAttribute("visitorInfo");
-        String deviceType = visitorInfo.get("deviceType");
-        /* 如果访问者使用手机 则跳至手机主页 */
-        //if("Mobile".equals(deviceType)) return "foreground/mobile/index.html";
-        /* 将[OPERATION_LOG]日志信息存入session 交给[VisitorLogInterceptor]的afterComplement处理 */
+        String deviceType = (String)session.getAttribute("deviceType");
+        /* 将[OPERATION_LOG]日志信息存入session 交给[VisitorLogInterceptor]类的afterComplement方法处理 */
         session.setAttribute("operationLogType", GlobalConstant.PAGE_VISIT_OPERATION_LOG_TYPE);
         session.setAttribute("operationLogContent", "访问了[首页]");
-        session.setAttribute("operationCreateTime", DateUtil.getCurrentDateTime());
-        /* 如果访问者使用电脑 或不明类型设备 则跳至通用界面 */
+        session.setAttribute("operationLogCreateTime", DateUtil.getCurrentDateTime());
+        /* 如果访问者使用手机访问 则跳至手机主页 */
+        //if("Mobile".equals(deviceType)) return "foreground/mobile/index.html";
+        /* 如果访问者使用电脑 或者不明类型设备访问 则跳至通用主页 */
         return "foreground/general/index.html";
     }
 

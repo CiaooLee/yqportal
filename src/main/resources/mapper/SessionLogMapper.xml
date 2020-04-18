@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaqiu.mapper.SessionLogMapper" >
+  <resultMap id="BaseResultMap" type="com.yaqiu.entity.SessionLog" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="device_type" property="deviceType" jdbcType="VARCHAR" />
+    <result column="browser_name" property="browserName" jdbcType="VARCHAR" />
+    <result column="browser_group" property="browserGroup" jdbcType="VARCHAR" />
+    <result column="browser_version" property="browserVersion" jdbcType="VARCHAR" />
+    <result column="os_name" property="osName" jdbcType="VARCHAR" />
+    <result column="os_group" property="osGroup" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="CHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="isp" property="isp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, ip, device_type, browser_name, browser_group, browser_version, os_name, os_group, 
+    user_id, create_time, province, city, isp
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yaqiu.entity.SessionLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from session_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from session_log
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from session_log
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yaqiu.entity.SessionLogExample" >
+    delete from session_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yaqiu.entity.SessionLog" >
+    insert into session_log (id, ip, device_type, 
+      browser_name, browser_group, browser_version, 
+      os_name, os_group, user_id, 
+      create_time, province, city, 
+      isp)
+    values (#{id,jdbcType=CHAR}, #{ip,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR}, 
+      #{browserName,jdbcType=VARCHAR}, #{browserGroup,jdbcType=VARCHAR}, #{browserVersion,jdbcType=VARCHAR}, 
+      #{osName,jdbcType=VARCHAR}, #{osGroup,jdbcType=VARCHAR}, #{userId,jdbcType=CHAR}, 
+      #{createTime,jdbcType=CHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{isp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yaqiu.entity.SessionLog" >
+    insert into session_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="deviceType != null" >
+        device_type,
+      </if>
+      <if test="browserName != null" >
+        browser_name,
+      </if>
+      <if test="browserGroup != null" >
+        browser_group,
+      </if>
+      <if test="browserVersion != null" >
+        browser_version,
+      </if>
+      <if test="osName != null" >
+        os_name,
+      </if>
+      <if test="osGroup != null" >
+        os_group,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="isp != null" >
+        isp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null" >
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="browserName != null" >
+        #{browserName,jdbcType=VARCHAR},
+      </if>
+      <if test="browserGroup != null" >
+        #{browserGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="browserVersion != null" >
+        #{browserVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="osName != null" >
+        #{osName,jdbcType=VARCHAR},
+      </if>
+      <if test="osGroup != null" >
+        #{osGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="isp != null" >
+        #{isp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yaqiu.entity.SessionLogExample" resultType="java.lang.Integer" >
+    select count(*) from session_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update session_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.ip != null" >
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceType != null" >
+        device_type = #{record.deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.browserName != null" >
+        browser_name = #{record.browserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.browserGroup != null" >
+        browser_group = #{record.browserGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.browserVersion != null" >
+        browser_version = #{record.browserVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osName != null" >
+        os_name = #{record.osName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.osGroup != null" >
+        os_group = #{record.osGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isp != null" >
+        isp = #{record.isp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update session_log
+    set id = #{record.id,jdbcType=CHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      device_type = #{record.deviceType,jdbcType=VARCHAR},
+      browser_name = #{record.browserName,jdbcType=VARCHAR},
+      browser_group = #{record.browserGroup,jdbcType=VARCHAR},
+      browser_version = #{record.browserVersion,jdbcType=VARCHAR},
+      os_name = #{record.osName,jdbcType=VARCHAR},
+      os_group = #{record.osGroup,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=CHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      isp = #{record.isp,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yaqiu.entity.SessionLog" >
+    update session_log
+    <set >
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null" >
+        device_type = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="browserName != null" >
+        browser_name = #{browserName,jdbcType=VARCHAR},
+      </if>
+      <if test="browserGroup != null" >
+        browser_group = #{browserGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="browserVersion != null" >
+        browser_version = #{browserVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="osName != null" >
+        os_name = #{osName,jdbcType=VARCHAR},
+      </if>
+      <if test="osGroup != null" >
+        os_group = #{osGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="isp != null" >
+        isp = #{isp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yaqiu.entity.SessionLog" >
+    update session_log
+    set ip = #{ip,jdbcType=VARCHAR},
+      device_type = #{deviceType,jdbcType=VARCHAR},
+      browser_name = #{browserName,jdbcType=VARCHAR},
+      browser_group = #{browserGroup,jdbcType=VARCHAR},
+      browser_version = #{browserVersion,jdbcType=VARCHAR},
+      os_name = #{osName,jdbcType=VARCHAR},
+      os_group = #{osGroup,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=CHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      isp = #{isp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>
