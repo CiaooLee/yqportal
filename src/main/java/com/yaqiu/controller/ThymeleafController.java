@@ -8,7 +8,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import java.util.Map;
 
 @Controller
 public class ThymeleafController {
@@ -38,7 +37,17 @@ public class ThymeleafController {
      */
     @RequestMapping("domain")
     public String toCase(ModelMap map, String type) {
+        /* 获取session */
+        HttpSession session = SessionUtil.get();
+        /* 从session中获取deviceType */
+        String deviceType = (String)session.getAttribute("deviceType");
+        /* 将[OPERATION_LOG]日志信息存入session 交给[VisitorLogInterceptor]类的afterComplement方法处理 */
+        session.setAttribute("operationLogType", GlobalConstant.PAGE_VISIT_OPERATION_LOG_TYPE);
+        session.setAttribute("operationLogContent", "访问了[内容板块-"+type+"]");
+        session.setAttribute("operationLogCreateTime", DateUtil.getCurrentDateTime());
         map.addAttribute("identifier", type);
+        //if("Mobile".equals(deviceType)) return "foreground/mobile/content/index.html";
+        /* 如果访问者使用电脑 或者不明类型设备访问 则跳至通用主页 */
         return "foreground/general/content/index.html";
     }
 

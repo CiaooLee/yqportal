@@ -1,11 +1,13 @@
 package com.yaqiu.util;
 
+import com.yaqiu.entity.OperationLog;
 import com.yaqiu.entity.SessionLog;
 import com.yaqiu.mapper.OperationLogMapper;
 import com.yaqiu.mapper.SessionLogMapper;
 import eu.bitwalker.useragentutils.Browser;
 import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class VisitorUtil {
     @Resource
     private SessionLogMapper sessionLogMapper;
@@ -86,5 +89,26 @@ public class VisitorUtil {
         sessionLog.setUserId(userId);
         sessionLog.setCreateTime(visitorInfo.get("createTime"));
         visitorUtil.sessionLogMapper.insertSelective(sessionLog);
+    }
+
+    /**
+     * @Description 新增[session_log]表记录
+     * @author CiaoLee
+     */
+    public static void generateOperationLog() {
+        /* 获取session */
+        HttpSession session = SessionUtil.get();
+        /* 从session中取出数据 */
+        String sessionLogId = (String)session.getAttribute("sessionLogId");
+        byte type = (byte)session.getAttribute("operationLogType");
+        String content = (String)session.getAttribute("operationLogContent");
+        String createTime = (String)session.getAttribute("operationLogCreateTime");
+        OperationLog operationLog = new OperationLog();
+        operationLog.setId(UUIDUtil.getUUID());
+        operationLog.setSessionLogId(sessionLogId);
+        operationLog.setType(type);
+        operationLog.setContent(content);
+        operationLog.setCreateTime(createTime);
+        visitorUtil.operationLogMapper.insertSelective(operationLog);
     }
 }

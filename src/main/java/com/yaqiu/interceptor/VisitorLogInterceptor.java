@@ -48,8 +48,8 @@ public class VisitorLogInterceptor implements HandlerInterceptor {
             VisitorUtil.generateSessionLog();
         }
         /* 生成本次请求的[OPERATION_LOG]表操作记录 */
-        System.out.println((int)session.getAttribute("operationLogType"));
-        System.out.println((String)session.getAttribute("operationLogContent"));
-        System.out.println((String)session.getAttribute("operationLogCreateTime"));
+        if(ObjectUtil.isNotEmpty(session.getAttribute("operationLogType"))) {
+            VisitorUtil.generateOperationLog();
+        }
     }
 }
