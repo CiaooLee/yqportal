@@ -53,12 +53,18 @@ public class VisitorUtil {
         //获取操作系统对象
         Map<String, String> visitorInfo = new HashMap<>();
         OperatingSystem operatingSystem = userAgent.getOperatingSystem();
-        visitorInfo.put("deviceType", operatingSystem.getDeviceType().getName()); //访问设备类型
+        //获取参数
+        String deviceType = operatingSystem.getDeviceType()==null?null:operatingSystem.getDeviceType().getName();
+        String browserGroup = browser.getGroup()==null?null:browser.getGroup().getName();
+        String browserVersion = userAgent.getBrowserVersion()==null?null:userAgent.getBrowserVersion().getVersion();
+        String osGroup = operatingSystem.getGroup()==null?null:operatingSystem.getGroup().getName();
+        //组装参数
+        visitorInfo.put("deviceType", deviceType); //访问设备类型
         visitorInfo.put("browserName", browser.getName()); //浏览器名
-        visitorInfo.put("browserGroup", browser.getGroup().getName()); //浏览器家族
-        visitorInfo.put("browserVersion", userAgent.getBrowserVersion().getVersion()); //浏览器版本
+        visitorInfo.put("browserGroup", browserGroup); //浏览器家族
+        visitorInfo.put("browserVersion", browserVersion); //浏览器版本
         visitorInfo.put("osName", operatingSystem.getName()); //操作系统名
-        visitorInfo.put("osGroup", operatingSystem.getGroup().getName()); //操作系统家族
+        visitorInfo.put("osGroup", osGroup); //操作系统家族
         /* 获取当前时间 */
         visitorInfo.put("createTime", DateUtil.getCurrentDateTime());
         return visitorInfo;
