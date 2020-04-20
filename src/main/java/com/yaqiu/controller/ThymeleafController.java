@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class ThymeleafController {
     /**
-     * @Description foreground/index.html 前台-首页跳转映射
+     * @Description 前台-首页跳转映射
      * @author CiaoLee
      */
     @RequestMapping("/")
@@ -32,11 +32,13 @@ public class ThymeleafController {
     }
 
     /**
-     * @Description foreground/content/index.html 前台-各面板跳转映射
+     * @Description 前台-各面板跳转映射
+     * @param type 从页面传过来的类型
+     * @param map 向页面传送数据
      * @author CiaoLee
      */
     @RequestMapping("domain")
-    public String toCase(ModelMap map, String type) {
+    public String toCase(String type, ModelMap map) {
         /* 获取session */
         HttpSession session = SessionUtil.get();
         /* 从session中获取deviceType */
@@ -52,11 +54,30 @@ public class ThymeleafController {
     }
 
     /**
-     * @Description foreground/content/show.html 前台-“帖子详情”跳转映射
-     *@ author CiaoLee
+     * @Description 前台-“帖子详情”跳转映射
+     * @author CiaoLee
      */
     @RequestMapping("content")
     public String toDetail(String id) {
         return "foreground/general/content/show.html";
+    }
+
+    /**
+     * @Description 前台-“联系我们”跳转映射
+     * @author CiaoLee
+     */
+    @RequestMapping("contact-us")
+    public String toContactUs() {
+        /* 获取session */
+        HttpSession session = SessionUtil.get();
+        /* 从session中获取deviceType */
+        String deviceType = (String)session.getAttribute("deviceType");
+        /* 将[OPERATION_LOG]日志信息存入session 交给[VisitorLogInterceptor]类的afterComplement方法处理 */
+        session.setAttribute("operationLogType", GlobalConstant.PAGE_VISIT_OPERATION_LOG_TYPE);
+        session.setAttribute("operationLogContent", "访问了[联系我们]");
+        session.setAttribute("operationLogCreateTime", DateUtil.getCurrentDateTime());
+        //if("Mobile".equals(deviceType)) return "foreground/mobile/document/contact-us.html";
+        /* 如果访问者使用电脑 或者不明类型设备访问 则跳至通用主页 */
+        return "foreground/general/document/contact-us.html";
     }
 }

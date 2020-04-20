@@ -2,15 +2,15 @@
 <html lang="zh-CN">
 <head>
     <!-- 标签页内容 -->
-    <title>重庆雅秋心理咨询|叛逆青少年心理健康咨询|婚姻情感咨询|心理工作室</title>
+    <title>重庆青少年心理咨询 专注青少年心理健康-【雅秋文化】</title>
     <!-- 网页元信息 -->
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="IceGlow">
-    <meta content="重庆雅秋文化传播有限公司与重庆晨报966966共同服务社会！咨询电话：023-68833733。专注于青少年成长、厌学、叛逆、减压、情绪调整、心理危机干预、心灵创伤、亲子关系、人际交往、抑郁、焦虑、强迫等心理障碍的调解。" name="description">
-    <meta content="雅秋,重庆心理,重庆青少年心理,重庆心理咨询,重庆青少年心理咨询,心理,心理咨询,青少年心理咨询" name="keywords">
-    <meta content="重庆雅秋,冰芒科技" name="author">
+    <meta name="description" content="雅秋文化,与重庆晨报966966合作,5年以来专注于青少年心理健康。本站无诱导无弹窗,请放心浏览。其中【经典案例】均为真实案例改编,也可以在【讨论区】提出困扰您的问题。">
+    <meta name="keywords" content="青少年心理健康咨询,婚姻情感咨询,重庆雅秋文化">
+    <meta name="author" content="雅秋文化,冰芒科技">
     <!-- css -->
     <link rel="shortcut icon" href="foreground/common/img/favicon.ico">
     <link rel="stylesheet" href="foreground/general/css/font-awesome/font-awesome.min.css">
@@ -18,26 +18,47 @@
     <link rel="stylesheet" href="foreground/general/css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="foreground/general/css/global/styles.css?=2016121272249">
     <link rel="stylesheet" href="foreground/general/css/animate/animate.min.css">
+    <link rel="stylesheet" href="foreground/general/css/mine/global/sign-modal.css">
+    <link rel="stylesheet" href="foreground/general/css/mine/global/navibar.css">
     <!-- js -->
     <script src="foreground/general/js/jquery/jquery.min.js"></script>
     <script src="foreground/general/js/bootstrap/bootstrap.min.js"></script>
     <!-- 内联样式 -->
     <style>
-        /* modal 模态框 */
-        /*.modal {
-            opacity: 1;
-        }*/
-
-        .show {
-            top: 200px;
+        /* 第一板块-主页 整体 */
+        .banner-container {
+            min-height: 662px;
         }
 
-        /* 第一板块-主页 整体 */
+        .course-btn {
+            margin-left: 4%;
+        }
+
         .navbar-banner {
-            margin-top: 50px;
-            background: url("foreground/general/img/homepage.jpg");
-            background-size: cover;
-            backgtound-repeat: no-repeat;
+            background-image: url("foreground/general/img/portal/homepage-0.jpg");
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+        }
+
+        /* 第二板块-内容简述 */
+        .brief-img {
+            width: 168px;
+            height: 168px;
+        }
+
+        /* 第三板块-经典案例 */
+        .case-img {
+            border-radius: 20px;
+        }
+
+        /* 第四板块-实时信息 */
+        .news-img {
+            border-radius: 15px;
+        }
+
+        /* 第五板块-讨论区 */
+        .forum-img {
+            border-radius: 15px;
         }
     </style>
 </head>
@@ -47,28 +68,28 @@
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar-collapse" aria-expanded="false">
-                <span class="sr-only">重庆雅秋</span>
+                <span class="sr-only">雅秋文化</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/">
-                <img src="foreground/img/logo_03.png">
+                <img src="foreground/general/img/portal/logo.png">
             </a>
         </div>
         <div class="collapse navbar-collapse" id="header-navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="">
-                    <a href="/domain?type=case">案例</a>
+                    <a href="/domain?type=case">经典案例</a>
                 </li>
                 <li class=" bootcamp new-nav logo-1111">
-                    <a href="/domain?type=news">动态</a>
+                    <a href="/domain?type=news">实时信息</a>
                 </li>
                 <li class="">
                     <a href="/domain?type=forum">讨论区</a>
                 </li>
                 <li class=" new-nav logo-1111">
-                    <a href="">联系我们</a>
+                    <a href="/contact-us">联系我们</a>
                 </li>
             </ul>
 
@@ -91,34 +112,14 @@
     <div class="banner-container">
         <div class="container">
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-5" style="margin-top: 60px;">
                     <a class="container-title">
-                        <img src="img/container-title-2.png" />
+                        <img src="foreground/general/img/portal/title.png" />
                     </a>
                     <div style="margin-top:24px;">
-                        <a id="course-btn" class="course-btn btn btn-lg" href="/domain?type=all">联系我们</a>
+                        <a id="course-btn" class="course-btn btn btn-lg" href="/contact-us">联系我们</a>
                     </div>
                 </div>
-
-                <div class="col-md-5">
-                    <form action="/quickregister" method="post">
-                        <div class="form-group">
-                            <input class="form-control" name="name" id="name" type="text" placeholder="昵称">
-                            <div class="help-block text-left"></div>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" name="email" id="email" type="email" placeholder="邮箱">
-                            <div class="help-block text-left"></div>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" name="password" id="password" type="password" placeholder="密码">
-                            <div class="help-block text-left"></div>
-                        </div>
-                        <button class="btn register" type="submit">加入实验楼</button>
-                        <p class="tip">点击"加入实验楼"，表示您已经同意我们的<a href="privacy/index.html" target="_blank"> 隐私条款</a></P>
-                    </form>
-                </div>
-
             </div>
         </div>
     </div>
@@ -128,21 +129,39 @@
 <div class="introduce-container" id="fourFeatures">
     <div class="container">
         <div class="row">
-            <div class="introduce-unit col-sm-6 col-md-3">
-                <div><a class="introduce-img"><img src="img/introduceContainer1.gif" /></a></div>
+            <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/domain?type=case'">
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/student-problem.gif" alt="雅秋心理-学生问题"/></a></div>
                 <div><span class="introduce-span">学生问题：厌学、叛逆、早恋、颓废、无兴趣爱好、亲情淡漠、学习无动力、考试紧张、注意力不集中、痴迷于游戏</span></div>
             </div>
-            <div class="introduce-unit col-sm-6 col-md-3">
-                <div><a class="introduce-img"><img src="img/introduceContainer2.gif" /></a></div>
+            <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/domain?type=case'">
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/psychological-problems.gif" alt="雅秋心理-心理问题"/></a></div>
                 <div><span class="introduce-span">心理问题：抑郁症、焦虑症、恐惧症、强迫症、疑病症、洁癖、自卑、自闭、失眠、情绪暴躁、心胸狭隘</span></div>
             </div>
-            <div class="introduce-unit col-sm-6 col-md-3">
-                <div><a class="introduce-img"><img src="img/introduceContainer3.gif" /></a></div>
+            <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/domain?type=case'">
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/mental-problem.gif" alt="雅秋心理-精神问题"/></a></div>
                 <div><span class="introduce-span">精神问题：幻听、幻觉、妄想、孤僻、亢奋、偏执、猜疑、行为退缩、思维破裂、回避社交、双向情感障碍、逻辑思维混乱</span></div>
             </div>
-            <div class="introduce-unit col-sm-6 col-md-3">
-                <div><a class="introduce-img"><img src="img/introduceContainer4.gif" /></a></div>
+            <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/domain?type=case'">
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/coaching-problem.gif" alt="雅秋心理-托管补习"/></a></div>
                 <div><span class="introduce-span">托管补习：对于学习方面令家长抓狂的学生，我们可以因材施教，提供针对于中小学生各科的学习辅导</span></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/domain?type=case'">
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/case.gif" alt="雅秋文化-经典案例"/></a></div>
+                <div><span class="introduce-span">经典案例</span></div>
+            </div>
+            <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/domain?type=news'">
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/news.gif" alt="雅秋文化-新闻动态"/></a></div>
+                <div><span class="introduce-span">实时信息</span></div>
+            </div>
+            <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/domain?type=forum'">
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/forum.gif" alt="雅秋文化-讨论区"/></a></div>
+                <div><span class="introduce-span">讨论区</span></div>
+            </div>
+            <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/contact-us'">
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/contact-us.gif" alt="雅秋文化-联系我们"/></a></div>
+                <div><span class="introduce-span">联系我们</span></div>
             </div>
         </div>
     </div>
@@ -153,76 +172,194 @@
     <div class="container">
         <div class="clearfix text-center item-header">
             <span class="line"></span>
-            <span class="text-center item-title">典型案例</span>
+            <div class="text-center item-title" onclick="location.href='/domain?type=case'">经典案例</div>
             <span class="line"></span>
         </div>
-        <div class="tab-content">
-            <div class="tab-pane clearfix active" id="study-line">
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <a href="paths/show.html">
-                        <div class="path-item">
-                            <div class="col-xs-5 col-sm-4 path-img">
-                                <img src="img/1471513730333.png">
-                            </div>
-                            <div class="col-xs-7 col-sm-8">
-                                <div class="path-name">新手入门</div>
-                                <div class="path-course-num">
-                                    </span>6</span>
-                                    门课程
-                                </div>
-                            </div>
-                            <div class="desc-layer">
-                                <div class="center">新手入门路径帮助对 IT 技术感兴趣的新手0基础入门计算机编程。本路径通过新手入门、Linux 及 Vim课程熟悉实验楼的实践学习环境，再以 C 语言和一个简单的项目引导你一步步进入计算机技术的殿堂。</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <a href="paths/show.html">
-                        <div class="path-item">
-                            <div class="col-xs-5 col-sm-4 path-img">
-                                <img src="img/1471513769430.png">
-                            </div>
-                            <div class="col-xs-7 col-sm-8">
-                                <div class="path-name">Python研发工程师</div>
-                                <div class="path-course-num">
-                                    </span>83</span>
-                                    门课程
-                                </div>
-                            </div>
-                            <div class="desc-layer">
-                                <div class="center">Python技术路径中包含入门知识、Python基础、Web框架、基础项目、网络编程、数据与计算及综合项目七个模块。模块中的课程将带着你逐步深入，学会如何使用 Python 实现项目一个博客，桌面词典，微信机器人或网络安全软件等。完成本路径的实验课，将具备独立开发 Python 软件和 Web 应用的能力。</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <a href="paths/show.html">
-                        <div class="path-item">
-                            <div class="col-xs-5 col-sm-4 path-img">
-                                <img src="img/1471513793360.png">
-                            </div>
-                            <div class="col-xs-7 col-sm-8">
-                                <div class="path-name">C++ 研发工程师</div>
-                                <div class="path-course-num">
-                                    </span>26</span>
-                                    门课程
-                                </div>
-                            </div>
-                            <div class="desc-layer">
-                                <div class="center">C++ 学习路径中将通过使用 C++ 语言实现 Web 服务器，Markdown 解析器，内存池以及 Docker 容器管理工具等，学习并实践 C++ 编程基础，C++ 11/14 标准，C++ 图像处理及增强现实技术。完成本路径的所有实验课，将能够使用 C++  独立实现复杂的应用程序。</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="clearfix item-footer">
-                    <div class="pull-right watch-all">
-                        <a href="courses/index.html">查看更多 ></a>
+        <div class="clearfix courses">
+            <!-- 经典案例1 -->
+            <div class="col-md-4 col-sm-6  course">
+                <a class="course-box" href="">
+                    <div class="sign-box">
+                        <i class="fa fa-star-o course-follow pull-right"></i>
                     </div>
-                </div>
+                    <div class="course-img">
+                        <img class="case-img" src="foreground/general/img/portal/case-0.jpg" alt="雅秋文化-经典案例-专题一">
+                    </div>
+                    <div class="course-body">
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="经典案例-专题一">经典案例-专题一</span>
+                    </div>
+                    <div class="course-footer">
+			            <span class="course-per-num pull-left">
+                            <i class="fa fa-users"></i>
+                            85157
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <!-- 经典案例2 -->
+            <div class="col-md-4 col-sm-6  course">
+                <a class="course-box" href="">
+                    <div class="sign-box">
+                        <i class="fa fa-star-o course-follow pull-right"></i>
+                    </div>
+                    <div class="course-img">
+                        <img class="case-img" src="foreground/general/img/portal/case-1.jpg" alt="雅秋文化-经典案例-专题二">
+                    </div>
+                    <div class="course-body">
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="经典案例-专题二">经典案例-专题二</span>
+                    </div>
+                    <div class="course-footer">
+			            <span class="course-per-num pull-left">
+                            <i class="fa fa-users"></i>
+                            85157
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <!-- 经典案例3 -->
+            <div class="col-md-4 col-sm-6  course">
+                <a class="course-box" href="">
+                    <div class="sign-box">
+                        <i class="fa fa-star-o course-follow pull-right"></i>
+                    </div>
+                    <div class="course-img">
+                        <img class="case-img" src="foreground/general/img/portal/case-2.jpg" alt="雅秋文化-经典案例-专题三">
+                    </div>
+                    <div class="course-body">
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="经典案例-专题三">经典案例-专题三</span>
+                    </div>
+                    <div class="course-footer">
+			            <span class="course-per-num pull-left">
+                            <i class="fa fa-users"></i>
+                            85157
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <!-- 经典案例4 -->
+            <div class="col-md-4 col-sm-6  course">
+                <a class="course-box" href="">
+                    <div class="sign-box">
+                        <i class="fa fa-star-o course-follow pull-right"></i>
+                    </div>
+                    <div class="course-img">
+                        <img class="case-img" src="foreground/general/img/portal/case-3.jpg" alt="雅秋文化-经典案例-专题四">
+                    </div>
+                    <div class="course-body">
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="经典案例-专题四">经典案例-专题四</span>
+                    </div>
+                    <div class="course-footer">
+			            <span class="course-per-num pull-left">
+                            <i class="fa fa-users"></i>
+                            85157
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <!-- 经典案例5 -->
+            <div class="col-md-4 col-sm-6  course">
+                <a class="course-box" href="">
+                    <div class="sign-box">
+                        <i class="fa fa-star-o course-follow pull-right"></i>
+                    </div>
+                    <div class="course-img">
+                        <img class="case-img" src="foreground/general/img/portal/case-4.jpg" alt="雅秋文化-经典案例-专题五">
+                    </div>
+                    <div class="course-body">
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="经典案例-专题五">经典案例-专题五</span>
+                    </div>
+                    <div class="course-footer">
+			            <span class="course-per-num pull-left">
+                            <i class="fa fa-users"></i>
+                            85157
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <!-- 经典案例6 -->
+            <div class="col-md-4 col-sm-6  course">
+                <a class="course-box" href="">
+                    <div class="sign-box">
+                        <i class="fa fa-star-o course-follow pull-right"></i>
+                    </div>
+                    <div class="course-img">
+                        <img class="case-img" src="foreground/general/img/portal/case-5.jpg" alt="雅秋文化-经典案例-专题六">
+                    </div>
+                    <div class="course-body">
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="经典案例-专题六">经典案例-专题六</span>
+                    </div>
+                    <div class="course-footer">
+			            <span class="course-per-num pull-left">
+                            <i class="fa fa-users"></i>
+                            85157
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <!-- 经典案例7 -->
+            <div class="col-md-4 col-sm-6  course">
+                <a class="course-box" href="">
+                    <div class="sign-box">
+                        <i class="fa fa-star-o course-follow pull-right"></i>
+                    </div>
+                    <div class="course-img">
+                        <img class="case-img" src="foreground/general/img/portal/case-6.jpg" alt="雅秋文化-经典案例-专题七">
+                    </div>
+                    <div class="course-body">
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="经典案例-专题七">经典案例-专题七</span>
+                    </div>
+                    <div class="course-footer">
+			            <span class="course-per-num pull-left">
+                            <i class="fa fa-users"></i>
+                            85157
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <!-- 经典案例8 -->
+            <div class="col-md-4 col-sm-6  course">
+                <a class="course-box" href="">
+                    <div class="sign-box">
+                        <i class="fa fa-star-o course-follow pull-right"></i>
+                    </div>
+                    <div class="course-img">
+                        <img class="case-img" src="foreground/general/img/portal/case-7.jpg" alt="雅秋文化-经典案例-专题八">
+                    </div>
+                    <div class="course-body">
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="经典案例-专题八">经典案例-专题八</span>
+                    </div>
+                    <div class="course-footer">
+			            <span class="course-per-num pull-left">
+                            <i class="fa fa-users"></i>
+                            85157
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <!-- 经典案例9 -->
+            <div class="col-md-4 col-sm-6  course">
+                <a class="course-box" href="">
+                    <div class="sign-box">
+                        <i class="fa fa-star-o course-follow pull-right"></i>
+                    </div>
+                    <div class="course-img">
+                        <img class="case-img" src="foreground/general/img/portal/case-8.jpg" alt="雅秋文化-经典案例-专题九">
+                    </div>
+                    <div class="course-body">
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="经典案例-专题九">经典案例-专题九</span>
+                    </div>
+                    <div class="course-footer">
+			            <span class="course-per-num pull-left">
+                            <i class="fa fa-users"></i>
+                            85157
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="clearfix item-footer">
+            <div class="pull-right watch-all">
+                <a href="/domain?type=case">查看更多 ></a>
             </div>
         </div>
     </div>
@@ -231,99 +368,88 @@
 <!-- 第四板块-实时信息 -->
 <div class="line-and-laboratory">
     <div class="container">
-        <div class="clearfix text-center item-header">
+        <div class="clearfix text-center item-header" onclick="location.href='/domain?type=news'">
             <span class="line"></span>
             <div class="text-center item-title">实时信息</div>
             <span class="line"></span>
         </div>
         <div class="clearfix courses">
-
             <div class="col-md-3 col-sm-6  course">
-                <a class="course-box" href="courses/show.html">
+                <a class="course-box" href="">
                     <div class="sign-box">
                         <i class="fa fa-star-o course-follow pull-right"
-                           data-follow-url="/courses/1/follow"
-                           data-unfollow-url="/courses/1/unfollow"  style="display:none"  ></i>
+                           data-follow-url="/courses/1/follow"></i>
                     </div>
                     <div class="course-img">
-                        <img alt="Linux 基础入门（新版）" src="img/ncn1.jpg">
+                        <img class="news-img" src="foreground/general/img/portal/news-0.jpg" alt="雅秋文化-实时信息一">
                     </div>
-
                     <div class="course-body">
-                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="Linux 基础入门（新版）">Linux 基础入门（新版）</span>
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="雅秋文化-实时信息一">雅秋文化-实时信息一</span>
                     </div>
                     <div class="course-footer">
 			            <span class="course-per-num pull-left">
                             <i class="fa fa-users"></i>
                             85157
-			                </span>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm-6  course">
-                <a class="course-box" href="courses/show.html">
-                    <div class="sign-box">
-                        <i class="fa fa-star-o course-follow pull-right"
-                           data-follow-url="/courses/11/follow"
-                           data-unfollow-url="/courses/11/unfollow"  style="display:none"  ></i>
-                    </div>
-                    <div class="course-img">
-                        <img alt="Go语言编程" src="img/ncn11.jpg">
-                    </div>
-
-                    <div class="course-body">
-                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="Go语言编程">Go语言编程</span>
-                    </div>
-                    <div class="course-footer">
-                        <span class="course-per-num pull-left">
-                            <i class="fa fa-users"></i>
-                            5741
                         </span>
                     </div>
                 </a>
             </div>
-
             <div class="col-md-3 col-sm-6  course">
-                <a class="course-box" href="courses/show.html">
+                <a class="course-box" href="">
                     <div class="sign-box">
                         <i class="fa fa-star-o course-follow pull-right"
-                           data-follow-url="/courses/23/follow"
-                           data-unfollow-url="/courses/23/unfollow"  style="display:none"></i>
+                           data-follow-url="/courses/1/follow"></i>
                     </div>
                     <div class="course-img">
-                        <img alt="PHP编程语言" src="img/ncn23.jpg">
+                        <img class="news-img" src="foreground/general/img/portal/news-1.jpg" alt="雅秋文化-实时信息二">
                     </div>
-
                     <div class="course-body">
-                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="PHP编程语言">PHP编程语言</span>
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="雅秋文化-实时信息二">雅秋文化-实时信息二</span>
                     </div>
                     <div class="course-footer">
-                        <span class="course-per-num pull-left">
+			            <span class="course-per-num pull-left">
                             <i class="fa fa-users"></i>
-                            8093
+                            85157
                         </span>
                     </div>
                 </a>
             </div>
-
             <div class="col-md-3 col-sm-6  course">
-                <a class="course-box" href="courses/show.html">
+                <a class="course-box" href="">
                     <div class="sign-box">
                         <i class="fa fa-star-o course-follow pull-right"
-                           data-follow-url="/courses/30/follow"
-                           data-unfollow-url="/courses/30/unfollow"  style="display:none"  ></i>
+                           data-follow-url="/courses/1/follow"></i>
                     </div>
                     <div class="course-img">
-                        <img alt="Python Django Web框架" src="img/ncn30.jpg">
+                        <img class="news-img" src="foreground/general/img/portal/news-2.jpg" alt="雅秋文化-实时信息三">
                     </div>
                     <div class="course-body">
-                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="Python Django Web框架">Python Django Web框架</span>
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="雅秋文化-实时信息三">雅秋文化-实时信息三</span>
                     </div>
                     <div class="course-footer">
-                        <span class="course-per-num pull-left">
+			            <span class="course-per-num pull-left">
                             <i class="fa fa-users"></i>
-                            5691
+                            85157
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6  course">
+                <a class="course-box" href="">
+                    <div class="sign-box">
+                        <i class="fa fa-star-o course-follow pull-right"
+                           data-follow-url="/courses/1/follow"></i>
+                    </div>
+                    <div class="course-img">
+                        <img class="news-img" src="foreground/general/img/portal/news-3.jpg" alt="雅秋文化-实时信息四">
+                    </div>
+                    <div class="course-body">
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="雅秋文化-实时信息四">雅秋文化-实时信息四</span>
+                    </div>
+                    <div class="course-footer">
+			            <span class="course-per-num pull-left">
+                            <i class="fa fa-users"></i>
+                            85157
                         </span>
                     </div>
                 </a>
@@ -331,7 +457,7 @@
         </div>
         <div class="clearfix item-footer">
             <div class="pull-right watch-all">
-                <a href="courses/index.html">查看更多 ></a>
+                <a href="/domain?type=news">查看更多 ></a>
             </div>
         </div>
     </div>
@@ -346,93 +472,82 @@
             <span class="line"></span>
         </div>
         <div class="clearfix courses">
-
             <div class="col-md-3 col-sm-6  course">
-                <a class="course-box" href="courses/show.html">
+                <a class="course-box" href="">
                     <div class="sign-box">
                         <i class="fa fa-star-o course-follow pull-right"
-                           data-follow-url="/courses/1/follow"
-                           data-unfollow-url="/courses/1/unfollow"  style="display:none"  ></i>
+                           data-follow-url="/courses/1/follow"></i>
                     </div>
                     <div class="course-img">
-                        <img alt="Linux 基础入门（新版）" src="img/ncn1.jpg">
+                        <img class="forum-img" src="foreground/general/img/portal/forum-0.jpg" alt="雅秋文化-讨论区专题一">
                     </div>
-
                     <div class="course-body">
-                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="Linux 基础入门（新版）">Linux 基础入门（新版）</span>
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="雅秋文化-讨论区专题一">雅秋文化-讨论区专题一</span>
                     </div>
                     <div class="course-footer">
 			            <span class="course-per-num pull-left">
                             <i class="fa fa-users"></i>
                             85157
-			                </span>
-                    </div>
-                </a>
-            </div>
-
-            <div class="col-md-3 col-sm-6  course">
-                <a class="course-box" href="courses/show.html">
-                    <div class="sign-box">
-                        <i class="fa fa-star-o course-follow pull-right"
-                           data-follow-url="/courses/11/follow"
-                           data-unfollow-url="/courses/11/unfollow"  style="display:none"  ></i>
-                    </div>
-                    <div class="course-img">
-                        <img alt="Go语言编程" src="img/ncn11.jpg">
-                    </div>
-
-                    <div class="course-body">
-                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="Go语言编程">Go语言编程</span>
-                    </div>
-                    <div class="course-footer">
-                        <span class="course-per-num pull-left">
-                            <i class="fa fa-users"></i>
-                            5741
                         </span>
                     </div>
                 </a>
             </div>
-
             <div class="col-md-3 col-sm-6  course">
-                <a class="course-box" href="courses/show.html">
+                <a class="course-box" href="">
                     <div class="sign-box">
                         <i class="fa fa-star-o course-follow pull-right"
-                           data-follow-url="/courses/23/follow"
-                           data-unfollow-url="/courses/23/unfollow"  style="display:none"></i>
+                           data-follow-url="/courses/1/follow"></i>
                     </div>
                     <div class="course-img">
-                        <img alt="PHP编程语言" src="img/ncn23.jpg">
+                        <img class="forum-img" src="foreground/general/img/portal/forum-1.jpg" alt="雅秋文化-讨论区专题二">
                     </div>
-
                     <div class="course-body">
-                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="PHP编程语言">PHP编程语言</span>
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="雅秋文化-讨论区专题二">雅秋文化-讨论区专题二</span>
                     </div>
                     <div class="course-footer">
-                        <span class="course-per-num pull-left">
+			            <span class="course-per-num pull-left">
                             <i class="fa fa-users"></i>
-                            8093
+                            85157
                         </span>
                     </div>
                 </a>
             </div>
-
             <div class="col-md-3 col-sm-6  course">
-                <a class="course-box" href="courses/show.html">
+                <a class="course-box" href="">
                     <div class="sign-box">
                         <i class="fa fa-star-o course-follow pull-right"
-                           data-follow-url="/courses/30/follow"
-                           data-unfollow-url="/courses/30/unfollow"  style="display:none"  ></i>
+                           data-follow-url="/courses/1/follow"></i>
                     </div>
                     <div class="course-img">
-                        <img alt="Python Django Web框架" src="img/ncn30.jpg">
+                        <img class="forum-img" src="foreground/general/img/portal/forum-2.jpg" alt="雅秋文化-讨论区专题三">
                     </div>
                     <div class="course-body">
-                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="Python Django Web框架">Python Django Web框架</span>
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="雅秋文化-讨论区专题三">雅秋文化-讨论区专题三</span>
                     </div>
                     <div class="course-footer">
-                        <span class="course-per-num pull-left">
+			            <span class="course-per-num pull-left">
                             <i class="fa fa-users"></i>
-                            5691
+                            85157
+                        </span>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6  course">
+                <a class="course-box" href="">
+                    <div class="sign-box">
+                        <i class="fa fa-star-o course-follow pull-right"
+                           data-follow-url="/courses/1/follow"></i>
+                    </div>
+                    <div class="course-img">
+                        <img class="forum-img" src="foreground/general/img/portal/forum-3.jpg" alt="雅秋文化-讨论区专题四">
+                    </div>
+                    <div class="course-body">
+                        <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="雅秋文化-讨论区专题四">雅秋文化-讨论区专题四</span>
+                    </div>
+                    <div class="course-footer">
+			            <span class="course-per-num pull-left">
+                            <i class="fa fa-users"></i>
+                            85157
                         </span>
                     </div>
                 </a>
@@ -440,7 +555,7 @@
         </div>
         <div class="clearfix item-footer">
             <div class="pull-right watch-all">
-                <a href="courses/index.html">查看更多 ></a>
+                <a href="/domain?type=forum">查看更多 ></a>
             </div>
         </div>
     </div>
@@ -549,13 +664,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 clearfix footer-col">
-                <img src="img/logo_03.png">
+                <img src="foreground/general/img/portal/logo.png" style="height: 50px; margin-left: 15px;">
                 <div class="footer-slogan">动手做实验，轻松学编程</div>
                 <div class="col-xs-2">
                     <div class="social-item footer-weixin-item">
                         <i class="fa fa-weixin"></i>
                         <div class="footer-weixin">
-                            <img src="img/footer-weixin.png">
+                            <img src="foreground/common/img/心之音-wechat-qr.jpg">
                         </div>
                     </div>
                 </div>
@@ -612,55 +727,15 @@
     </div>
 </div>
 </body>
-
+<!-- 文档就绪-外联js -->
+<script src="foreground/general/js/mine/global/login-btn.js"></script>
 <script type="text/javascript">
-    /**
-     *@Description 全局变量
-     *@author CiaoLee
-     */
-    var signModal = $("#sign-modal"); //登录/注册模态框
-    var modalSignInBtn = $(".modal-sign-button").eq(0); //模态框[登录]按钮最内层<a>标签
-    var modalSignInLi = modalSignInBtn.parent(); //模态框[登录]按钮最外层<li>标签
-    var modalSignUpBtn = $(".modal-sign-button").eq(1); //模态框[注册]按钮最内层<a>标签
-    var modalSignUpLi = modalSignUpBtn.parent(); //模态框[注册]按钮最外层<li>标签
-    var modalSignInForm = $("#signin-form"); //模态框登录表单区域
-    var modalSignUpForm = $("#signup-form"); //模态框注册表单区域
-
     /**
      *@Description 初始化函数
      *@author CiaoLee
      */
     $(function() {
 
-    });
-
-    /**
-     *@Description 绑定事件
-     *@author CiaoLee
-     */
-    /* 导航栏按钮-点击事件 */
-    $(".navbar").click(function() {
-        signModal.addClass("in");
-    });
-
-    /* 导航栏[登录]按钮-点击事件 */
-    $(".sign-in").click(function() {
-        //显示登录按钮 并隐藏注册按钮
-        modalSignInBtn.addClass("active");
-        modalSignUpBtn.removeClass("active");
-        //显示登录内容区域 并隐藏注册内容区域
-        modalSignInForm.addClass("active");
-        modalSignUpForm.removeClass("active");
-    });
-
-    /* 导航栏[注册]按钮-点击事件 */
-    $(".sign-up").click(function() {
-        //显示注册按钮 并隐藏登录按钮
-        modalSignUpBtn.addClass("active");
-        modalSignInBtn.removeClass("active");
-        //显示注册内容区域 并隐藏登录内容区域
-        modalSignUpForm.addClass("active");
-        modalSignInForm.removeClass("active");
     });
 </script>
 </html>

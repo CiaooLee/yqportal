@@ -1,0 +1,8 @@
+/* 顶部导航栏 */
+.header {
+    background-color: rgba(0,0,1,0.8);
+}
+
+.navbar-nav {
+    margin-left: 5%;
+}
