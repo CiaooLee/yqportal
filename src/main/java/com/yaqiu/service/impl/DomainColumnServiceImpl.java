@@ -14,6 +14,10 @@ public class DomainColumnServiceImpl implements DomainColumnService {
     @Resource
     private DomainColumnMapper domainColumnMapper;
 
+    /**
+     * @Description 获取DomainColumns
+     * @author CiaoLee
+     */
     @Override
     public List<DomainColumn> getActiveList() {
         DomainColumnExample domainColumnExample = new DomainColumnExample();

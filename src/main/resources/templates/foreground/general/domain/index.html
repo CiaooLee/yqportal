@@ -85,8 +85,12 @@
             <div class="content">
                 <!-- 内容区域-导航栏 -->
                 <ul id="domain-column" class="nav nav-tabs question-types" role="tablist">
-                    <li role="presentation" v-for="domainColumn in list">
-                        <a :href="'#'+domainColumn.identifier+'-area'" aria-controls="all" role="tab" toggle="tab">{{domainColumn.name}}</a>
+                    <li role="presentation" v-for="domainColumn in domainColumns">
+                        <a :href="'#'+domainColumn.identifier+'-area'"
+                           :onclick="contentOnload(domainColumn.identifier, domainColumn.id)"
+                           aria-controls="all" role="tab" toggle="tab">
+                            {{domainColumn.name}}
+                        </a>
                     </li>
                     <!-- 内容区域-导航栏-排序方式 -->
                     <div class="question-sort">
@@ -99,7 +103,7 @@
                 </ul>
                 <!-- 内容区域-主要内容 -->
                 <div class="tab-content">
-                    <!-- “全部”内容 -->
+                    <!-- “全部”板块内容 -->
                     <div id="all-area" role="tabpanel" class="tab-pane active">
                         <ul class="row question-items">
                             <li class="question-item">
@@ -891,6 +895,168 @@
                             </ul>
                         </nav>
                     </div>
+                    <!-- “经典案例”板块内容 -->
+                    <div id="case-area" role="tabpanel" class="tab-pane">
+                        <ul class="row question-items">
+                            <li class="question-item">
+                                <div class="col-md-10">
+                                    <div class="col-sm-2 question-item-author">
+                                        <div class="user-avatar ">
+                                            <a class="avatar" href="../user/13/study.html" target="_blank">
+                                                <img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <h4>
+                                            <img src="../img/topQuestion.png">
+                                            <a class="question-item-title" href="show.html" target="_blank">
+                                                实验楼百楼俱乐部成立，欢迎100楼的你加入！
+                                            </a>
+                                        </h4>
+                                        <div class="question-item-summary">
+                                            <div class="user-username ">
+                                                <a class="avatar" href="../user/13/study.html" target="_blank">
+                                                    shiyanlouadmin
+                                                </a>
+                                                <span class="user-level">L14</span>
+                                            </div>
+
+                                            <span class="question-item-date">3小时前</span>
+
+                                            最后回复
+                                            <span class="question-item-date">
+                                            <div class="user-username ">
+                                                <a class="username" href="/user/256544" target="_blank">
+                                                    芃逆明
+                                                </a>
+                                                <span class="user-level">L38</span>
+                                            </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 question-item-rank">
+                                    <div class="question-item-answered">
+                                        <div>89</div>
+                                        <div>回复</div>
+                                    </div>
+                                    <div class="question-item-views">
+                                        <div>2409</div>
+                                        <div>查看</div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- “实时信息”板块内容 -->
+                    <div id="news-area" role="tabpanel" class="tab-pane">
+                        <ul class="row question-items">
+                            <li class="question-item">
+                                <div class="col-md-10">
+                                    <div class="col-sm-2 question-item-author">
+                                        <div class="user-avatar ">
+                                            <a class="avatar" href="../user/13/study.html" target="_blank">
+                                                <img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <h4>
+                                            <img src="../img/topQuestion.png">
+                                            <a class="question-item-title" href="show.html" target="_blank">
+                                                实验楼百楼俱乐部成立，欢迎100楼的你加入！
+                                            </a>
+                                        </h4>
+                                        <div class="question-item-summary">
+                                            <div class="user-username ">
+                                                <a class="avatar" href="../user/13/study.html" target="_blank">
+                                                    shiyanlouadmin
+                                                </a>
+                                                <span class="user-level">L14</span>
+                                            </div>
+
+                                            <span class="question-item-date">3小时前</span>
+
+                                            最后回复
+                                            <span class="question-item-date">
+                                            <div class="user-username ">
+                                                <a class="username" href="/user/256544" target="_blank">
+                                                    芃逆明
+                                                </a>
+                                                <span class="user-level">L38</span>
+                                            </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 question-item-rank">
+                                    <div class="question-item-answered">
+                                        <div>89</div>
+                                        <div>回复</div>
+                                    </div>
+                                    <div class="question-item-views">
+                                        <div>2409</div>
+                                        <div>查看</div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- “讨论交流”板块内容 -->
+                    <div id="forum-area" role="tabpanel" class="tab-pane">
+                        <ul class="row question-items">
+                            <li class="question-item">
+                                <div class="col-md-10">
+                                    <div class="col-sm-2 question-item-author">
+                                        <div class="user-avatar ">
+                                            <a class="avatar" href="../user/13/study.html" target="_blank">
+                                                <img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <h4>
+                                            <img src="../img/topQuestion.png">
+                                            <a class="question-item-title" href="show.html" target="_blank">
+                                                实验楼百楼俱乐部成立，欢迎100楼的你加入！
+                                            </a>
+                                        </h4>
+                                        <div class="question-item-summary">
+                                            <div class="user-username ">
+                                                <a class="avatar" href="../user/13/study.html" target="_blank">
+                                                    shiyanlouadmin
+                                                </a>
+                                                <span class="user-level">L14</span>
+                                            </div>
+
+                                            <span class="question-item-date">3小时前</span>
+
+                                            最后回复
+                                            <span class="question-item-date">
+                                            <div class="user-username ">
+                                                <a class="username" href="/user/256544" target="_blank">
+                                                    芃逆明
+                                                </a>
+                                                <span class="user-level">L38</span>
+                                            </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 question-item-rank">
+                                    <div class="question-item-answered">
+                                        <div>89</div>
+                                        <div>回复</div>
+                                    </div>
+                                    <div class="question-item-views">
+                                        <div>2409</div>
+                                        <div>查看</div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1284,10 +1450,16 @@
      *@author CiaoLee
      */
     /* DomainColumn栏目List */
-    var domainColumnVue = new Vue({
-        el:"#domain-column",
-        data:{list:[]}
+    let domainColumnVue = new Vue({
+        el: "#domain-column",
+        data: {
+            domainColumns: []
+        }
     });
+    /* Content内容List */
+    /*let contentVue = new Vue({
+        el: "#"
+    });*/
 
     /**
      *@Description 初始化函数
@@ -1300,8 +1472,8 @@
     });
 
     /**
-     *@Description 获取DomainColumns
-     *@author CiaoLee
+     * @Description 获取DomainColumns
+     * @author CiaoLee
      */
     function domainColumnOnload() {
         $.ajax({
@@ -1309,10 +1481,20 @@
             type: "get",
             success: function(rtnData) {
                 if(rtnData.code === "success") {
-                    domainColumnVue.list = rtnData.data;
+                    domainColumnVue.domainColumns = rtnData.data;
                 }
             }
         });
+    }
+
+    /**
+     * @Description 获取指定DomainColumns下的Contents
+     * @param identifier 标识符
+     * @param domainColumnId 栏目id
+     * @author CiaoLee
+     */
+    function contentOnload(identifier, domainColumnId) {
+
     }
 </script>
 </html>

@@ -24,6 +24,10 @@ public class DomainColumnController {
     @Resource
     private RedisUtil redisUtil;
 
+    /**
+     * @Description 获取DomainColumns
+     * @author CiaoLee
+     */
     @GetMapping("getActiveList")
     public Result getActiveList() {
         /* 查询Redis */
