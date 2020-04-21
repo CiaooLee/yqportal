@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="foreground/general/css/animate/animate.min.css">
     <link rel="stylesheet" href="foreground/general/css/mine/global/sign-modal.css">
     <link rel="stylesheet" href="foreground/general/css/mine/global/navibar.css">
+    <link rel="stylesheet" href="foreground/general/css/mine/global/highlight.css">
     <!-- js -->
     <script src="foreground/general/js/jquery/jquery.min.js"></script>
     <script src="foreground/general/js/bootstrap/bootstrap.min.js"></script>
@@ -84,11 +85,12 @@
         <div class="col-md-9 layout-body">
             <div class="content">
                 <!-- 内容区域-导航栏 -->
+                <!-- :onclick="'contentOnload(' +  domainColumn.identifier + ',' + domainColumn.id + ')'" -->
                 <ul id="domain-column" class="nav nav-tabs question-types" role="tablist">
                     <li role="presentation" v-for="domainColumn in domainColumns">
                         <a :href="'#'+domainColumn.identifier+'-area'"
-                           :onclick="contentOnload(domainColumn.identifier, domainColumn.id)"
-                           aria-controls="all" role="tab" toggle="tab">
+                            :id="domainColumn.identifier"
+                            class="domain-btn" aria-controls="all" role="tab" toggle="tab">
                             {{domainColumn.name}}
                         </a>
                     </li>
@@ -102,7 +104,7 @@
                     </div>
                 </ul>
                 <!-- 内容区域-主要内容 -->
-                <div class="tab-content">
+                <div id="content-area" class="tab-content">
                     <!-- “全部”板块内容 -->
                     <div id="all-area" role="tabpanel" class="tab-pane active">
                         <ul class="row question-items">
@@ -1443,7 +1445,7 @@
      *@Description 全局变量
      *@author CiaoLee
      */
-    let identifier = [[${identifier}]];
+    let currentDomain = [[${identifier}]];
 
     /**
      *@Description Vue全局变量初始化
@@ -1457,19 +1459,46 @@
         }
     });
     /* Content内容List */
-    /*let contentVue = new Vue({
-        el: "#"
-    });*/
+    let contentVue = new Vue({
+        el: "#content-area",
+        data: {
+            contents: {}
+        }
+    });
+
+    /**
+     *@Description 绑定事件
+     *@author CiaoLee
+     */
+    /* 加载DomainColumn */
+    domainColumnOnload();
+    $(".domain-btn").click(function(e) {
+        console.log(e);
+        /* 设置全局当前domain */
+        //let domainBtn = $(e);
+        //currentDomain = domainBtn.attr("id");
+        /* 按钮高亮 且同级取消高亮 */
+        //domainBtn.addClass("highlight");
+        //domainBtn.removeClass("highlight");
+    });
+
 
     /**
      *@Description 初始化函数
      *@author CiaoLee
      */
     $(function() {
-        /* 加载DomainColumn */
-        domainColumnOnload();
+
         /* 选取Domain并分页加载其Content */
     });
+
+    /**
+     * @Description 显示指定的区域
+     * @author CiaoLee
+     */
+    function domainActive() {
+
+    }
 
     /**
      * @Description 获取DomainColumns
@@ -1494,7 +1523,8 @@
      * @author CiaoLee
      */
     function contentOnload(identifier, domainColumnId) {
-
+        console.log(identifier);
+        console.log(domainColumnId);
     }
 </script>
 </html>

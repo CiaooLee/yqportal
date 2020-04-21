@@ -31,12 +31,16 @@ public class DomainColumnController {
     @GetMapping("getActiveList")
     public Result getActiveList() {
         /* 查询Redis */
+        Object o = redisUtil.get("domain-columns");
         if(redisUtil.hasKey("domain-columns")) return new Result(SUCCESS, redisUtil.get("domain-columns"));
         /* Compromise 查库 */
         List<DomainColumn> domainColumns;
         try {
             domainColumns = domainColumnService.getActiveList();
-            redisUtil.set("domain-columns", domainColumns);
+            redisUtil.set("domain-columns", domainColumns, 0);
+            for(DomainColumn domainColumn : domainColumns) {
+                redisUtil.hset("domain-columns-map", domainColumn.getId(), domainColumn, 0);
+            }
         } catch (Exception e) {
             return new Result(ERROR, null);
         }
