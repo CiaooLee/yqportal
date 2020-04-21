@@ -38,7 +38,7 @@ public class ThymeleafController {
      * @author CiaoLee
      */
     @RequestMapping("domain")
-    public String toCase(String type, ModelMap map) {
+    public String toDomain(String type, ModelMap map) {
         /* 获取session */
         HttpSession session = SessionUtil.get();
         /* 从session中获取deviceType */
@@ -50,7 +50,7 @@ public class ThymeleafController {
         map.addAttribute("identifier", type);
         //if("Mobile".equals(deviceType)) return "foreground/mobile/content/index.html";
         /* 如果访问者使用电脑 或者不明类型设备访问 则跳至通用主页 */
-        return "foreground/general/content/index.html";
+        return "foreground/general/domain/index.html";
     }
 
     /**

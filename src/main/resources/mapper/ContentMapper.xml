@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaqiu.mapper.ContentMapper" >
+  <resultMap id="BaseResultMap" type="com.yaqiu.entity.Content" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="hits_show" property="hitsShow" jdbcType="INTEGER" />
+    <result column="hits_real" property="hitsReal" jdbcType="INTEGER" />
+    <result column="comment_num" property="commentNum" jdbcType="INTEGER" />
+    <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+    <result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="CHAR" />
+    <result column="column_id" property="columnId" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="weight" property="weight" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.yaqiu.entity.Content" extends="BaseResultMap" >
+    <result column="main_content" property="mainContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, hits_show, hits_real, comment_num, creator_id, creator_name, create_time, 
+    column_id, status, weight
+  </sql>
+  <sql id="Blob_Column_List" >
+    main_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.yaqiu.entity.ContentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yaqiu.entity.ContentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from content
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from content
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.yaqiu.entity.ContentExample" >
+    delete from content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.yaqiu.entity.Content" >
+    insert into content (id, title, hits_show, 
+      hits_real, comment_num, creator_id, 
+      creator_name, create_time, column_id, 
+      status, weight, main_content
+      )
+    values (#{id,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{hitsShow,jdbcType=INTEGER}, 
+      #{hitsReal,jdbcType=INTEGER}, #{commentNum,jdbcType=INTEGER}, #{creatorId,jdbcType=VARCHAR}, 
+      #{creatorName,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, #{columnId,jdbcType=CHAR}, 
+      #{status,jdbcType=TINYINT}, #{weight,jdbcType=TINYINT}, #{mainContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yaqiu.entity.Content" >
+    insert into content
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="hitsShow != null" >
+        hits_show,
+      </if>
+      <if test="hitsReal != null" >
+        hits_real,
+      </if>
+      <if test="commentNum != null" >
+        comment_num,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="creatorName != null" >
+        creator_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="columnId != null" >
+        column_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="mainContent != null" >
+        main_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="hitsShow != null" >
+        #{hitsShow,jdbcType=INTEGER},
+      </if>
+      <if test="hitsReal != null" >
+        #{hitsReal,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null" >
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorName != null" >
+        #{creatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="columnId != null" >
+        #{columnId,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=TINYINT},
+      </if>
+      <if test="mainContent != null" >
+        #{mainContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.yaqiu.entity.ContentExample" resultType="java.lang.Integer" >
+    select count(*) from content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update content
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hitsShow != null" >
+        hits_show = #{record.hitsShow,jdbcType=INTEGER},
+      </if>
+      <if test="record.hitsReal != null" >
+        hits_real = #{record.hitsReal,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentNum != null" >
+        comment_num = #{record.commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorName != null" >
+        creator_name = #{record.creatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.columnId != null" >
+        column_id = #{record.columnId,jdbcType=CHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=TINYINT},
+      </if>
+      <if test="record.mainContent != null" >
+        main_content = #{record.mainContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update content
+    set id = #{record.id,jdbcType=CHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      hits_show = #{record.hitsShow,jdbcType=INTEGER},
+      hits_real = #{record.hitsReal,jdbcType=INTEGER},
+      comment_num = #{record.commentNum,jdbcType=INTEGER},
+      creator_id = #{record.creatorId,jdbcType=VARCHAR},
+      creator_name = #{record.creatorName,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=CHAR},
+      column_id = #{record.columnId,jdbcType=CHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      weight = #{record.weight,jdbcType=TINYINT},
+      main_content = #{record.mainContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update content
+    set id = #{record.id,jdbcType=CHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      hits_show = #{record.hitsShow,jdbcType=INTEGER},
+      hits_real = #{record.hitsReal,jdbcType=INTEGER},
+      comment_num = #{record.commentNum,jdbcType=INTEGER},
+      creator_id = #{record.creatorId,jdbcType=VARCHAR},
+      creator_name = #{record.creatorName,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=CHAR},
+      column_id = #{record.columnId,jdbcType=CHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      weight = #{record.weight,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yaqiu.entity.Content" >
+    update content
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="hitsShow != null" >
+        hits_show = #{hitsShow,jdbcType=INTEGER},
+      </if>
+      <if test="hitsReal != null" >
+        hits_real = #{hitsReal,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null" >
+        comment_num = #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorName != null" >
+        creator_name = #{creatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="columnId != null" >
+        column_id = #{columnId,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=TINYINT},
+      </if>
+      <if test="mainContent != null" >
+        main_content = #{mainContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yaqiu.entity.Content" >
+    update content
+    set title = #{title,jdbcType=VARCHAR},
+      hits_show = #{hitsShow,jdbcType=INTEGER},
+      hits_real = #{hitsReal,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      creator_id = #{creatorId,jdbcType=VARCHAR},
+      creator_name = #{creatorName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=CHAR},
+      column_id = #{columnId,jdbcType=CHAR},
+      status = #{status,jdbcType=TINYINT},
+      weight = #{weight,jdbcType=TINYINT},
+      main_content = #{mainContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yaqiu.entity.Content" >
+    update content
+    set title = #{title,jdbcType=VARCHAR},
+      hits_show = #{hitsShow,jdbcType=INTEGER},
+      hits_real = #{hitsReal,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      creator_id = #{creatorId,jdbcType=VARCHAR},
+      creator_name = #{creatorName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=CHAR},
+      column_id = #{columnId,jdbcType=CHAR},
+      status = #{status,jdbcType=TINYINT},
+      weight = #{weight,jdbcType=TINYINT}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

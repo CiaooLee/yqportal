@@ -2,11 +2,11 @@
  *@Description 全局变量
  *@author CiaoLee
  */
-var signModal = $("#sign-modal"); //登录/注册模态框
-var modalSignInBtn = $(".modal-sign-button").eq(0); //模态框[登录]按钮最内层<a>标签
-var modalSignUpBtn = $(".modal-sign-button").eq(1); //模态框[注册]按钮最内层<a>标签
-var modalSignInForm = $("#signin-form"); //模态框登录表单区域
-var modalSignUpForm = $("#signup-form"); //模态框注册表单区域
+let signModal = $("#sign-modal"); //登录/注册模态框
+let modalSignInBtn = $(".modal-sign-button").eq(0); //模态框[登录]按钮最内层<a>标签
+let modalSignUpBtn = $(".modal-sign-button").eq(1); //模态框[注册]按钮最内层<a>标签
+let modalSignInForm = $("#signin-form"); //模态框登录表单区域
+let modalSignUpForm = $("#signup-form"); //模态框注册表单区域
 
 /**
  *@Description 绑定事件
