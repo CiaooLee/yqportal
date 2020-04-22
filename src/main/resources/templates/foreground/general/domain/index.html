@@ -88,7 +88,8 @@
                 <!-- :onclick="'contentOnload(' +  domainColumn.identifier + ',' + domainColumn.id + ')'" -->
                 <ul id="domain-column" class="nav nav-tabs question-types" role="tablist">
                     <li role="presentation" v-for="domainColumn in domainColumns">
-                        <a :id="domainColumn.identifier" :onclick=""
+                        <a :id="domainColumn.identifier"
+                           onclick="domainSwitch(this)"
                             class="domain-btn" aria-controls="all" role="tab" toggle="tab">
                             {{domainColumn.name}}
                         </a>
@@ -98,8 +99,6 @@
                         <a class="active" href="#newest">最新</a></li>
                         /
                         <a href="#hot">最热</a></li>
-                        /
-                        <a href="#unanswered">未回复</a></li>
                     </div>
                 </ul>
                 <!-- 内容区域-主要内容 -->
@@ -1461,25 +1460,9 @@
     let contentVue = new Vue({
         el: "#content-area",
         data: {
-            contents: {}
+            contents: {},
         }
     });
-
-    /**
-     *@Description 绑定事件
-     *@author CiaoLee
-     */
-
-    $(".domain-btn").click(function(e) {
-        console.log(e);
-        /* 设置全局当前domain */
-        //let domainBtn = $(e);
-        //currentDomain = domainBtn.attr("id");
-        /* 按钮高亮 且同级取消高亮 */
-        //domainBtn.addClass("highlight");
-        //domainBtn.removeClass("highlight");
-    });
-
 
     /**
      *@Description 初始化函数
@@ -1492,11 +1475,13 @@
     });
 
     /**
-     * @Description 显示指定的区域
+     * @Description 按钮点击高亮
      * @author CiaoLee
      */
-    function domainActive() {
-
+    function widgetHighlight(widget) {
+        widget = $(widget);
+        widget.addClass("highlight");
+        widget.siblings().removeClass("hightlight");
     }
 
     /**
@@ -1521,11 +1506,35 @@
      * @author CiaoLee
      */
     function domainSwitch(domainBtn) {
+        /* 按钮高亮 */
+        widgetHighlight(domainBtn);
+        /* 获取Identifier */
         domainBtn = $(domainBtn);
-        let identifier = domainBtn.identifier;
-        let domainColumnId = domainBtn.id;
-        console.log(identifier);
-        console.log(domainColumnId);
+        let identifier = domainBtn.attr("id");
+        /* 加载内容（若已经加载过 不做重复加载） */
+        if(contentVue.contents[identifier][1] == null) {
+            getContentList(identifier, 1);
+        }
+        /* 显示相应的内容区域 */
+    }
+
+    /**
+     * @Description 分页加载指定板块的内容
+     * @param domainBtn 板块按钮
+     * @author CiaoLee
+     */
+    function getContentList(identifier, pageIndex) {
+        let params = {};
+        params["identifier"] = identifier;
+        params['pageIndex'] = pageIndex;
+        $.ajax({
+            url: "content/getList",
+            type: "get",
+            data: params,
+            success: function(rtnData) {
+
+            }
+        });
     }
 </script>
 </html>
