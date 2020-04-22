@@ -88,8 +88,7 @@
                 <!-- :onclick="'contentOnload(' +  domainColumn.identifier + ',' + domainColumn.id + ')'" -->
                 <ul id="domain-column" class="nav nav-tabs question-types" role="tablist">
                     <li role="presentation" v-for="domainColumn in domainColumns">
-                        <a :href="'#'+domainColumn.identifier+'-area'"
-                            :id="domainColumn.identifier"
+                        <a :id="domainColumn.identifier" :onclick=""
                             class="domain-btn" aria-controls="all" role="tab" toggle="tab">
                             {{domainColumn.name}}
                         </a>
@@ -1470,8 +1469,7 @@
      *@Description 绑定事件
      *@author CiaoLee
      */
-    /* 加载DomainColumn */
-    domainColumnOnload();
+
     $(".domain-btn").click(function(e) {
         console.log(e);
         /* 设置全局当前domain */
@@ -1488,7 +1486,8 @@
      *@author CiaoLee
      */
     $(function() {
-
+        /* 加载DomainColumn */
+        domainColumnOnload();
         /* 选取Domain并分页加载其Content */
     });
 
@@ -1518,11 +1517,13 @@
 
     /**
      * @Description 获取指定DomainColumns下的Contents
-     * @param identifier 标识符
-     * @param domainColumnId 栏目id
+     * @param domainBtn 板块按钮
      * @author CiaoLee
      */
-    function contentOnload(identifier, domainColumnId) {
+    function domainSwitch(domainBtn) {
+        domainBtn = $(domainBtn);
+        let identifier = domainBtn.identifier;
+        let domainColumnId = domainBtn.id;
         console.log(identifier);
         console.log(domainColumnId);
     }
