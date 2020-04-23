@@ -5,6 +5,7 @@ import com.yaqiu.entity.ContentExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ContentMapper {
     int countByExample(ContentExample example);
@@ -22,6 +23,8 @@ public interface ContentMapper {
     List<Content> selectByExample(ContentExample example);
 
     Content selectByPrimaryKey(String id);
+
+    List<Map> getCurrentPage(Map<String, Object> params);
 
     int updateByExampleSelective(@Param("record") Content record, @Param("example") ContentExample example);
 

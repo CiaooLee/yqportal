@@ -16,14 +16,11 @@ public class ContentServiceImpl implements ContentService {
 
     /**
      * @Description 获取所有的内容
-     * @param domainColumnId
+     * @param params:
      * @author CiaoLee
      */
     @Override
-    public List<Map> getList(String domainColumnId) {
-        ContentExample contentExample = new ContentExample();
-        ContentExample.Criteria contentExampleCriteria = contentExample.createCriteria();
-        contentExampleCriteria.and
-        return contentMapper.selectByExample();
+    public List<Map> getCurrentPage(Map<String, Object> params) {
+       return contentMapper.getCurrentPage(params);
     }
 }

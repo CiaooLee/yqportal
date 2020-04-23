@@ -122,6 +122,19 @@
     from content
     where id = #{id,jdbcType=CHAR}
   </select>
+  <select id="getCurrentPage" resultType="map" parameterType="map">
+    select content.id,content.title,content.hits_show,content.comment_num,content.creator_name,
+        `user`.nickname,`user`.profile_picture_url
+    from content
+    left join `user`
+        on content.creator_id=`user`.id
+    where content.`status`='1'
+    <if test="columnId != null" >
+      and content.column_id=#{columnId}
+    </if>
+    order by content.weight desc,content.create_time desc
+    limit #{beginIndex},#{pageSize}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from content
     where id = #{id,jdbcType=CHAR}

@@ -1,5 +1,6 @@
 package com.yaqiu.controller;
 
+import com.yaqiu.entity.DomainColumn;
 import com.yaqiu.pojo.Result;
 import com.yaqiu.service.ContentService;
 import com.yaqiu.util.RedisUtil;
@@ -29,20 +30,23 @@ public class ContentController {
      * @param identifier domain标识符
      * @author CiaoLee
      */
-    @GetMapping("getList")
-    public Result getList(String identifier, int pageIndex) {
+    @GetMapping("getCurrentPage")
+    public Result getCurrentPage(String identifier, int pageIndex) {
         /* 从Redis中获取domainColumn的主键 */
-        String domainColumnId = "";
+        String columnId = "";
         if(redisUtil.hasKey("domain-columns-map")) {
-            Map<String, String> domainColumn = (Map<String, String>)redisUtil.hget("domain-columns-map", identifier);
-            domainColumnId = domainColumn.get("id");
+            DomainColumn domainColumn = (DomainColumn)redisUtil.hget("domain-columns-map", identifier);
+            columnId = domainColumn.getId();
+        } else {
+          return null;
         }
         /* 查询此栏目下 当前页的内容 */
-        Map<String, Integer> params = new HashMap<String, Integer>();
-        params.put("")
+        Map<String, Object> params = new HashMap();
+        params.put("columnId", columnId);
         params.put("pageIndex", pageIndex);
         params.put("beginIndex", (pageIndex-1)*PAGE_SIZE);
         params.put("pageSize", PAGE_SIZE);
-        return new Result(SUCCESS, );
+        List<Map> currentPage = contentService.getCurrentPage(params);
+        return new Result(SUCCESS, currentPage);
     }
 }

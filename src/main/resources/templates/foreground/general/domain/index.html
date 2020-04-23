@@ -1512,9 +1512,10 @@
         domainBtn = $(domainBtn);
         let identifier = domainBtn.attr("id");
         /* 加载内容（若已经加载过 不做重复加载） */
-        if(contentVue.contents[identifier][1] == null) {
-            getContentList(identifier, 1);
-        }
+        /*if(contentVue.contents[identifier][1] == null) {
+            getCurrentPage(identifier, 1);
+        }*/
+        getCurrentPage(identifier, 1);
         /* 显示相应的内容区域 */
     }
 
@@ -1523,16 +1524,16 @@
      * @param domainBtn 板块按钮
      * @author CiaoLee
      */
-    function getContentList(identifier, pageIndex) {
+    function getCurrentPage(identifier, pageIndex) {
         let params = {};
         params["identifier"] = identifier;
         params['pageIndex'] = pageIndex;
         $.ajax({
-            url: "content/getList",
+            url: "content/getCurrentPage",
             type: "get",
             data: params,
             success: function(rtnData) {
-                
+                console.log(rtnData);
             }
         });
     }
