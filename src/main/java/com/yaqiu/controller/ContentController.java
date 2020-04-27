@@ -13,8 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.yaqiu.constant.GlobalConstant.PAGE_SIZE;
-import static com.yaqiu.constant.GlobalConstant.SUCCESS;
+import static com.yaqiu.constant.GlobalConstant.*;
 
 @RestController
 @RequestMapping("content")
@@ -38,7 +37,7 @@ public class ContentController {
             DomainColumn domainColumn = (DomainColumn)redisUtil.hget("domain-columns-map", identifier);
             columnId = domainColumn.getId();
         } else {
-          return null;
+          return new Result(ERROR, null);
         }
         /* 查询此栏目下 当前页的内容 */
         Map<String, Object> params = new HashMap();
