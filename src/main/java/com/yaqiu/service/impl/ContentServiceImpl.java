@@ -20,7 +20,7 @@ public class ContentServiceImpl implements ContentService {
      * @author CiaoLee
      */
     @Override
-    public List<Map> getCurrentPage(Map<String, Object> params) {
-       return contentMapper.getCurrentPage(params);
+    public List<Map> getSpecifiedPage(Map<String, Object> params) {
+       return contentMapper.getSpecifiedPage(params);
     }
 }

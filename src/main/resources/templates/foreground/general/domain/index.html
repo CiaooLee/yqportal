@@ -84,7 +84,6 @@
         <div class="col-md-9 layout-body">
             <div class="content">
                 <!-- 内容区域-导航栏 -->
-                <!-- :onclick="'contentOnload(' +  domainColumn.identifier + ',' + domainColumn.id + ')'" -->
                 <ul id="domain-column" class="nav nav-tabs question-types" role="tablist">
                     <li role="presentation" v-for="domainColumn in domainColumns">
                         <a :id="domainColumn.identifier"
@@ -102,10 +101,9 @@
                 </ul>
                 <!-- 内容区域-主要内容 -->
                 <div id="content-area" class="tab-content">
-                    <!-- “全部”板块内容 -->
-                    <div id="all-area" role="tabpanel" class="tab-pane active">
+                    <div role="tabpanel" class="tab-pane active">
                         <ul class="row question-items">
-                            <li class="question-item" v-for="typicalContent in contents['all'][1]">
+                            <li class="question-item" v-for="content in currentPage">
                                 <div class="col-md-10">
                                     <div class="col-sm-2 question-item-author">
                                         <div class="user-avatar ">
@@ -118,38 +116,29 @@
                                         <h4>
                                             <img src="../img/topQuestion.png">
                                             <a class="question-item-title" href="show.html" target="_blank">
-                                                {{typicalContent.title}}
+                                                {{content.title}}
                                             </a>
                                         </h4>
                                         <div class="question-item-summary">
-                                            <div class="user-username ">
-                                                <a class="avatar" href="../user/13/study.html" target="_blank">
-                                                    shiyanlouadmin
+                                            <div class="user-username">
+                                                <a v-if="content.nickname != null " class="avatar" href="../user/13/study.html" target="_blank">
+                                                    {{content.nickname}}
                                                 </a>
-                                                <span class="user-level">L14</span>
+                                                <a v-if="content.creator_name != null " class="avatar" href="../user/13/study.html" target="_blank">
+                                                    {{content.creator_name}}
+                                                </a>
                                             </div>
-
                                             <span class="question-item-date">3小时前</span>
-
-                                            最后回复
-                                            <span class="question-item-date">
-                                            <div class="user-username ">
-                                                <a class="username" href="/user/256544" target="_blank">
-                                                    芃逆明
-                                                </a>
-                                                <span class="user-level">L38</span>
-                                            </div>
-                                            </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-2 question-item-rank">
                                     <div class="question-item-answered">
-                                        <div>89</div>
+                                        <div>{{content.comment_num}}</div>
                                         <div>回复</div>
                                     </div>
                                     <div class="question-item-views">
-                                        <div>2409</div>
+                                        <div>{{content.hits_show}}</div>
                                         <div>查看</div>
                                     </div>
                                 </div>
@@ -194,168 +183,6 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div>
-                    <!-- “经典案例”板块内容 -->
-                    <div id="case-area" role="tabpanel" class="tab-pane">
-                        <ul class="row question-items">
-                            <li class="question-item">
-                                <div class="col-md-10">
-                                    <div class="col-sm-2 question-item-author">
-                                        <div class="user-avatar ">
-                                            <a class="avatar" href="../user/13/study.html" target="_blank">
-                                                <img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <h4>
-                                            <img src="../img/topQuestion.png">
-                                            <a class="question-item-title" href="show.html" target="_blank">
-                                                实验楼百楼俱乐部成立，欢迎100楼的你加入！
-                                            </a>
-                                        </h4>
-                                        <div class="question-item-summary">
-                                            <div class="user-username ">
-                                                <a class="avatar" href="../user/13/study.html" target="_blank">
-                                                    shiyanlouadmin
-                                                </a>
-                                                <span class="user-level">L14</span>
-                                            </div>
-
-                                            <span class="question-item-date">3小时前</span>
-
-                                            最后回复
-                                            <span class="question-item-date">
-                                            <div class="user-username ">
-                                                <a class="username" href="/user/256544" target="_blank">
-                                                    芃逆明
-                                                </a>
-                                                <span class="user-level">L38</span>
-                                            </div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 question-item-rank">
-                                    <div class="question-item-answered">
-                                        <div>89</div>
-                                        <div>回复</div>
-                                    </div>
-                                    <div class="question-item-views">
-                                        <div>2409</div>
-                                        <div>查看</div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- “实时信息”板块内容 -->
-                    <div id="news-area" role="tabpanel" class="tab-pane">
-                        <ul class="row question-items">
-                            <li class="question-item">
-                                <div class="col-md-10">
-                                    <div class="col-sm-2 question-item-author">
-                                        <div class="user-avatar ">
-                                            <a class="avatar" href="../user/13/study.html" target="_blank">
-                                                <img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <h4>
-                                            <img src="../img/topQuestion.png">
-                                            <a class="question-item-title" href="show.html" target="_blank">
-                                                实验楼百楼俱乐部成立，欢迎100楼的你加入！
-                                            </a>
-                                        </h4>
-                                        <div class="question-item-summary">
-                                            <div class="user-username ">
-                                                <a class="avatar" href="../user/13/study.html" target="_blank">
-                                                    shiyanlouadmin
-                                                </a>
-                                                <span class="user-level">L14</span>
-                                            </div>
-
-                                            <span class="question-item-date">3小时前</span>
-
-                                            最后回复
-                                            <span class="question-item-date">
-                                            <div class="user-username ">
-                                                <a class="username" href="/user/256544" target="_blank">
-                                                    芃逆明
-                                                </a>
-                                                <span class="user-level">L38</span>
-                                            </div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 question-item-rank">
-                                    <div class="question-item-answered">
-                                        <div>89</div>
-                                        <div>回复</div>
-                                    </div>
-                                    <div class="question-item-views">
-                                        <div>2409</div>
-                                        <div>查看</div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- “讨论交流”板块内容 -->
-                    <div id="forum-area" role="tabpanel" class="tab-pane">
-                        <ul class="row question-items">
-                            <li class="question-item">
-                                <div class="col-md-10">
-                                    <div class="col-sm-2 question-item-author">
-                                        <div class="user-avatar ">
-                                            <a class="avatar" href="../user/13/study.html" target="_blank">
-                                                <img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <h4>
-                                            <img src="../img/topQuestion.png">
-                                            <a class="question-item-title" href="show.html" target="_blank">
-                                                实验楼百楼俱乐部成立，欢迎100楼的你加入！
-                                            </a>
-                                        </h4>
-                                        <div class="question-item-summary">
-                                            <div class="user-username ">
-                                                <a class="avatar" href="../user/13/study.html" target="_blank">
-                                                    shiyanlouadmin
-                                                </a>
-                                                <span class="user-level">L14</span>
-                                            </div>
-
-                                            <span class="question-item-date">3小时前</span>
-
-                                            最后回复
-                                            <span class="question-item-date">
-                                            <div class="user-username ">
-                                                <a class="username" href="/user/256544" target="_blank">
-                                                    芃逆明
-                                                </a>
-                                                <span class="user-level">L38</span>
-                                            </div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 question-item-rank">
-                                    <div class="question-item-answered">
-                                        <div>89</div>
-                                        <div>回复</div>
-                                    </div>
-                                    <div class="question-item-views">
-                                        <div>2409</div>
-                                        <div>查看</div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -744,7 +571,7 @@
      *@author CiaoLee
      */
     let currentDomain = [[${identifier}]];
-
+    let globalContents = {};
 
     /**
      *@Description Vue全局变量初始化
@@ -761,7 +588,7 @@
     let contentVue = new Vue({
         el: "#content-area",
         data: {
-            contents: {},
+            currentPage: {},
         }
     });
 
@@ -772,8 +599,13 @@
     $(function() {
         /* 加载DomainColumn */
         domainColumnOnload();
-        /* 选取Domain并分页加载其Content */
     });
+
+    window.onload = function () {
+        /* 选取Domain并分页加载其Content */
+        console.log($("#" + currentDomain).attr("id"));
+        domainSwitch($("#" + currentDomain));
+    };
 
     /**
      * @Description 按钮点击高亮
@@ -821,12 +653,14 @@
         /* 获取Identifier */
         domainBtn = $(domainBtn);
         let identifier = domainBtn.attr("id");
-        /* 加载内容（若已经加载过 不做重复加载） */
-        /*if(contentVue.contents[identifier][1] == null) {
-            getCurrentPage(identifier, 1);
-        }*/
-        getCurrentPage(identifier, 1);
-        /* 显示相应的内容区域 */
+        /* 把Identifier存入全局变量 */
+        currentDomain = identifier;
+        /* 加载指定 栏目&&页数 的内容（若已经加载过 不做重复加载） */
+        let contentsExpected = globalContents[identifier];
+        //如果全局内容管理对象中有当前页 则直接拿给Vue渲染
+        if(contentsExpected != null) contentVue.currentPage = contentsExpected[1];
+        //如果没有当前页 Compromise=>查库
+        if(contentsExpected == null) getSpecifiedPage(identifier, 1);
     }
 
     /**
@@ -835,17 +669,27 @@
      * @param pageIndex 页数
      * @author CiaoLee
      */
-    function getCurrentPage(identifier, pageIndex) {
+    function getSpecifiedPage(identifier, pageIndex) {
         let params = {};
         params["identifier"] = identifier;
         params['pageIndex'] = pageIndex;
         $.ajax({
-            url: "content/getCurrentPage",
+            url: "content/getSpecifiedPage",
             type: "get",
             data: params,
             async: false,
             success: function(rtnData) {
-                typicalContents[pageIndex] = rtnData.data;
+                //把本页内容存入Vue对象 用于直接渲染
+                contentVue.currentPage = rtnData.data;
+                //把本页内容存入全局内容管理对象 用于缓存
+                let specifiedContents = globalContents[identifier];
+                if(specifiedContents != null) {
+                    globalContents[identifier][pageIndex] = rtnData.data;
+                }
+                if(specifiedContents == null) {
+                    globalContents[identifier] = {};
+                    globalContents[identifier][pageIndex] = rtnData.data;
+                }
             }
         });
     }

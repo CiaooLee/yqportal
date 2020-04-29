@@ -24,7 +24,7 @@ public interface ContentMapper {
 
     Content selectByPrimaryKey(String id);
 
-    List<Map> getCurrentPage(Map<String, Object> params);
+    List<Map> getSpecifiedPage(Map<String, Object> params);
 
     int updateByExampleSelective(@Param("record") Content record, @Param("example") ContentExample example);
 

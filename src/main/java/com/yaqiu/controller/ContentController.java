@@ -29,8 +29,8 @@ public class ContentController {
      * @param identifier domain标识符
      * @author CiaoLee
      */
-    @GetMapping("getCurrentPage")
-    public Result getCurrentPage(String identifier, int pageIndex) {
+    @GetMapping("getSpecifiedPage")
+    public Result getSpecifiedPage(String identifier, int pageIndex) {
         /* 从Redis中获取domainColumn的主键 */
         String columnId = "";
         if(redisUtil.hasKey("domain-columns-map")) {
@@ -45,7 +45,7 @@ public class ContentController {
         params.put("pageIndex", pageIndex);
         params.put("beginIndex", (pageIndex-1)*PAGE_SIZE);
         params.put("pageSize", PAGE_SIZE);
-        List<Map> currentPage = contentService.getCurrentPage(params);
+        List<Map> currentPage = contentService.getSpecifiedPage(params);
         return new Result(SUCCESS, currentPage);
     }
 }
