@@ -781,8 +781,8 @@
      */
     function widgetHighlight(widget) {
         widget = $(widget);
-        widget.addClass("highlight");
-        widget.siblings().removeClass("hightlight");
+        widget.addClass("active");
+        widget.siblings().removeClass("active");
     }
 
     /**
@@ -817,7 +817,7 @@
      */
     function domainSwitch(domainBtn) {
         /* 按钮高亮 */
-        widgetHighlight(domainBtn);
+        widgetHighlight($(domainBtn).parent());
         /* 获取Identifier */
         domainBtn = $(domainBtn);
         let identifier = domainBtn.attr("id");
@@ -831,7 +831,8 @@
 
     /**
      * @Description 分页加载指定板块的内容
-     * @param domainBtn 板块按钮
+     * @param identifier 栏目标识符
+     * @param pageIndex 页数
      * @author CiaoLee
      */
     function getCurrentPage(identifier, pageIndex) {
