@@ -18,14 +18,66 @@
     <link rel="stylesheet" href="foreground/general/css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="foreground/general/css/global/styles.css?=2016121272249">
     <link rel="stylesheet" href="foreground/general/css/animate/animate.min.css">
+    <link rel="stylesheet" href="foreground/general/css/pagination/pagination.css">
     <link rel="stylesheet" href="foreground/general/css/mine/global/sign-modal.css">
     <link rel="stylesheet" href="foreground/general/css/mine/global/navibar.css">
     <!-- js -->
     <script src="foreground/general/js/jquery/jquery.min.js"></script>
     <script src="foreground/general/js/bootstrap/bootstrap.min.js"></script>
     <script src="foreground/general/js/vue/vue.js"></script>
+    <script src="foreground/general/js/pagination/jquery.pagination.js"></script>
     <!-- 内联样式 -->
     <style>
+        /* 页签栏 */
+        .pagination>a {
+            float: left;
+            margin: 0 5px;
+            width: 38px;
+            height: 38px;
+            line-height: 38px;
+            background: #fff;
+        }
+
+        .pagination>span {
+            float: left;
+            margin: 0 5px;
+            width: 38px;
+            height: 38px;
+            line-height: 38px;
+            font-size: 14px;
+        }
+
+        .current-page {
+            background: #0c9;
+            color: #565a61;
+            border: 1px solid #0c9;
+        }
+
+        .jump-input {
+            float: left;
+            margin: 0 5px;
+            width: 38px;
+            height: 38px;
+            line-height: 38px;
+            text-align: center;
+            background: #fff;
+            border: 1px solid #ebebeb;
+            outline: none;
+            color: #bdbdbd;
+            font-size: 14px;
+        }
+
+        .jump-btn {
+            float: left;
+            margin: 0 5px;
+            width: 38px;
+            height: 38px;
+            line-height: 38px;
+            background: #fff;
+            border: 1px solid #ebebeb;
+            color: #bdbdbd;
+            font-size: 14px;
+        }
     </style>
 </head>
 
@@ -85,7 +137,7 @@
             <div class="content">
                 <!-- 内容区域-导航栏 -->
                 <ul id="domain-column" class="nav nav-tabs question-types" role="tablist">
-                    <li role="presentation" v-for="domainColumn in domainColumns">
+                    <li v-for="domainColumn in domainColumns" role="presentation">
                         <a :id="domainColumn.identifier"
                            onclick="domainSwitch(this)"
                             class="domain-btn" aria-controls="all" role="tab" toggle="tab">
@@ -93,21 +145,21 @@
                         </a>
                     </li>
                     <!-- 内容区域-导航栏-排序方式 -->
-                    <div class="question-sort">
-                        <a class="active" href="#newest">最新</a></li>
+                    <div id="sort-type" class="question-sort">
+                        <a id="new" class="active" onclick="sortTypeBtn(this)">最新</a>
                         /
-                        <a href="#hot">最热</a></li>
+                        <a id="hot" onclick="sortTypeBtn(this)">最热</a>
                     </div>
                 </ul>
                 <!-- 内容区域-主要内容 -->
                 <div id="content-area" class="tab-content">
                     <div role="tabpanel" class="tab-pane active">
                         <ul class="row question-items">
-                            <li class="question-item" v-for="content in currentPage">
+                            <li v-for="content in currentPage" class="question-item">
                                 <div class="col-md-10">
                                     <div class="col-sm-2 question-item-author">
                                         <div class="user-avatar ">
-                                            <a class="avatar" href="../user/13/study.html" target="_blank">
+                                            <a class="avatar">
                                                 <img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">
                                             </a>
                                         </div>
@@ -121,14 +173,14 @@
                                         </h4>
                                         <div class="question-item-summary">
                                             <div class="user-username">
-                                                <a v-if="content.nickname != null " class="avatar" href="../user/13/study.html" target="_blank">
+                                                <a v-if="content.nickname != null " class="avatar">
                                                     {{content.nickname}}
                                                 </a>
-                                                <a v-if="content.creator_name != null " class="avatar" href="../user/13/study.html" target="_blank">
+                                                <a v-if="content.creator_name != null " class="avatar">
                                                     {{content.creator_name}}
                                                 </a>
                                             </div>
-                                            <span class="question-item-date">3小时前</span>
+                                            <span class="question-item-date">{{content.create_time}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -146,42 +198,7 @@
                         </ul>
                         <!-- 分页工具栏 -->
                         <nav class="pagination-container">
-                            <ul class="pagination">
-                                <li class="disabled">
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">上一页</span>
-                                    </a>
-                                </li>
-                                <li class="active">
-                                    <a href="/questions/?sort=newest&amp;page=1&amp;area_type=all">1</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=2&amp;area_type=all">2</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=3&amp;area_type=all">3</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=4&amp;area_type=all">4</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=5&amp;area_type=all">5</a>
-                                </li>
-                                <li>
-                                    <a href='#'>...</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=547&amp;area_type=all">547</a>
-                                </li>
-                                <li class="">
-                                    <a href="/questions/?sort=newest&amp;page=548&amp;area_type=all">548</a>
-                                </li>
-                                <li class="">
-                                    <a aria-label="Next" href="/questions/?sort=newest&amp;page=2&amp;area_type=all">
-                                        <span aria-hidden="true">下一页</span>
-                                    </a>
-                                </li>
-                            </ul>
+                            <ul class="pagination"></ul>
                         </nav>
                     </div>
                 </div>
@@ -570,25 +587,34 @@
      *@Description 全局变量
      *@author CiaoLee
      */
-    let currentDomain = [[${identifier}]];
-    let globalContents = {};
+    let currentDomain = [[${identifier}]]; //当前板块
+    let currentSortType = "new"; //当前排序方式
+    let globalContents = {}; //全局内容存储
+    let globalPagination = {}; //全局内容页签存储
 
     /**
      *@Description Vue全局变量初始化
      *@author CiaoLee
      */
-    /* DomainColumn栏目List */
+    /* DomainColumn栏目Vue */
     let domainColumnVue = new Vue({
         el: "#domain-column",
         data: {
             domainColumns: []
         }
     });
-    /* Content内容List */
+    /* Content内容Vue */
     let contentVue = new Vue({
         el: "#content-area",
         data: {
-            currentPage: {},
+            currentPage: {}
+        }
+    });
+    /* Content页签Vue */
+    let paginationVue = new Vue({
+        el: ".pagination-container",
+        data: {
+            currentPagination: {}
         }
     });
 
@@ -601,6 +627,10 @@
         domainColumnOnload();
     });
 
+    /**
+     *@Description 动态渲染结束时 初始化函数
+     *@author CiaoLee
+     */
     window.onload = function () {
         /* 选取Domain并分页加载其Content */
         domainSwitch($("#" + currentDomain));
@@ -642,24 +672,35 @@
     }
 
     /**
-     * @Description 获取指定DomainColumns下的Contents
+     * @Description 切换板块 获取指定DomainColumns下的Contents
      * @param domainBtn 板块按钮
      * @author CiaoLee
      */
     function domainSwitch(domainBtn) {
         /* 按钮高亮 */
         widgetHighlight($(domainBtn).parent());
-        /* 获取Identifier */
+        /* 获取Identifier 并把Identifier存入全局变量 */
         domainBtn = $(domainBtn);
         let identifier = domainBtn.attr("id");
-        /* 把Identifier存入全局变量 */
         currentDomain = identifier;
-        /* 加载指定 栏目&&页数 的内容（若已经加载过 不做重复加载） */
-        let contentsExpected = globalContents[identifier];
-        //如果全局内容管理对象中有当前页 则直接拿给Vue渲染
-        if(contentsExpected != null) contentVue.currentPage = contentsExpected[1];
-        //如果没有当前页 Compromise=>查库
-        if(contentsExpected == null) getSpecifiedPage(identifier, 1);
+        /* 查询指定内容 */
+        getSpecifiedPage(identifier, 1);
+    }
+
+    /**
+     * @Description 切换排序方式 SortType
+     * @param sortBtn 排序按钮
+     * @author CiaoLee
+     */
+    function sortTypeBtn(sortBtn) {
+        /* 排序按钮前端样式改变 */
+        let specifiedBtn = $(sortBtn);
+        specifiedBtn.addClass("active");
+        specifiedBtn.siblings().removeClass("active");
+        /* 把当前指定的排序方式 放入全局变量 */
+        currentSortType = specifiedBtn.attr("id");
+        /* 查询指定内容 */
+        getSpecifiedPage(currentDomain, 1);
     }
 
     /**
@@ -669,7 +710,20 @@
      * @author CiaoLee
      */
     function getSpecifiedPage(identifier, pageIndex) {
+        /* 获取指定栏目的页签栏 */
+        getSpecifiedPagination(identifier);
+        /* 获取排序方式 */
+        let sortType = currentSortType;
+        /* 加载指定 排序方式&&栏目&&页数 的内容（若已经加载过 不做重复加载） */
+        let contentsExpected = globalContents[identifier];
+        //如果全局内容管理对象中有当前页 则直接拿给Vue渲染
+        if(contentsExpected!=null && contentsExpected[sortType]!=null && contentsExpected[sortType][pageIndex]!=null) {
+            contentVue.currentPage = contentsExpected[sortType][pageIndex];
+            return;
+        }
+        /* 如果没有当前页 Compromise=>查库 */
         let params = {};
+        params['sortType'] = sortType;
         params["identifier"] = identifier;
         params['pageIndex'] = pageIndex;
         $.ajax({
@@ -678,19 +732,57 @@
             data: params,
             async: false,
             success: function(rtnData) {
-                //把本页内容存入Vue对象 用于直接渲染
+                /* 把本页内容存入Vue对象 用于直接渲染 */
                 contentVue.currentPage = rtnData.data;
-                //把本页内容存入全局内容管理对象 用于缓存
+                /* 把本页内容存入全局内容管理对象 用于缓存 */
                 let specifiedContents = globalContents[identifier];
-                if(specifiedContents != null) {
-                    globalContents[identifier][pageIndex] = rtnData.data;
-                }
+                //如果指定Identifier下的内容都不存在 那么直接初始化
                 if(specifiedContents == null) {
                     globalContents[identifier] = {};
-                    globalContents[identifier][pageIndex] = rtnData.data;
+                    globalContents[identifier][sortType] = {};
+                    globalContents[identifier][sortType][pageIndex] = rtnData.data;
+                }
+                //如果指定Identifier下的内容存在 那么就继续看指定SortType下的内容存不存在
+                if(specifiedContents != null) {
+                    //如果指定SortType下的内容存在 那么就赋值当前页
+                    if(specifiedContents[sortType] != null) {
+                        globalContents[identifier][sortType][pageIndex] = rtnData.data;
+                    }
+                    //如果指定SortType下的内容不存在 那么就初始化SortType 然后再赋值当前页
+                    if(specifiedContents[sortType] == null) {
+                        globalContents[identifier][sortType] = {};
+                        globalContents[identifier][sortType][pageIndex] = rtnData.data;
+                    }
                 }
             }
         });
+    }
+
+    /**
+     * @Description 加载页签栏
+     * @param identifier 栏目标识符
+     * @author CiaoLee
+     */
+    function getSpecifiedPagination(identifier) {
+        $(".pagination").pagination({
+            pageCount: 50,
+            totalData: 0,
+            count: 2,
+            jump: true,
+            coping: true,
+            homePage: "首页",
+            endPage: "末页",
+            prevContent: "上页",
+            nextContent: "下页",
+            activeCls: "current-page",
+            jumpIptCls: "jump-input",
+            jumpBtnCls: "jump-btn",
+            callback: function (api) {
+                console.log(api.getCurrent())
+            }
+        });
+
+
     }
 </script>
 </html>

@@ -122,8 +122,9 @@
     from content
     where id = #{id,jdbcType=CHAR}
   </select>
-  <select id="getSpecifiedPage" resultType="map" parameterType="map">
-    select content.id,content.title,content.hits_show,content.comment_num,content.creator_name,
+  <!-- 查询指定 页数&&栏目&&排序方式（最新） 的内容 -->
+  <select id="getSpecifiedPageOfLatest" resultType="map" parameterType="map">
+    select content.id,content.title,content.hits_show,content.comment_num,content.creator_name,content.create_time,
         `user`.nickname,`user`.profile_picture_url
     from content
     left join `user`
@@ -133,6 +134,20 @@
       and content.column_id=#{columnId}
     </if>
     order by content.weight desc,content.create_time desc
+    limit #{beginIndex},#{pageSize}
+  </select>
+  <!-- 查询指定 页数&&栏目&&排序方式（最热） 的内容 -->
+  <select id="getSpecifiedPageOfHottest" resultType="map" parameterType="map">
+    select content.id,content.title,content.hits_show,content.comment_num,content.creator_name,content.create_time,
+    `user`.nickname,`user`.profile_picture_url
+    from content
+    left join `user`
+    on content.creator_id=`user`.id
+    where content.`status`='1'
+    <if test="columnId != null" >
+      and content.column_id=#{columnId}
+    </if>
+    order by content.weight desc,content.hits_show desc,content.comment_num desc
     limit #{beginIndex},#{pageSize}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
