@@ -49,7 +49,7 @@
 
         .current-page {
             background: #0c9;
-            color: #565a61;
+            color: #fff;
             border: 1px solid #0c9;
         }
 
@@ -158,7 +158,7 @@
                             <li v-for="content in currentPage" class="question-item">
                                 <div class="col-md-10">
                                     <div class="col-sm-2 question-item-author">
-                                        <div class="user-avatar ">
+                                        <div class="user-avatar">
                                             <a class="avatar">
                                                 <img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">
                                             </a>
@@ -185,13 +185,13 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 question-item-rank">
-                                    <div class="question-item-answered">
-                                        <div>{{content.comment_num}}</div>
-                                        <div>回复</div>
-                                    </div>
                                     <div class="question-item-views">
                                         <div>{{content.hits_show}}</div>
                                         <div>查看</div>
+                                    </div>
+                                    <div class="question-item-answered">
+                                        <div>{{content.comment_num}}</div>
+                                        <div>回复</div>
                                     </div>
                                 </div>
                             </li>
@@ -589,6 +589,7 @@
      */
     let currentDomain = [[${identifier}]]; //当前板块
     let currentSortType = "new"; //当前排序方式
+    let currentPageIndex = 1;
     let globalContents = {}; //全局内容存储
     let globalPagination = {}; //全局内容页签存储
 
@@ -608,13 +609,6 @@
         el: "#content-area",
         data: {
             currentPage: {}
-        }
-    });
-    /* Content页签Vue */
-    let paginationVue = new Vue({
-        el: ".pagination-container",
-        data: {
-            currentPagination: {}
         }
     });
 
@@ -667,6 +661,9 @@
                         }
                     }
                 }
+                if(rtnData.code === "error") {
+                    alert("加载失败了，请重试");
+                }
             }
         });
     }
@@ -683,8 +680,10 @@
         domainBtn = $(domainBtn);
         let identifier = domainBtn.attr("id");
         currentDomain = identifier;
+        /* 刷新currentPageIndex */
+        currentPageIndex = 1;
         /* 查询指定内容 */
-        getSpecifiedPage(identifier, 1);
+        getSpecifiedPage(identifier, currentPageIndex);
     }
 
     /**
@@ -699,8 +698,10 @@
         specifiedBtn.siblings().removeClass("active");
         /* 把当前指定的排序方式 放入全局变量 */
         currentSortType = specifiedBtn.attr("id");
+        /* 刷新currentPageIndex */
+        currentPageIndex = 1;
         /* 查询指定内容 */
-        getSpecifiedPage(currentDomain, 1);
+        getSpecifiedPage(currentDomain, currentPageIndex);
     }
 
     /**
@@ -732,41 +733,84 @@
             data: params,
             async: false,
             success: function(rtnData) {
-                /* 把本页内容存入Vue对象 用于直接渲染 */
-                contentVue.currentPage = rtnData.data;
-                /* 把本页内容存入全局内容管理对象 用于缓存 */
-                let specifiedContents = globalContents[identifier];
-                //如果指定Identifier下的内容都不存在 那么直接初始化
-                if(specifiedContents == null) {
-                    globalContents[identifier] = {};
-                    globalContents[identifier][sortType] = {};
-                    globalContents[identifier][sortType][pageIndex] = rtnData.data;
-                }
-                //如果指定Identifier下的内容存在 那么就继续看指定SortType下的内容存不存在
-                if(specifiedContents != null) {
-                    //如果指定SortType下的内容存在 那么就赋值当前页
-                    if(specifiedContents[sortType] != null) {
-                        globalContents[identifier][sortType][pageIndex] = rtnData.data;
-                    }
-                    //如果指定SortType下的内容不存在 那么就初始化SortType 然后再赋值当前页
-                    if(specifiedContents[sortType] == null) {
+                if(rtnData.code === "success") {
+                    /* 把本页内容存入Vue对象 用于直接渲染 */
+                    contentVue.currentPage = rtnData.data;
+                    /* 把本页内容存入全局内容管理对象 用于缓存 */
+                    let specifiedContents = globalContents[identifier];
+                    //如果指定Identifier下的内容都不存在 那么直接初始化
+                    if(specifiedContents == null) {
+                        globalContents[identifier] = {};
                         globalContents[identifier][sortType] = {};
                         globalContents[identifier][sortType][pageIndex] = rtnData.data;
                     }
+                    //如果指定Identifier下的内容存在 那么就继续看指定SortType下的内容存不存在
+                    if(specifiedContents != null) {
+                        //如果指定SortType下的内容存在 那么就赋值当前页
+                        if(specifiedContents[sortType] != null) {
+                            globalContents[identifier][sortType][pageIndex] = rtnData.data;
+                        }
+                        //如果指定SortType下的内容不存在 那么就初始化SortType 然后再赋值当前页
+                        if(specifiedContents[sortType] == null) {
+                            globalContents[identifier][sortType] = {};
+                            globalContents[identifier][sortType][pageIndex] = rtnData.data;
+                        }
+                    }
+                }
+                if(rtnData.code === "error") {
+                    alert("加载失败了，请重试");
                 }
             }
         });
     }
 
     /**
-     * @Description 加载页签栏
+     * @Description 获取指定栏目页签栏数据
      * @param identifier 栏目标识符
      * @author CiaoLee
      */
     function getSpecifiedPagination(identifier) {
+        let pageCount = null;
+        /* 从本地缓存中读取分页参数 */
+        if(globalPagination[identifier]!=null && globalPagination[identifier]["pageCount"]!=null) {
+            pageCount = globalPagination[identifier]["pageCount"];
+            paginationPrint(pageCount);
+            return;
+        }
+        /* Compromise=> 连接数据库查询页签栏分页参数 */
+        $.ajax({
+            url: "content/getSpecifiedPagination",
+            type: "get",
+            data: {"identifier": identifier},
+            async: false,
+            success:function (rtnData) {
+                if(rtnData.code === "success") {
+                    pageCount = rtnData.data.pageCount;
+                    /* 使用Pagination插件渲染页签栏 */
+                    paginationPrint(pageCount);
+                    /* 将数据存入全局变量缓存 */
+                    if(globalPagination[identifier] == null) {
+                        globalPagination[identifier] = {};
+                        globalPagination[identifier]["pageCount"] = pageCount;
+                    }
+                }
+                if(rtnData.code === "error") {
+                    alert("加载失败了，请重试");
+                }
+            }
+        });
+    }
+
+    /**
+     * @Description 绘制页签栏
+     * @param identifier 栏目标识符
+     * @param pageCount 指定栏目的页数
+     * @author CiaoLee
+     */
+    function paginationPrint(pageCount) {
         $(".pagination").pagination({
-            pageCount: 50,
-            totalData: 0,
+            pageCount: pageCount,
+            current: currentPageIndex,
             count: 2,
             jump: true,
             coping: true,
@@ -778,11 +822,14 @@
             jumpIptCls: "jump-input",
             jumpBtnCls: "jump-btn",
             callback: function (api) {
-                console.log(api.getCurrent())
+                /* 回到页面顶部 */
+                scrollTo(0,0);
+                /* 加载内容数据 并跳转页面 */
+                let pageIndex = api.getCurrent();
+                currentPageIndex = pageIndex;
+                getSpecifiedPage(currentDomain, pageIndex);
             }
         });
-
-
     }
 </script>
 </html>

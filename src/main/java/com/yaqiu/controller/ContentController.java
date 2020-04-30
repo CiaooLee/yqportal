@@ -1,9 +1,9 @@
 package com.yaqiu.controller;
 
 import com.yaqiu.entity.DomainColumn;
+import com.yaqiu.pojo.Page;
 import com.yaqiu.pojo.Result;
 import com.yaqiu.service.ContentService;
-import com.yaqiu.util.ObjectUtil;
 import com.yaqiu.util.RedisUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,6 +67,25 @@ public class ContentController {
      */
     @GetMapping("getSpecifiedPagination")
     public Result getSpecifiedPagination(String identifier) {
-        return null;
+        /* 从Redis中获取domainColumn的主键 */
+        String columnId = "";
+        if(!"all".equals(identifier) && redisUtil.hasKey("domain-columns-map")) {
+            DomainColumn domainColumn = (DomainColumn)redisUtil.hget("domain-columns-map", identifier);
+            columnId = domainColumn.getId();
+        }
+        /* 查询此栏目下内容的 分页参数 */
+        Map<String, Object> params = new HashMap();
+        if(!"all".equals(identifier)) params.put("columnId", columnId);
+        //查询数据库
+        Page page = null;
+        try {
+            int specifiedContentsCount = contentService.countSpecifiedContents(params);
+            int specifiedPageCount = specifiedContentsCount%PAGE_SIZE==0? specifiedContentsCount/PAGE_SIZE: specifiedContentsCount/PAGE_SIZE+1;
+            page = new Page(specifiedPageCount);
+        } catch(Exception e) {
+            System.err.println("查询指定栏目的分页参数 连接数据库失败");
+            return new Result(ERROR, null);
+        }
+        return new Result(SUCCESS, page);
     }
 }

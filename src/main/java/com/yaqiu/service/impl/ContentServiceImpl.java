@@ -3,6 +3,7 @@ package com.yaqiu.service.impl;
 import com.yaqiu.entity.ContentExample;
 import com.yaqiu.mapper.ContentMapper;
 import com.yaqiu.service.ContentService;
+import com.yaqiu.util.ObjectUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,5 +37,23 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public List<Map> getSpecifiedPageOfHottest(Map<String, Object> params) {
         return contentMapper.getSpecifiedPageOfHottest(params);
+    }
+
+    /**
+     * @Description 获取指定栏目的Contents记录数
+     * @param params=> identifier domain标识符
+     * @author CiaoLee
+     */
+    @Override
+    public int countSpecifiedContents(Map<String, Object> params) {
+        /* 查询“全部”内容总数 */
+        if(ObjectUtil.isEmpty(params.get("columnId"))) {
+            return contentMapper.countByExample(null);
+        }
+        /* 按栏目查询内容总数 */
+        ContentExample contentExample = new ContentExample();
+        ContentExample.Criteria contentExampleCriteria = contentExample.createCriteria();
+        contentExampleCriteria.andColumnIdEqualTo((String)params.get("columnId"));
+        return contentMapper.countByExample(contentExample);
     }
 }
