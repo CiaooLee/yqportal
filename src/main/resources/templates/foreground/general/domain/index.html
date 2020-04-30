@@ -602,6 +602,18 @@
         el: "#domain-column",
         data: {
             domainColumns: []
+        },
+        beforeCreate() {
+            /* 加载DomainColumn */
+            domainColumnOnload();
+        },
+        watch: {
+            "domainColumns": function () {
+                this.$nextTick(function () {
+                    /* 选取Domain并分页加载其Content */
+                    domainSwitch($("#" + currentDomain));
+                });
+            }
         }
     });
     /* Content内容Vue */
@@ -611,24 +623,6 @@
             currentPage: {}
         }
     });
-
-    /**
-     *@Description 初始化函数
-     *@author CiaoLee
-     */
-    $(function() {
-        /* 加载DomainColumn */
-        domainColumnOnload();
-    });
-
-    /**
-     *@Description 动态渲染结束时 初始化函数
-     *@author CiaoLee
-     */
-    window.onload = function () {
-        /* 选取Domain并分页加载其Content */
-        domainSwitch($("#" + currentDomain));
-    };
 
     /**
      * @Description 按钮点击高亮
@@ -661,7 +655,7 @@
                     }
                 }
                 if(rtnData.code === "error") {
-                    alert("加载失败了，请重试");
+                    alert("加载失败了，请刷新");
                 }
             }
         });
@@ -686,7 +680,7 @@
     }
 
     /**
-     * @Description 切换排序方式 SortType
+     * @Description 切换排序方式
      * @param sortBtn 排序按钮
      * @author CiaoLee
      */
@@ -756,7 +750,7 @@
                     }
                 }
                 if(rtnData.code === "error") {
-                    alert("加载失败了，请重试");
+                    alert("加载失败了，请刷新");
                 }
             }
         });
@@ -796,7 +790,7 @@
                     }
                 }
                 if(rtnData.code === "error") {
-                    alert("加载失败了，请重试");
+                    alert("加载失败了，请刷新");
                 }
             }
         });

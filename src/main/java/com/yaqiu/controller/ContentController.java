@@ -41,7 +41,7 @@ public class ContentController {
             columnId = domainColumn.getId();
         }
         /* 查询此栏目下 当前页的内容 */
-        Map<String, Object> params = new HashMap();
+        Map<String, Object> params = new HashMap<>();
         if(!"all".equals(identifier)) params.put("columnId", columnId);
         params.put("pageIndex", pageIndex);
         params.put("beginIndex", (pageIndex-1)*PAGE_SIZE);
@@ -74,7 +74,7 @@ public class ContentController {
             columnId = domainColumn.getId();
         }
         /* 查询此栏目下内容的 分页参数 */
-        Map<String, Object> params = new HashMap();
+        Map<String, Object> params = new HashMap<>();
         if(!"all".equals(identifier)) params.put("columnId", columnId);
         //查询数据库
         Page page = null;
