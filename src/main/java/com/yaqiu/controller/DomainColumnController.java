@@ -31,8 +31,7 @@ public class DomainColumnController {
     @GetMapping("getActiveList")
     public Result getActiveList() {
         /* 查询Redis */
-        Object o = redisUtil.get("domain-columns");
-        if(redisUtil.hasKey("domain-columns") || redisUtil.hasKey("domain-columns-map"))
+        if(redisUtil.hasKey("domain-columns") && redisUtil.hasKey("domain-columns-map"))
             return new Result(SUCCESS, redisUtil.get("domain-columns"));
         /* Compromise 查库 */
         List<DomainColumn> domainColumns;
