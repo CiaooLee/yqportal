@@ -26,7 +26,7 @@ public class ContentController {
     private RedisUtil redisUtil;
 
     /**
-     * @Description 获取所有的内容
+     * @Description 获取指定内容
      * @param sortType 排序方式
      * @param identifier domain标识符
      * @param pageIndex 指定页数
