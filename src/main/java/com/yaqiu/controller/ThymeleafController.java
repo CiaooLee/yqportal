@@ -48,7 +48,7 @@ public class ThymeleafController {
         session.setAttribute("operationLogContent", "访问了[内容板块-"+type+"]");
         session.setAttribute("operationLogCreateTime", DateUtil.getCurrentDateTime());
         map.addAttribute("identifier", type);
-        //if("Mobile".equals(deviceType)) return "foreground/mobile/content/index.html";
+        //if("Mobile".equals(deviceType)) return "foreground/mobile/domain/index.html";
         /* 如果访问者使用电脑 或者不明类型设备访问 则跳至通用主页 */
         return "foreground/general/domain/index.html";
     }
@@ -59,7 +59,14 @@ public class ThymeleafController {
      */
     @RequestMapping("content")
     public String toDetail(String id) {
-        return "foreground/general/content/show.html";
+        /* 获取session */
+        HttpSession session = SessionUtil.get();
+        /* 从session中获取deviceType */
+        String deviceType = (String)session.getAttribute("deviceType");
+        System.out.println(id);
+        //if("Mobile".equals(deviceType)) return "foreground/mobile/domain/content.html";
+        /* 如果访问者使用电脑 或者不明类型设备访问 则跳至通用主页 */
+        return "foreground/general/domain/content.html";
     }
 
     /**
