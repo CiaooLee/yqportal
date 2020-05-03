@@ -1,6 +1,7 @@
 package com.yaqiu.config;
 
 import com.yaqiu.interceptor.AuthenticationInterceptor;
+import com.yaqiu.interceptor.InsuranceInterceptor;
 import com.yaqiu.interceptor.VisitorLogInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
+    /**
+     * @Description 服务器安全保障拦截器
+     * @author CiaoLee
+     */
+    @Bean
+    public InsuranceInterceptor insuranceInterceptor() {
+        return new InsuranceInterceptor();
+    }
+
     /**
      * @Description 登录验证拦截器
      * @author CiaoLee
@@ -33,6 +43,10 @@ public class InterceptorConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        /* 服务器安全保障拦截器规则 */
+        registry.addInterceptor(insuranceInterceptor())
+                .addPathPatterns("/**/*.html");
+
         /* 登录验证拦截器规则 */
         /*registry.addInterceptor(authenticationInterceptor())
                 .addPathPatterns("/**");*/
