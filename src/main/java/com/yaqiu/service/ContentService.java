@@ -11,4 +11,6 @@ public interface ContentService {
     int countSpecifiedContents(Map<String, Object> params);
 
     Map<String, Object> getSpecifiedContent(Map<String, Object> params);
+
+    void adminPublish(String title, String mainContent, String columnId, Byte weight);
 }

@@ -19,4 +19,8 @@ public class GlobalConstant {
 
     /* Domain页面分页信息 */
     public static final Integer PAGE_SIZE = 12;
+
+    /* status状态 */
+    public static final Byte ACTIVE_STATUS = 1;
+    public static final Byte INACTIVE_STATUS = 0;
 }

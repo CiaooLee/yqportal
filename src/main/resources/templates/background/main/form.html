@@ -29,6 +29,11 @@
     <link href="background/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
     <!-- Main CSS-->
     <link href="background/css/theme.css" rel="stylesheet" media="all">
+    <style>
+        .card-footer {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body class="animsition">
@@ -337,33 +342,33 @@
                                         <strong>文章发布</strong>
                                     </div>
                                     <div class="card-body card-block">
-                                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                        <form class="form-horizontal">
                                             <!-- 标题 -->
                                             <div class="row form-group">
                                                 <div class="col col-md-2">
-                                                    <label for="text-input" class=" form-control-label">文章标题</label>
+                                                    <label for="title" class="form-control-label">文章标题</label>
                                                 </div>
                                                 <div class="col-12 col-md-10">
-                                                    <input type="text" id="text-input" name="title" placeholder="请输入文章标题" class="form-control">
+                                                    <input type="text" id="title" name="title" placeholder="请输入文章标题" class="form-control">
                                                     <!--<small class="form-text text-muted">This is a help text</small>-->
                                                 </div>
                                             </div>
                                             <!-- 内容 -->
                                             <div class="row form-group">
                                                 <div class="col col-md-2">
-                                                    <label for="textarea-input" class=" form-control-label">文章内容</label>
+                                                    <label for="main-content" class="form-control-label">文章内容</label>
                                                 </div>
                                                 <div class="col-12 col-md-10">
-                                                    <textarea name="main-content" id="textarea-input" rows="9" placeholder="请输入文章内容" class="form-control"></textarea>
+                                                    <textarea name="main-content" id="main-content" rows="9" placeholder="请输入文章内容" class="form-control"></textarea>
                                                 </div>
                                             </div>
                                             <!-- 栏目 -->
                                             <div class="row form-group">
                                                 <div class="col col-md-2">
-                                                    <label for="selectLg" class=" form-control-label">选择栏目</label>
+                                                    <label for="column-id" class="form-control-label">选择栏目</label>
                                                 </div>
                                                 <div class="col-12 col-md-10">
-                                                    <select name="selectLg" id="selectLg" class="form-control-lg form-control">
+                                                    <select name="selectLg" id="column-id" class="form-control-lg form-control">
                                                         <option value="sgfY4g5k">经典案例</option>
                                                         <option value="GbBxLHTt">实时信息</option>
                                                         <option value="lQSlUrT0">讨论交流</option>
@@ -373,15 +378,15 @@
                                             <!-- 权重 -->
                                             <div class="row form-group">
                                                 <div class="col col-md-2">
-                                                    <label class=" form-control-label">文章等级</label>
+                                                    <label class="form-control-label">文章等级</label>
                                                 </div>
                                                 <div class="col col-md-10">
                                                     <div class="form-check-inline form-check">
-                                                        <label for="inline-checkbox1" class="form-check-label">
-                                                            <input type="checkbox" id="inline-checkbox1" name="inline-checkbox1" value="0" class="form-check-input">普通文章
+                                                        <label for="inline-radio1" class="form-check-label">
+                                                            <input type="radio" id="inline-radio1" name="weight" value="0" class="form-check-input weight">普通文章
                                                         </label>
-                                                        <label for="inline-checkbox2" class="form-check-label">
-                                                            <input type="checkbox" id="inline-checkbox2" name="inline-checkbox2" value="1" class="form-check-input">置顶文章
+                                                        <label for="inline-radio2" class="form-check-label">
+                                                            <input type="radio" id="inline-radio2" name="weight" value="1" class="form-check-input weight">置顶文章
                                                         </label>
                                                     </div>
                                                 </div>
@@ -389,10 +394,10 @@
                                         </form>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary btn-sm">
+                                        <button class="btn btn-primary btn-lg" onclick="publish()">
                                             <i class="fa fa-dot-circle-o"></i> 提交
                                         </button>
-                                        <button type="reset" class="btn btn-danger btn-sm">
+                                        <button class="btn btn-danger btn-lg" onclick="reset()">
                                             <i class="fa fa-ban"></i> 重置
                                         </button>
                                     </div>
@@ -412,6 +417,28 @@
                 </div>
             </div>
         </div>
+
+        <!-- alert -->
+        <div class="modal fade" id="alert-modal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true"
+             data-backdrop="static">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">提示</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="alert-modal-content"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- alert -->
     </div>
 </body>
 <!-- Jquery JS-->
@@ -437,7 +464,72 @@
 <!-- Main JS-->
 <script src="background/js/main.js"></script>
 <script type="text/javascript">
+    /**
+    * @Description 发布文章
+    * @author CiaoLee
+    */
+    function publish() {
+        /* 获取input值 */
+        let title = $("#title").val();
+        let mainContent = $("#main-content").val();
+        let columnId = $("#column-id").val();
+        let weight = parseInt($("input[name='weight']:checked").val());
+        /* 验证标题 */
+        if(title === "") {
+            $("#alert-modal-content").html("请输入标题");
+            $('#alert-modal').modal();
+            return;
+        }
+        /* 验证内容 */
+        if(mainContent === "") {
+            $("#alert-modal-content").html("请输入内容");
+            $('#alert-modal').modal();
+            return;
+        }
+        /* 验证栏目 */
+        if(columnId === "") {
+            $("#alert-modal-content").html("请选择栏目");
+            $('#alert-modal').modal();
+            return;
+        }
+        /* 验证文章等级 */
+        if(weight === undefined) {
+            $("#alert-modal-content").html("请选择文章等级");
+            $('#alert-modal').modal();
+            return;
+        }
+        let params = {};
+        params["title"] = title;
+        params["mainContent"] = mainContent;
+        params["columnId"] = columnId;
+        params["weight"] = weight;
+        $.ajax({
+            url: "content/adminPublish",
+            type: "post",
+            data: params,
+            async: false,
+            success: function (rtnData) {
+                if(rtnData.code === "success") {
+                    $("#alert-modal-content").html("发布成功");
+                    $('#alert-modal').modal();
+                }
+                if(rtnData.code === "error") {
+                    $("#alert-modal-content").html("发布失败，请重试");
+                    $('#alert-modal').modal();
+                }
+            }
+        });
+    }
 
+    /**
+     * @Description 重置Form
+     * @author CiaoLee
+     */
+    function reset() {
+        $("#title").val("");
+        $("#main-content").val("");
+        $("#column-id").val("");
+    }
 </script>
 </html>
 <!-- end document-->

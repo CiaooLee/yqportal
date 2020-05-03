@@ -6,6 +6,7 @@ import com.yaqiu.pojo.Result;
 import com.yaqiu.service.ContentService;
 import com.yaqiu.util.RedisUtil;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -107,5 +108,29 @@ public class ContentController {
             return new Result(ERROR, null);
         }
         return new Result(SUCCESS, specifiedContent);
+    }
+
+    /**
+     * @Description 管理员发布文章
+     * @param title 标题
+     * @param mainContent 内容
+     * @param columnId 栏目Id
+     * @param weight 权重
+     * @author CiaoLee
+     */
+    @PostMapping("adminPublish")
+    public Result adminPublish(String title, String mainContent, String columnId, Byte weight) {
+        /* 处理mainContent=> 将制表符转为HTML代码 */
+        mainContent = mainContent.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+        mainContent = mainContent.replaceAll("\n", "<br/>");
+        mainContent = mainContent.replaceAll(" ", "&nbsp;");
+        /* 执行新增 */
+        try {
+            contentService.adminPublish(title, mainContent, columnId, weight);
+        } catch(Exception e) {
+            System.err.println("管理员新增Content错误，连接数据库失败");
+            return new Result(ERROR, null);
+        }
+        return new Result(SUCCESS, null);
     }
 }

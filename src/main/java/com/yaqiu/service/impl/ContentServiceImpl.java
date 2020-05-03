@@ -1,14 +1,20 @@
 package com.yaqiu.service.impl;
 
+import com.yaqiu.entity.Content;
 import com.yaqiu.entity.ContentExample;
 import com.yaqiu.mapper.ContentMapper;
 import com.yaqiu.service.ContentService;
+import com.yaqiu.util.DateUtil;
 import com.yaqiu.util.ObjectUtil;
+import com.yaqiu.util.UUIDUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+
+import static com.yaqiu.constant.GlobalConstant.ACTIVE_STATUS;
+import static com.yaqiu.constant.GlobalConstant.ADMIN_USERNAME;
 
 @Service
 public class ContentServiceImpl implements ContentService {
@@ -65,5 +71,20 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public Map<String, Object> getSpecifiedContent(Map<String, Object> params) {
         return contentMapper.getSpecifiedContent(params);
+    }
+
+    /**
+     * @Description 管理员发布文章
+     * @param title 标题
+     * @param mainContent 内容
+     * @param columnId 栏目Id
+     * @param weight 权重
+     * @author CiaoLee
+     */
+    @Override
+    public void adminPublish(String title, String mainContent, String columnId, Byte weight) {
+        /* 初始化Content对象 */
+        Content content = new Content(UUIDUtil.getUUID(), title, null, null, null, ADMIN_USERNAME, null, DateUtil.getCurrentDateTime(), columnId, ACTIVE_STATUS, weight, mainContent);
+        contentMapper.insert(content);
     }
 }
