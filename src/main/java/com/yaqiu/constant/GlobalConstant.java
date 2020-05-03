@@ -10,7 +10,7 @@ public class GlobalConstant {
     public static final Byte SEND_REQUEST_OPERATION_LOG_TYPE = 1; //"发送请求"类型
 
     /* 后台管理员账号密码 */
-    public static final String ADMIN_USERNAME = "admin";
+    public static final String ADMIN_USERNAME = "adminyxn";
     public static final String ADMIN_PASSWORD = "996815yt";
 
     /* ajax返回信息 */

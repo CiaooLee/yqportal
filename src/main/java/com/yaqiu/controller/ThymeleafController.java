@@ -5,6 +5,7 @@ import com.yaqiu.util.DateUtil;
 import com.yaqiu.util.SessionUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -86,5 +87,32 @@ public class ThymeleafController {
         //if("Mobile".equals(deviceType)) return "foreground/mobile/document/contact-us.html";
         /* 如果访问者使用电脑 或者不明类型设备访问 则跳至通用主页 */
         return "foreground/general/document/contact-us.html";
+    }
+
+    /**
+     * @Description 后台-登录
+     * @author CiaoLee
+     */
+    @RequestMapping("background")
+    public String toBackground() {
+        return "background/login.html";
+    }
+
+    /**
+     * @Description 后台-主页
+     * @author CiaoLee
+     */
+    @RequestMapping("background/index")
+    public String toBackgroundIndex() {
+        return "background/main/index.html";
+    }
+
+    /**
+     * @Description 后台-表格
+     * @author CiaoLee
+     */
+    @RequestMapping("background/form")
+    public String toBackgroundForm() {
+        return "background/main/form.html";
     }
 }
