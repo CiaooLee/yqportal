@@ -56,4 +56,14 @@ public class ContentServiceImpl implements ContentService {
         contentExampleCriteria.andColumnIdEqualTo((String)params.get("columnId"));
         return contentMapper.countByExample(contentExample);
     }
+
+    /**
+     * @Description 获取指定内容
+     * @param params=> id Content表主键
+     * @author CiaoLee
+     */
+    @Override
+    public Map<String, Object> getSpecifiedContent(Map<String, Object> params) {
+        return contentMapper.getSpecifiedContent(params);
+    }
 }

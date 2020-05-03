@@ -167,16 +167,16 @@
                                     <div class="col-sm-10">
                                         <h4>
                                             <img src="../img/topQuestion.png">
-                                            <a :href="'content?id='+content.id" class="question-item-title">
+                                            <a :href="'content?id='+content.id" class="question-item-title" target="_blank">
                                                 {{content.title}}
                                             </a>
                                         </h4>
                                         <div class="question-item-summary">
                                             <div class="user-username">
-                                                <a v-if="content.nickname != null " class="avatar">
+                                                <a v-if="content.nickname != null" class="avatar">
                                                     {{content.nickname}}
                                                 </a>
-                                                <a v-if="content.creator_name != null " class="avatar">
+                                                <a v-if="content.creator_name != null" class="avatar">
                                                     {{content.creator_name}}
                                                 </a>
                                             </div>
@@ -594,7 +594,7 @@
     let globalPagination = {}; //全局内容页签存储
 
     /**
-     *@Description Vue全局变量初始化
+     *@Description Vue全局变量
      *@author CiaoLee
      */
     /* DomainColumn栏目Vue */

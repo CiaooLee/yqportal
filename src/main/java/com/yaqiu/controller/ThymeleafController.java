@@ -58,12 +58,12 @@ public class ThymeleafController {
      * @author CiaoLee
      */
     @RequestMapping("content")
-    public String toDetail(String id) {
+    public String toContent(String id, ModelMap map) {
         /* 获取session */
         HttpSession session = SessionUtil.get();
         /* 从session中获取deviceType */
         String deviceType = (String)session.getAttribute("deviceType");
-        System.out.println(id);
+        map.addAttribute("contentId", id);
         //if("Mobile".equals(deviceType)) return "foreground/mobile/domain/content.html";
         /* 如果访问者使用电脑 或者不明类型设备访问 则跳至通用主页 */
         return "foreground/general/domain/content.html";

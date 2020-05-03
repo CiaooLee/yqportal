@@ -88,4 +88,24 @@ public class ContentController {
         }
         return new Result(SUCCESS, page);
     }
+
+    /**
+     * @Description 获取指定内容
+     * @param id ContentId
+     * @author CiaoLee
+     */
+    @GetMapping("getSpecifiedContent")
+    public Result getSpecifiedContent(String id) {
+        /* 初始化参数/返回集 */
+        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> specifiedContent = null;
+        params.put("id", id);
+        try {
+            specifiedContent = contentService.getSpecifiedContent(params);
+        } catch(Exception e) {
+            System.err.println("查询Content：'"+id+"'连接数据库失败");
+            return new Result(ERROR, null);
+        }
+        return new Result(SUCCESS, specifiedContent);
+    }
 }

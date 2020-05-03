@@ -150,6 +150,18 @@
     order by content.weight desc,content.hits_show desc,content.comment_num desc
     limit #{beginIndex},#{pageSize}
   </select>
+  <!-- 查询指定内容 -->
+  <select id="getSpecifiedContent" parameterType="map" resultType="map">
+    select content.id,content.title,content.main_content,content.hits_show,content.comment_num,
+        `user`.nickname,content.creator_name,`user`.profile_picture_url,
+        content.create_time,domain_column.identifier,domain_column.`name` as column_name
+    from content
+    left join `user`
+        on content.creator_id=`user`.id
+    left join domain_column
+        on content.column_id=domain_column.id
+    where content.id=#{id}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from content
     where id = #{id,jdbcType=CHAR}

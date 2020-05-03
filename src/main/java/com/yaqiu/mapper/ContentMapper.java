@@ -28,6 +28,8 @@ public interface ContentMapper {
 
     List<Map> getSpecifiedPageOfHottest(Map<String, Object> params);
 
+    Map<String, Object> getSpecifiedContent(Map<String, Object> params);
+
     int updateByExampleSelective(@Param("record") Content record, @Param("example") ContentExample example);
 
     int updateByExampleWithBLOBs(@Param("record") Content record, @Param("example") ContentExample example);

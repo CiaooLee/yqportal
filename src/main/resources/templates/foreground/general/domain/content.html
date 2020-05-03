@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!-- 标签页内容 -->
     <title>重庆青少年心理咨询 专注青少年心理健康-【雅秋文化】</title>
@@ -24,6 +23,7 @@
     <!-- js -->
     <script src="foreground/general/js/jquery/jquery.min.js"></script>
     <script src="foreground/general/js/bootstrap/bootstrap.min.js"></script>
+    <script src="foreground/general/js/vue/vue.js"></script>
     <!-- 内联样式 -->
     <style>
         /* 标题 */
@@ -87,13 +87,13 @@
 </nav>
 
 <!-- 主要 -->
-<div class="container layout layout-margin-top">
+<div id="content-area" class="container layout layout-margin-top">
     <!-- 主要-路径导航栏 -->
     <ol class="breadcrumb">
-        <li><a href="/questions/">讨论区</a></li>
-        <li><a href="/questions/?area_type=course">课程问答</a></li>
+        <li><a href="/">首页</a></li>
+        <li><a :href="'domain?type=' + content.identifier">{{content.column_name}}</a></li>
         <li class="active">
-            <a href="/questions/8641">
+            <a :href="'content?id=' + content.id">
             好心人可以告诉我怎么截屏吗。。。
             </a>
         </li>
@@ -101,42 +101,44 @@
     <!-- 主要-内容区域 -->
     <div class="row">
         <!-- 主要-内容区域 -->
-        <div id="content-area" class="col-md-12 layout-body">
+        <div class="col-md-12 layout-body">
             <div class="content question-detail">
                 <!-- 主要-内容区域-标题 -->
                 <div class="question-headline">
-                    <span class="question-title"> 好心人可以告诉我怎么截屏吗。。。</span>
+                    <span class="question-title">{{content.title}}</span>
                 </div>
                 <!-- 主要-内容区域-发帖人信息 -->
                 <div class="question-author">
                     <div class="user-avatar ">
-                        <a class="avatar" href="/user/347060" target="_blank">
+                        <a class="avatar">
                             <img src="https://dn-simplecloud.shiyanlou.com/gravatarM7Q8G5B92TNJ.jpg?imageView2/1/w/200/h/200">
                         </a>
                     </div>
-                    <div class="user-username ">
-                        <a class="username" href="/user/347060" target="_blank">
-                            到此一游
+                    <div class="user-username">
+                        <a v-if="content.nickname != null" class="username">
+                            {{content.nickname}}
                         </a>
-                        <span class="user-level">L4</span>
+                        <a v-if="content.creator_name != null" class="username">
+                            {{content.creator_name}}
+                        </a>
                     </div>
-                    <span>23小时前</span>
-                    <span>
-                        <a href="/questions/?area_type=course">课程问答</a>
+                    <span style="margin-left: 2.5%"> 发布于：{{content.create_time}}</span>
+                    <span class="question-from">
+                        来自：
+                        <a :href="'domain?type=' + content.identifier">{{content.column_name}}</a>
                     </span>
-                    <span class="question-from">来自： <a href="/questions/courses/115">熟悉实验环境 </a></span>
-                    <span class="question-figure">3 回复</span><span class="question-figure">17 查看</span>
+                    <span class="question-figure">{{content.comment_num}} 回复</span><span class="question-figure">{{content.hits_show}} 查看</span>
                 </div>
                 <!-- 主要-内容区域-发帖详情 -->
                 <div class="question-content markdown-body">
-                    <p>&nbsp;&nbsp;第一段代码中，步骤三第二行的libb.a应该是libb.o，同步骤二中的一致第一段代码中，步骤三第二行的libb.a应该是libb.o，同步骤二中的一致第一段代码中，步骤三第二行的libb.a应该是libb.o，同步骤二中的一致第一段代码中，步骤三第二行的libb.a应该是libb.o，同步骤二中的一致第一段代码中，步骤三第二行的libb.a应该是libb.o，同步骤二中的一致</p>
+                    <p v-html="content.main_content"></p>
                 </div>
                 <!-- 主要-内容区域-回答区域 -->
                 <div class="question-answers">
-                    <p class="ptilte">全部回复</p>
+                    <p class="ptilte">评论区维护中</p>
                     <hr/>
                     <!-- 回答1 -->
-                    <div class="answer-item">
+                    <!--<div class="answer-item">
                         <div class="answer-head">
                             <div class="user-avatar ">
                                 <a class="avatar" href="/user/212008" target="_blank">
@@ -167,9 +169,9 @@
                                 <hr/>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <!-- 回答2 -->
-                    <div class="answer-item">
+                    <!--<div class="answer-item">
                         <div class="answer-head">
                             <div class="user-avatar ">
                                 <a class="avatar" href="/user/347060" target="_blank">
@@ -194,7 +196,7 @@
                                 <hr/>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -365,7 +367,41 @@
 </body>
 <!-- 文档就绪-外联js -->
 <script src="foreground/general/js/mine/global/login-btn.js"></script>
-<script type="text/javascript">
+<script th:inline="javascript">
+    /**
+     *@Description 全局变量
+     *@author CiaoLee
+     */
+    let contentId = [[${contentId}]]; //当前文章Id
 
+    /**
+     *@Description Vue全局变量
+     *@author CiaoLee
+     */
+    let contentVue = new Vue({
+        el: "#content-area",
+        data: {
+            content: {}
+        },
+        beforeCreate() {
+            getSpecifiedContent(contentId);
+        }
+    });
+
+    /**
+     *@Description 查询当前文章详情
+     *@param contentId
+     *@author CiaoLee
+     */
+    function getSpecifiedContent(contentId) {
+        $.ajax({
+            url: "content/getSpecifiedContent",
+            type: "get",
+            data: {"id": contentId},
+            success: function (rtnData) {
+                contentVue.content = rtnData.data;
+            }
+        });
+    }
 </script>
 </html>
