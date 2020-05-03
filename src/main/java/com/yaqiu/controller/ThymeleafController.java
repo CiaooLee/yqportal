@@ -5,7 +5,6 @@ import com.yaqiu.util.DateUtil;
 import com.yaqiu.util.SessionUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -74,7 +73,7 @@ public class ThymeleafController {
      * @Description 前台-“联系我们”跳转映射
      * @author CiaoLee
      */
-    @RequestMapping("contact-us")
+    @RequestMapping("contactUs")
     public String toContactUs() {
         /* 获取session */
         HttpSession session = SessionUtil.get();
@@ -102,7 +101,7 @@ public class ThymeleafController {
      * @Description 后台-主页
      * @author CiaoLee
      */
-    @RequestMapping("background/index")
+    @RequestMapping("backgroundIndex")
     public String toBackgroundIndex() {
         return "background/main/index.html";
     }
@@ -111,7 +110,7 @@ public class ThymeleafController {
      * @Description 后台-表格
      * @author CiaoLee
      */
-    @RequestMapping("background/form")
+    @RequestMapping("backgroundForm")
     public String toBackgroundForm() {
         return "background/main/form.html";
     }

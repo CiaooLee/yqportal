@@ -27,6 +27,6 @@ public class UserController {
         if(ADMIN_USERNAME.equals(username)) {
             if(!ADMIN_PASSWORD.equals(password)) return "redirect:background";
         }
-        return "redirect:/background/index";
+        return "redirect:/backgroundIndex";
     }
 }

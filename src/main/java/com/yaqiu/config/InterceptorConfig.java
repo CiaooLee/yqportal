@@ -38,8 +38,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**");*/
 
         /* 访问者日志拦截器规则 */
-        /*registry.addInterceptor(visitorLogInterceptor())
+        registry.addInterceptor(visitorLogInterceptor())
                 .addPathPatterns("/*")
-                .excludePathPatterns("/error");*/
+                .excludePathPatterns("/error");
     }
 }
