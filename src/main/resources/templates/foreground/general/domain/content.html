@@ -94,7 +94,7 @@
         <li><a :href="'domain?type=' + content.identifier">{{content.column_name}}</a></li>
         <li class="active">
             <a :href="'content?id=' + content.id">
-            好心人可以告诉我怎么截屏吗。。。
+            {{content.title}}
             </a>
         </li>
     </ol>
@@ -115,14 +115,14 @@
                         </a>
                     </div>
                     <div class="user-username">
-                        <a v-if="content.nickname != null" class="username">
+                        <a v-if="content.nickname!=null && content.creator_name==null" class="username">
                             {{content.nickname}}
                         </a>
-                        <a v-if="content.creator_name != null" class="username">
+                        <a v-if="content.creator_name!=null && content.nickname==null" class="username">
                             {{content.creator_name}}
                         </a>
                     </div>
-                    <span style="margin-left: 2.5%"> 发布于：{{content.create_time}}</span>
+                    <span style="margin-left: 2%"> 发布于：{{content.create_time}}</span>
                     <span class="question-from">
                         来自：
                         <a :href="'domain?type=' + content.identifier">{{content.column_name}}</a>
