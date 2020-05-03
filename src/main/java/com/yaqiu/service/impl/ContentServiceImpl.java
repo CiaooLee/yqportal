@@ -84,7 +84,7 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public void adminPublish(String title, String mainContent, String columnId, Byte weight) {
         /* 初始化Content对象 */
-        Content content = new Content(UUIDUtil.getUUID(), title, null, null, null, ADMIN_USERNAME, null, DateUtil.getCurrentDateTime(), columnId, ACTIVE_STATUS, weight, mainContent);
+        Content content = new Content(UUIDUtil.getUUID(), title, 0, 0, 0, ADMIN_USERNAME, null, DateUtil.getCurrentDateTime(), columnId, ACTIVE_STATUS, weight, mainContent);
         contentMapper.insert(content);
     }
 }

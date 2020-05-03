@@ -160,13 +160,13 @@
                                     <div class="col-sm-2 question-item-author">
                                         <div class="user-avatar">
                                             <a class="avatar">
-                                                <img src="https://dn-simplecloud.shiyanlou.com/gravataradmin.png?imageView2/1/w/100/h/100">
+                                                <img :src="content.profile_picture_url">
                                             </a>
                                         </div>
                                     </div>
                                     <div class="col-sm-10">
                                         <h4>
-                                            <img src="../img/topQuestion.png">
+                                            <img v-if="content.weight >= 1" src="foreground/general/img/domain/top-identifier.png">
                                             <a :href="'content?id='+content.id" class="question-item-title" target="_blank">
                                                 {{content.title}}
                                             </a>
@@ -206,115 +206,77 @@
         </div>
         <!-- 右部区域 -->
         <div class="col-md-3 layout-side">
-            <a class="btn side-btn" href="#sign-modal" data-toggle="modal" data-sign="signin">我要发帖</a>
+            <!-- 右部区域-“联系我们”按钮 -->
+            <a class="btn side-btn" href="#sign-modal" data-toggle="modal" data-sign="signin">联系我们</a>
+            <!-- 右部区域-“登录/注册”按钮 -->
             <div class="panel panel-default panel-userinfo">
                 <div class="panel-body body-userinfo">
                     <div class="media userinfo-header">
                         <div class="media-left">
                             <div class="user-avatar">
                                 <a class="avatar" href="#sign-modal" data-toggle="modal" data-sign="signin">
-                                    <img class="circle" src="../img/logo-grey.png">
+                                    <img class="circle" src="foreground/general/img/domain/xzy-profile.jpg">
                                 </a>
                             </div>
                         </div>
                         <div class="media-body">
-                            <span class="media-heading username">欢迎来到实验楼</span>
-                            <p class="vip-remain">做实验，学编程</p>
+                            <span class="media-heading username">欢迎来到雅秋文化</span>
+                            <p class="vip-remain">专注青少年心理健康</p>
                         </div>
                     </div>
                     <div class="row userinfo-data">
                         <hr>
                         <div class="btn-group-lr">
-                            <a href="#sign-modal" type="button" class="btn btn-success col-md-5 col-xs-6 login-btn"
+                            <a href="#sign-modal" type="button" class="btn btn-success col-md-5 col-xs-6 login-btn sign-in"
                                data-toggle="modal" data-sign="signin">登录</a>
                             <a href="#sign-modal" type="button"
-                               class="btn btn-success col-md-5 col-xs-6 col-md-offset-1 register-btn"
+                               class="btn btn-success col-md-5 col-xs-6 col-md-offset-1 register-btn sign-up"
                                data-toggle="modal" data-sign="signup">注册</a>
                         </div>
                     </div>
-                    <div class="userinfo-footer row">
-                        <div class="col-md-6 col-xs-6 pos-left">
-                            <a href="#sign-modal" data-toggle="modal" data-sign="signin"><span
-                                    class="glyphicon glyphicon-bookmark"></span> 加入私有课</a>
-                        </div>
-                        <div class="col-md-6 col-xs-6 pos-right">
-                            <a href="/contribute" target="_blank"><span class="glyphicon glyphicon-send"></span>
-                                我要投稿</a>
-                        </div>
-                        <div id="join-private-course" class="modal fade words-ctrl" tabindex="-1" role="dialog">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">加入私有课</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div style="margin:15px 0; font-size:16px;">输入教师提供的私有课程码可以加入教师的私有课程。</div>
-                                        <form id="private-course-form" method="POST" action="/courses/join">
-                                            <div class="form-group">
-                                                <label for="code">邀请码</label>
-                                                <input class="form-control" id="code" name="code" type="text" value="">
-                                                <input name="_csrf_token" type=hidden
-                                                       value="1483789088##bbf83c51243ab12daa94911c8865a65bdc66c4d8">
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                        <button type="button" class="btn btn-primary"
-                                                onclick="document.getElementById('private-course-form').submit();">确定
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-
-
+            <!-- 右部区域-“社交平台” -->
             <div class="sidebox">
-
                 <div class="sidebox-header">
-                    <h4 class="sidebox-title">最热路径</h4>
+                    <h4 class="sidebox-title">社交平台-7*24欢迎咨询</h4>
                 </div>
                 <div class="sidebox-body course-content side-list-body">
-                    <a href="/paths/python"><img style="width:25px;height:25px" src="../img/1471513769430.png"> Python
-                        研发工程师</a>
-                    <a href="/paths/bigdata"><img style="width:25px;height:25px" src="../img/1471513926288.png"> 大数据工程师</a>
-                    <a href="/paths/cpp"><img style="width:25px;height:25px" src="../img/1471513793360.png"> C++
-                        研发工程师</a>
-                    <a href="/paths/security"><img style="width:25px;height:25px" src="../img/1471513867033.png">
-                        信息安全工程师</a>
-                    <a href="/paths/linuxsys"><img style="width:25px;height:25px" src="../img/1471514004752.png"> Linux
-                        运维工程师</a>
+                    <a href="contactUs">
+                        <i class="fa fa-weixin"></i>
+                        微信: y724029169 (心之音)
+                    </a>
+                    <a href="contactUs">
+                        <i class="fa fa-qq"></i>
+                        QQ: 724029169 (心之音)
+                    </a>
+                    <a href="contactUs">
+                        <i class="fa fa-weibo"></i>
+                        微博: 心之音yxn
+                    </a>
+                    <a href="contactUs">
+                        <i class="fa fa-comments-o"></i>
+                        百度贴吧: 雅秋文化
+                    </a>
                 </div>
-
             </div>
-
+            <!-- 右部区域-“微信公众号” -->
             <div class="side-image side-qrcode">
-                <img src="../img/ShiyanlouQRCode.png">
-                <div class="side-image-text">关注公众号，手机看教程</div>
+                <img src="foreground/common/img/wechat-official-account-qr.jpg">
+                <div class="side-image-text">欢迎关注微信公众号：重庆雅秋文化</div>
             </div>
-
+            <!-- 右部区域-“最热关注” -->
             <div class="sidebox side-list">
                 <div class="sidebox-header">
-                    <h4 class="sidebox-title">常见问题</h4>
+                    <h4 class="sidebox-title">内容专题</h4>
                 </div>
                 <div class="sidebox-body side-list-body">
-                    <a href="/questions/80" target="_blank">实验操作很卡怎么办？</a>
-                    <a href="/questions/91" target="_blank">为什么连不上实验桌面？</a>
-                    <a href="/questions/360" target="_blank">"我的代码库"如何用？</a>
-                    <a href="/questions/92" target="_blank">实验楼环境默认用户及密码？</a>
-                    <a href="/questions/235" target="_blank">环境中是否可以联网？</a>
-                </div>
-                <div class="sidebox-footer">
-                    <div class="pull-right"><a href="/questions/?tag=%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"
-                                               target="_blank">查看全部</a></div>
+                    <a href="" target="_blank">心理问题</a>
+                    <a href="" target="_blank">精神问题</a>
+                    <a href="" target="_blank">心理问题</a>
+                    <a href="" target="_blank">托管补习</a>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
@@ -527,7 +489,7 @@
                     <div class="social-item footer-weixin-item">
                         <i class="fa fa-weixin"></i>
                         <div class="footer-weixin">
-                            <img src="foreground/common/img/心之音-wechat-qr.jpg">
+                            <img src="foreground/common/img/wechat-qr.jpg">
                         </div>
                     </div>
                 </div>

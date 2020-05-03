@@ -124,7 +124,7 @@
   </select>
   <!-- 查询指定 页数&&栏目&&排序方式（最新） 的内容 -->
   <select id="getSpecifiedPageOfLatest" resultType="map" parameterType="map">
-    select content.id,content.title,content.hits_show,content.comment_num,content.creator_name,content.create_time,
+    select content.id,content.title,content.hits_show,content.comment_num,content.creator_name,content.create_time,content.weight,
         `user`.nickname,`user`.profile_picture_url
     from content
     left join `user`
@@ -138,7 +138,7 @@
   </select>
   <!-- 查询指定 页数&&栏目&&排序方式（最热） 的内容 -->
   <select id="getSpecifiedPageOfHottest" resultType="map" parameterType="map">
-    select content.id,content.title,content.hits_show,content.comment_num,content.creator_name,content.create_time,
+    select content.id,content.title,content.hits_show,content.comment_num,content.creator_name,content.create_time,content.weight,
     `user`.nickname,`user`.profile_picture_url
     from content
     left join `user`
