@@ -98,6 +98,10 @@ public class ContentServiceImpl implements ContentService {
         return contentMapper.getTopXSpecifiedContent(params);
     }
 
+    /**
+     * @Description 查询“时事信息”板块Top4
+     * @author CiaoLee
+     */
     @Override
     public List<Map> getNewsTopFour(Map<String, Object> params) {
         params.put("endIndex", NEWS_TOP_X);
@@ -105,10 +109,25 @@ public class ContentServiceImpl implements ContentService {
         return contentMapper.getTopXSpecifiedContent(params);
     }
 
+    /**
+     * @Description 查询“讨论交流”板块Top4
+     * @author CiaoLee
+     */
     @Override
     public List<Map> getForumTopNine(Map<String, Object> params) {
         params.put("endIndex", FORUM_TOP_X);
         params.put("columnId", FORUM_ID);
         return contentMapper.getTopXSpecifiedContent(params);
+    }
+
+    /**
+     * @Description 文章点击量增加
+     * @param params=> contentId Content表主键
+     * @author CiaoLee
+     */
+    @Override
+    public void contentHitsUp(Map<String, Object> params) {
+        params.put("hitsUpInterval", HITS_UP_INTERVAL);
+        contentMapper.contentHitsUp(params);
     }
 }

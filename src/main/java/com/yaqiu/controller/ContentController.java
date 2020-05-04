@@ -159,4 +159,22 @@ public class ContentController {
         }
         return new Result(SUCCESS, rtnMap);
     }
+
+    /**
+     * @Description 文章点击量增加
+     * @param contentId Content表主键
+     * @author CiaoLee
+     */
+    @PostMapping("contentHitsUp")
+    public void contentHitsUp(String contentId) {
+        /* 初始化参数 */
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", contentId);
+        /* 执行修改 */
+        try{
+            contentService.contentHitsUp(params);
+        } catch(Exception e) {
+            System.err.println("文章点击量增加错误，连接数据库失败");
+        }
+    }
 }

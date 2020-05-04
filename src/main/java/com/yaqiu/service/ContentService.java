@@ -19,4 +19,6 @@ public interface ContentService {
     List<Map> getNewsTopFour(Map<String, Object> params);
 
     List<Map> getForumTopNine(Map<String, Object> params);
+
+    void contentHitsUp(Map<String, Object> params);
 }

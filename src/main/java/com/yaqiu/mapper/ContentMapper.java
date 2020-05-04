@@ -43,4 +43,6 @@ public interface ContentMapper {
     int updateByPrimaryKeyWithBLOBs(Content record);
 
     int updateByPrimaryKey(Content record);
+
+    void contentHitsUp(Map<String, Object> params);
 }

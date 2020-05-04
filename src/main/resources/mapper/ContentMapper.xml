@@ -425,4 +425,11 @@
       weight = #{weight,jdbcType=TINYINT}
     where id = #{id,jdbcType=CHAR}
   </update>
+  <!-- 文章点击量增加 -->
+  <update id="contentHitsUp" parameterType="map">
+    update content
+    set content.hits_show=content.hits_show+#{hitsUpInterval},
+        content.hits_real=content.hits_real+#{hitsUpInterval}
+    where content.id=#{id}
+  </update>
 </mapper>

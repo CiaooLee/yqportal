@@ -111,7 +111,7 @@
                 <div class="question-author">
                     <div class="user-avatar ">
                         <a class="avatar">
-                            <img src="https://dn-simplecloud.shiyanlou.com/gravatarM7Q8G5B92TNJ.jpg?imageView2/1/w/200/h/200">
+                            <img src="/foreground/general/img/domain/xzy-profile.jpg">
                         </a>
                     </div>
                     <div class="user-username">
@@ -389,6 +389,9 @@
         },
         beforeCreate() {
             getSpecifiedContent(contentId);
+        },
+        mounted() {
+            contentHitsUp();
         }
     });
 
@@ -405,6 +408,19 @@
             success: function (rtnData) {
                 contentVue.content = rtnData.data;
             }
+        });
+    }
+
+    /**
+     *@Description 文章点击量增加
+     *@private contentId 文章主键（全局变量）
+     *@author CiaoLee
+     */
+    function contentHitsUp() {
+        $.ajax({
+            url: "content/contentHitsUp",
+            type: "post",
+            data: {"contentId": contentId}
         });
     }
 </script>

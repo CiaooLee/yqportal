@@ -33,4 +33,7 @@ public class GlobalConstant {
     public static final Integer CASE_TOP_X = 9;
     public static final Integer NEWS_TOP_X = 4;
     public static final Integer FORUM_TOP_X = 4;
+
+    /* 文章点击量每次增加的差距值 */
+    public static final Integer HITS_UP_INTERVAL = 1;
 }
