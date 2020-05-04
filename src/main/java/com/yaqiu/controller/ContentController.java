@@ -47,6 +47,7 @@ public class ContentController {
         params.put("pageIndex", pageIndex);
         params.put("beginIndex", (pageIndex-1)*PAGE_SIZE);
         params.put("pageSize", PAGE_SIZE);
+        params.put("status", ACTIVE_STATUS);
         //查询数据库
         List<Map> currentPage = null;
         try {
@@ -132,5 +133,30 @@ public class ContentController {
             return new Result(ERROR, null);
         }
         return new Result(SUCCESS, null);
+    }
+
+    /**
+     * @Description 获取首页内容-各版块TopX
+     * @author CiaoLee
+     */
+    @GetMapping("portalContentOnload")
+    public Result portalContentOnload() {
+        /* 初始化参数 */
+        Map<String, Object> params = new HashMap<>();
+        params.put("status", ACTIVE_STATUS);
+        /* 初始化结果集 */
+        Map<String, Object> rtnMap = new HashMap<>();
+        try{
+            /* 查询“经典案例”板块Top9 */
+            rtnMap.put("case", contentService.getCaseTopNine(params));
+            /* 查询”实时信息”板块Top4 */
+            rtnMap.put("news", contentService.getNewsTopFour(params));
+            /* 查询“讨论交流”板块Top4 */
+            rtnMap.put("forum", contentService.getForumTopNine(params));
+        } catch(Exception e) {
+            System.err.println("获取首页内容错误，连接数据库失败");
+            return new Result(ERROR, null);
+        }
+        return new Result(SUCCESS, rtnMap);
     }
 }

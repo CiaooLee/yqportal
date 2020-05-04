@@ -23,4 +23,14 @@ public class GlobalConstant {
     /* status状态 */
     public static final Byte ACTIVE_STATUS = 1;
     public static final Byte INACTIVE_STATUS = 0;
+
+    /* 各板块主键 */
+    public static final String CASE_ID = "sgfY4g5k";
+    public static final String NEWS_ID = "GbBxLHTt";
+    public static final String FORUM_ID = "lQSlUrT0";
+
+    /* 首页各版块内容查询TopX */
+    public static final Integer CASE_TOP_X = 9;
+    public static final Integer NEWS_TOP_X = 4;
+    public static final Integer FORUM_TOP_X = 4;
 }

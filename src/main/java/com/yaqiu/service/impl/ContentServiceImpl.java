@@ -13,8 +13,7 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
-import static com.yaqiu.constant.GlobalConstant.ACTIVE_STATUS;
-import static com.yaqiu.constant.GlobalConstant.ADMIN_USERNAME;
+import static com.yaqiu.constant.GlobalConstant.*;
 
 @Service
 public class ContentServiceImpl implements ContentService {
@@ -86,5 +85,30 @@ public class ContentServiceImpl implements ContentService {
         /* 初始化Content对象 */
         Content content = new Content(UUIDUtil.getUUID(), title, 0, 0, 0, ADMIN_USERNAME, null, DateUtil.getCurrentDateTime(), columnId, ACTIVE_STATUS, weight, mainContent);
         contentMapper.insert(content);
+    }
+
+    /**
+     * @Description 查询“经典案例”板块Top9
+     * @author CiaoLee
+     */
+    @Override
+    public List<Map> getCaseTopNine(Map<String, Object> params) {
+        params.put("endIndex", CASE_TOP_X);
+        params.put("columnId", CASE_ID);
+        return contentMapper.getTopXSpecifiedContent(params);
+    }
+
+    @Override
+    public List<Map> getNewsTopFour(Map<String, Object> params) {
+        params.put("endIndex", NEWS_TOP_X);
+        params.put("columnId", NEWS_ID);
+        return contentMapper.getTopXSpecifiedContent(params);
+    }
+
+    @Override
+    public List<Map> getForumTopNine(Map<String, Object> params) {
+        params.put("endIndex", FORUM_TOP_X);
+        params.put("columnId", FORUM_ID);
+        return contentMapper.getTopXSpecifiedContent(params);
     }
 }

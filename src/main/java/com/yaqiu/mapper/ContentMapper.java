@@ -30,6 +30,8 @@ public interface ContentMapper {
 
     Map<String, Object> getSpecifiedContent(Map<String, Object> params);
 
+    List<Map> getTopXSpecifiedContent(Map<String, Object> params);
+
     int updateByExampleSelective(@Param("record") Content record, @Param("example") ContentExample example);
 
     int updateByExampleWithBLOBs(@Param("record") Content record, @Param("example") ContentExample example);

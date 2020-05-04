@@ -129,7 +129,7 @@
     from content
     left join `user`
         on content.creator_id=`user`.id
-    where content.`status`='1'
+    where content.`status`=#{status}
     <if test="columnId != null" >
       and content.column_id=#{columnId}
     </if>
@@ -143,7 +143,7 @@
     from content
     left join `user`
     on content.creator_id=`user`.id
-    where content.`status`='1'
+    where content.`status`=#{status}
     <if test="columnId != null" >
       and content.column_id=#{columnId}
     </if>
@@ -161,6 +161,15 @@
     left join domain_column
         on content.column_id=domain_column.id
     where content.id=#{id}
+  </select>
+  <!-- 获取首页内容-各版块TopX -->
+  <select id="getTopXSpecifiedContent" parameterType="map" resultType="map">
+    select content.id,content.title,content.hits_show
+    from content
+    where content.`status`=#{status}
+        and content.column_id=#{columnId}
+    order by content.create_time desc
+    limit 0,#{endIndex}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from content
