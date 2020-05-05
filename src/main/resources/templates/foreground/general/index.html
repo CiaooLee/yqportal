@@ -20,47 +20,14 @@
     <link rel="stylesheet" href="foreground/general/css/animate/animate.min.css">
     <link rel="stylesheet" href="foreground/general/css/mine/global/sign-modal.css">
     <link rel="stylesheet" href="foreground/general/css/mine/global/navibar.css">
+    <link rel="stylesheet" href="foreground/general/css/mine/portal/portal.css">
     <!-- js -->
     <script src="foreground/general/js/jquery/jquery.min.js"></script>
     <script src="foreground/general/js/bootstrap/bootstrap.min.js"></script>
     <script src="foreground/general/js/vue/vue.js"></script>
     <!-- 内联样式 -->
     <style>
-        /* 第一板块-主页 整体 */
-        .banner-container {
-            min-height: 662px;
-        }
 
-        .course-btn {
-            margin-left: 4%;
-        }
-
-        .navbar-banner {
-            background-image: url("foreground/general/img/portal/homepage-0.jpg");
-            background-size: auto 100%;
-            background-repeat: no-repeat;
-        }
-
-        /* 第二板块-内容简述 */
-        .brief-img {
-            width: 168px;
-            height: 168px;
-        }
-
-        /* 第三板块-经典案例 */
-        .case-img {
-            border-radius: 20px;
-        }
-
-        /* 第四板块-实时信息 */
-        .news-img {
-            border-radius: 15px;
-        }
-
-        /* 第五板块-讨论交流 */
-        .forum-img {
-            border-radius: 15px;
-        }
     </style>
 </head>
 <body>
@@ -96,17 +63,6 @@
                     <a href="/contactUs">联系我们</a>
                 </li>
             </ul>
-
-            <div class="navbar-right btns">
-                <a class="btn btn-default navbar-btn sign-in" data-sign="signin" href="#sign-modal" data-toggle="modal">登录</a>
-                <a class="btn btn-default navbar-btn sign-up" data-sign="signup" href="#sign-modal" data-toggle="modal">注册</a>
-            </div>
-
-            <!--<form class="navbar-form navbar-right" action="search" method="get" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="search" autocomplete="off" placeholder="搜索 案例/话题">
-                </div>
-            </form>-->
         </div>
     </div>
 </nav>
@@ -121,7 +77,7 @@
                         <img src="foreground/general/img/portal/title.png"/>
                     </a>
                     <div style="margin-top:24px; border-radius: 60px;">
-                        <a id="course-btn" class="course-btn btn btn-lg" href="/contactUs">联系我们</a>
+                        <a id="course-btn" class="course-btn btn btn-lg" href="tel:13320337453">联系我们</a>
                     </div>
                 </div>
             </div>
@@ -172,45 +128,7 @@
 </div>
 
 <div id="content-area">
-    <!-- 第三板块-典型案例 -->
-    <div class="line-and-laboratory">
-        <div class="container">
-            <div class="clearfix text-center item-header">
-                <span class="line"></span>
-                <div class="text-center item-title" onclick="location.href='/domain?type=case'">经典案例</div>
-                <span class="line"></span>
-            </div>
-            <div class="clearfix courses">
-                <!-- 经典案例1 -->
-                <div v-for="(content,index) in caseTopNine" class="col-md-4 col-sm-6 course">
-                    <a class="course-box" :href="'/content?id='+content.id">
-                        <div class="sign-box">
-                            <i class="fa fa-star-o course-follow pull-right"></i>
-                        </div>
-                        <div class="course-img">
-                            <img class="case-img" :src="'foreground/general/img/portal/case-'+ index +'.jpg'" alt="雅秋文化-经典案例-专题一">
-                        </div>
-                        <div class="course-body">
-                            <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="经典案例-专题一">{{content.title}}</span>
-                        </div>
-                        <div class="course-footer">
-			            <span class="course-per-num pull-left">
-                            <i class="fa fa-users"></i>
-                            {{content.hits_show}}
-                        </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="clearfix item-footer">
-                <div class="pull-right watch-all">
-                    <a href="/domain?type=case">查看更多 ></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 第四板块-实时信息 -->
+    <!-- 第三板块-实时信息 -->
     <div class="line-and-laboratory">
         <div class="container">
             <div class="clearfix text-center item-header" onclick="location.href='/domain?type=news'">
@@ -248,7 +166,7 @@
         </div>
     </div>
 
-    <!-- 第五板块-讨论区 -->
+    <!-- 第四板块-讨论区 -->
     <div class="line-and-laboratory">
         <div class="container">
             <div class="clearfix text-center item-header">
@@ -281,6 +199,44 @@
             <div class="clearfix item-footer">
                 <div class="pull-right watch-all">
                     <a href="/domain?type=forum">查看更多 ></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第五板块-典型案例 -->
+    <div class="line-and-laboratory">
+        <div class="container">
+            <div class="clearfix text-center item-header">
+                <span class="line"></span>
+                <div class="text-center item-title" onclick="location.href='/domain?type=case'">经典案例</div>
+                <span class="line"></span>
+            </div>
+            <div class="clearfix courses">
+                <!-- 经典案例1 -->
+                <div v-for="(content,index) in caseTopNine" class="col-md-4 col-sm-6 course">
+                    <a class="course-box" :href="'/content?id='+content.id">
+                        <div class="sign-box">
+                            <i class="fa fa-star-o course-follow pull-right"></i>
+                        </div>
+                        <div class="course-img">
+                            <img class="case-img" :src="'foreground/general/img/portal/case-'+ index +'.jpg'" alt="雅秋文化-经典案例-专题一">
+                        </div>
+                        <div class="course-body">
+                            <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="经典案例-专题一">{{content.title}}</span>
+                        </div>
+                        <div class="course-footer">
+			            <span class="course-per-num pull-left">
+                            <i class="fa fa-users"></i>
+                            {{content.hits_show}}
+                        </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="clearfix item-footer">
+                <div class="pull-right watch-all">
+                    <a href="/domain?type=case">查看更多 ></a>
                 </div>
             </div>
         </div>
@@ -455,45 +411,5 @@
 </body>
 <!-- 文档就绪-外联js -->
 <script src="foreground/general/js/mine/global/login-btn.js"></script>
-<script type="text/javascript">
-    /**
-     *@Description Vue全局变量
-     *@author CiaoLee
-     */
-    /* Content内容Vue */
-    let contentVue = new Vue({
-        el: "#content-area",
-        data: {
-            caseTopNine: [],
-            newsTopFour: [],
-            forumTopFour: []
-        },
-        beforeCreate() {
-            /* 获取首页内容-各版块TopX */
-            portalContentOnload();
-        }
-    });
-
-    /**
-     *@Description 获取首页内容-各版块TopX
-     *@author CiaoLee
-     */
-    function portalContentOnload() {
-        $.ajax({
-            url: "content/portalContentOnload",
-            type: "get",
-            success: function (rtnData) {
-                if(rtnData.code === "success") {
-                    let data = rtnData.data;
-                    contentVue.caseTopNine = data["case"];
-                    contentVue.newsTopFour = data["news"];
-                    contentVue.forumTopFour = data["forum"];
-                }
-                if(rtnData.code === "error") {
-                    alert("服务器错误，请刷新");
-                }
-            }
-        });
-    }
-</script>
+<script src="foreground/general/js/mine/portal/portal.js"></script>
 </html>

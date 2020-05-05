@@ -1,0 +1,35 @@
+/* 第一板块-主页 整体 */
+.banner-container {
+    min-height: 662px;
+}
+
+.course-btn {
+    margin-left: 4%;
+}
+
+.navbar-banner {
+    background-image: url("/foreground/general/img/portal/homepage-0.jpg");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+
+/* 第二板块-内容简述 */
+.brief-img {
+    width: 168px;
+    height: 168px;
+}
+
+/* 第三板块-经典案例 */
+.case-img {
+    border-radius: 20px;
+}
+
+/* 第四板块-实时信息 */
+.news-img {
+    border-radius: 15px;
+}
+
+/* 第五板块-讨论交流 */
+.forum-img {
+    border-radius: 15px;
+}

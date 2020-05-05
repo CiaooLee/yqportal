@@ -35,6 +35,28 @@
         .question-author {
             text-align: center;
         }
+
+        /* 发布评论模态框 */
+        #comment {
+            width: 80%;
+            height: 60px;
+            margin-left: 10%;
+            border-radius: 15px;
+        }
+
+        #nickname {
+            text-align: center;
+            width: 50%;
+            margin-left: 25%;
+            border-radius: 10px;
+        }
+
+        #phone-number {
+            text-align: center;
+            width: 50%;
+            margin-left: 25%;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
@@ -71,17 +93,6 @@
                     <a href="/contactUs">联系我们</a>
                 </li>
             </ul>
-
-            <div class="navbar-right btns">
-                <a class="btn btn-default navbar-btn sign-in" data-sign="signin" href="#sign-modal" data-toggle="modal">登录</a>
-                <a class="btn btn-default navbar-btn sign-up" data-sign="signup" href="#sign-modal" data-toggle="modal">注册</a>
-            </div>
-
-            <!--<form class="navbar-form navbar-right" action="search" method="get" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="search" autocomplete="off" placeholder="搜索 案例/话题">
-                </div>
-            </form>-->
         </div>
     </div>
 </nav>
@@ -94,7 +105,7 @@
         <li><a :href="'domain?type=' + content.identifier">{{content.column_name}}</a></li>
         <li class="active">
             <a :href="'content?id=' + content.id">
-            {{content.title}}
+                {{content.title}}
             </a>
         </li>
     </ol>
@@ -136,68 +147,35 @@
                 </div>
                 <!-- 主要-内容区域-回答区域 -->
                 <div class="question-answers">
-                    <p class="ptilte">评论区维护中</p>
+                    <p class="ptilte" style="width: 85%; display: inline-block">评论区</p>
+                    <button id="comment-btn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#comment-modal" style="display: inline-block;">发表评论</button>
                     <hr/>
                     <!-- 回答1 -->
-                    <!--<div class="answer-item">
+                    <div v-for="comment in comments" class="answer-item">
                         <div class="answer-head">
-                            <div class="user-avatar ">
-                                <a class="avatar" href="/user/212008" target="_blank">
-                                    <img src="https://dn-simplecloud.shiyanlou.com/gravatarNTY0MzE5MjI0Njgz.png?v=1477283063583&amp;imageView2/1/w/200/h/200">
-                                </a>
-                                <a class="member-icon" href="/vip" target="_blank">
-                                    <img src="https://static.shiyanlou.com/img/vip-icon.png">
+                            <div class="user-avatar">
+                                <a class="avatar">
+                                    <img :src="'/foreground/common/img/profile-picture/' + comment.profilePictureUrl + '.png'">
                                 </a>
                             </div>
                         </div>
                         <div class="answer-detail">
                             <span class="comment-reply">
                                 <div class="user-username ">
-                                    <a class="username" href="/user/212008" target="_blank">
-                                        米斯特_周
+                                    <a class="username">
+                                        {{comment.creatorNickname}}
                                     </a>
-                                    <span class="user-level">L234</span>
                                  </div>
                             </span>
                             <div class="answer-content markdown-body">
-                            <textarea style="display:none;">
-                                开始实验后，如图所示：
-                                ![图片描述](https://dn-simplecloud.shiyanlou.com/uid/212008/1483688692465.png-wm)
-                            </textarea>
+                                <p style="font-size: 15px">{{comment.mainContent}}</p>
                             </div>
                             <div>
-                                <span class="create-time">21小时前</span>
+                                <span class="create-time">{{comment.createTime}}</span>
                                 <hr/>
                             </div>
                         </div>
-                    </div>-->
-                    <!-- 回答2 -->
-                    <!--<div class="answer-item">
-                        <div class="answer-head">
-                            <div class="user-avatar ">
-                                <a class="avatar" href="/user/347060" target="_blank">
-                                    <img src="https://dn-simplecloud.shiyanlou.com/gravatarM7Q8G5B92TNJ.jpg?imageView2/1/w/200/h/200">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="answer-detail">
-                            <span class="comment-reply">
-                                <div class="user-username ">
-                                    <a class="username" href="/user/347060" target="_blank">
-                                            到此一游
-                                    </a>
-                                    <span class="user-level">L4</span>
-                                </div>
-                            </span>
-                            <div class="answer-content markdown-body">
-                                <textarea style="display:none;">这个不是发实验报告咩。。。怎么提问的时候发截图啊</textarea>
-                            </div>
-                            <div>
-                                <span class="create-time">5小时前</span>
-                                <hr/>
-                            </div>
-                        </div>
-                    </div>-->
+                    </div>
                 </div>
             </div>
         </div>
@@ -302,6 +280,41 @@
     </div>
 </div>
 
+<!-- 发布评论模态框 -->
+<div class="modal fade" id="comment-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:800px; height:500px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">发表评论</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <span>我的评论：</span>
+                    <span id="comment-warning" style="display: none; color: red"></span>
+                    <textarea id="comment"></textarea>
+                </div>
+                <br/><br/>
+                <div class="col-md-12" style="margin-top: 30px">
+                    <span>请输入昵称，以游客身份畅所欲言：</span>
+                    <span id="nickname-warning" style="display: none; color: red"></span>
+                    <input id="nickname"/>
+                </div>
+                <br/><br/>
+                <div class="col-md-12" style="margin-top: 30px">
+                    <span>（选填）您可以填写手机号，方便获取回复提醒：</span>
+                    <span id="phone-number-warning" style="display: none; color: red"></span>
+                    <input id="phone-number"/>
+                </div>
+            </div>
+            <div class="modal-footer" style="margin-top: 200px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="visitorCommentPublish()">发布</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- 尾部 -->
 <div class="footer">
     <div class="container">
@@ -386,14 +399,43 @@
     let contentVue = new Vue({
         el: "#content-area",
         data: {
-            content: {}
+            content: {},
+            comments: []
         },
         beforeCreate() {
-            getSpecifiedContent(contentId);
+            getSpecifiedContent();
         },
         mounted() {
             contentHitsUp();
+            getSpecifiedComments();
         }
+    });
+
+    /**
+     *@Description 绑定事件
+     *@author CiaoLee
+     */
+    /* “发布评论”模态框按钮 */
+    $("#comment-btn").click(function() {
+        $("#nickname").val("");
+        $("#comment").val("");
+        $("#phone-number").val("");
+        $("#nickname-warning").hide();
+        $("#comment-warning").hide();
+        $("#phone-number-warning").hide();
+        $("#comment-modal").addClass("in");
+    });
+    /* 昵称输入框 */
+    $("#nickname").focus(function() {
+        $("#nickname-warning").hide();
+    });
+    /* 评论输入框 */
+    $("#comment").focus(function() {
+        $("#comment-warning").hide();
+    });
+    /* 手机号输入框 */
+    $("#phone-number").focus(function() {
+        $("#phone-number-warning").hide();
     });
 
     /**
@@ -401,9 +443,9 @@
      *@param contentId
      *@author CiaoLee
      */
-    function getSpecifiedContent(contentId) {
+    function getSpecifiedContent() {
         $.ajax({
-            url: "content/getSpecifiedContent",
+            url: "/content/getSpecifiedContent",
             type: "get",
             data: {"id": contentId},
             success: function (rtnData) {
@@ -419,9 +461,88 @@
      */
     function contentHitsUp() {
         $.ajax({
-            url: "content/contentHitsUp",
+            url: "/content/contentHitsUp",
             type: "post",
             data: {"contentId": contentId}
+        });
+    }
+
+    /**
+     *@Description 游客发布评论
+     *@private contentId 文章主键（全局变量）
+     *@author CiaoLee
+     */
+    function visitorCommentPublish() {
+        /* 获取参数 */
+        let nickname = $("#nickname").val();
+        let comment = $("#comment").val();
+        let phoneNumber = $("#phone-number").val();
+        /* 获取警告框 */
+        let nicknameWarning = $("#nickname-warning");
+        let commentWarning = $("#comment-warning");
+        let phoneNumberWarning = $("#phone-number-warning");
+        /* 参数验证 */
+        let flag = 1;
+        if(nickname === "") {
+            nicknameWarning.html("请输入昵称");
+            nicknameWarning.show();
+            flag = 0;
+        }
+        if(comment === "") {
+            commentWarning.html("请输入评论");
+            commentWarning.show();
+            flag = 0;
+        }
+        if(nickname.length > 20) {
+            nicknameWarning.html("昵称长度请保持在20字以内");
+            nicknameWarning.show();
+            flag = 0;
+        }
+        if(comment.length > 80) {
+            commentWarning.html("评论字数请控制在80字以内");
+            commentWarning.show();
+            flag = 0;
+        }
+        if(phoneNumber!=="" && !(/^1[3456789]\d{9}$/.test(phoneNumber))) {
+            phoneNumberWarning.html("请输入正确手机号，或者不填写手机号");
+            phoneNumberWarning.show();
+            flag = 0;
+        }
+        if(flag === 0) return;
+        $.ajax({
+            url: "/comment/visitorCommentPublish",
+            type: "post",
+            data: {"contentId": contentId, "creatorNickname":nickname, "mainContent":comment, "phoneNumber": phoneNumber},
+            success: function(rtnData) {
+                if(rtnData.code === "success") {
+                    alert("发布成功！");
+                    $('#comment-modal').modal('hide');
+                }
+                if(rtnData.code === "error") {
+                    alert("发布失败，请重试");
+                }
+            }
+        });
+    }
+
+    /**
+     *@Description 获取文章的评论
+     *@private contentId 文章主键（全局变量）
+     *@author CiaoLee
+     */
+    function getSpecifiedComments() {
+        $.ajax({
+            url: "/comment/getSpecifiedComments",
+            type: "get",
+            data: {"contentId": contentId},
+            success: function(rtnData) {
+                if(rtnData.code === "success") {
+                    contentVue.comments = rtnData.data;
+                }
+                if(rtnData.code === "error") {
+                    $(".ptilte").html("评论区加载失败，请刷新页面");
+                }
+            }
         });
     }
 </script>

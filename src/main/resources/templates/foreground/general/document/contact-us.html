@@ -21,39 +21,12 @@
     <link rel="stylesheet" href="foreground/general/css/animate/animate.min.css">
     <link rel="stylesheet" href="foreground/general/css/mine/global/sign-modal.css">
     <link rel="stylesheet" href="foreground/general/css/mine/global/navibar.css">
+    <link rel="stylesheet" href="foreground/general/css/mine/document/contact-us.css">
     <!-- js -->
     <script src="foreground/general/js/jquery/jquery.min.js"></script>
     <script src="foreground/general/js/bootstrap/bootstrap.min.js"></script>
     <script src="foreground/general/js/vue/vue.js"></script>
     <script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&type=webgl&ak=Ms1xaHAOHlRSsQPseriYRLKGlCwcN7F8"></script>
-    <style>
-        .privacy-title{
-            font-weight: 100;
-            color: #1ABC9C;
-            font-size: 32px;
-        }
-        .privacy-container {
-            margin-bottom:15px;
-            background-color: #FFFFFF;
-            box-shadow: #CCCCCC 0 1px 3px 0;
-            padding: 40px;
-        }
-        .privacy-row{
-            padding: 25px;
-        }
-        .privacy-h3{
-            margin-bottom: 24px;
-            font-weight: 100;
-            color: #1ABC9C;
-            font-size: 24px;
-        }
-        .privacy-row p{
-            line-height: 32px;
-            color: #6B767D;
-            font-size: 20px;
-            font-weight: 100;
-        }
-    </style>
 </head>
 <body>
 <!-- 导航栏 -->
@@ -88,17 +61,6 @@
                     <a href="/contactUs">联系我们</a>
                 </li>
             </ul>
-
-            <div class="navbar-right btns">
-                <a class="btn btn-default navbar-btn sign-in" data-sign="signin" href="#sign-modal" data-toggle="modal">登录</a>
-                <a class="btn btn-default navbar-btn sign-up" data-sign="signup" href="#sign-modal" data-toggle="modal">注册</a>
-            </div>
-
-            <!--<form class="navbar-form navbar-right" action="search" method="get" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="search" autocomplete="off" placeholder="搜索 案例/话题">
-                </div>
-            </form>-->
         </div>
     </div>
 </nav>
@@ -310,27 +272,5 @@
 </body>
 <!-- 文档就绪-外联js -->
 <script src="foreground/general/js/mine/global/login-btn.js"></script>
-<script type="text/javascript">
-    // 创建地图实例
-    var map = new BMapGL.Map("map-container");
-    // 创建点坐标
-    var point = new BMapGL.Point(106.495918,29.543255);
-    // 初始化地图，设置中心点坐标和地图级别
-    map.centerAndZoom(point, 19);
-    //开启鼠标滚轮缩放
-    map.enableScrollWheelZoom(true);
-    //向地图中添加信息窗口
-    var marker = new BMapGL.Marker(point);  // 创建标注
-    map.addOverlay(marker);              // 将标注添加到地图中
-    var opts = {
-        width : 240,     // 信息窗口宽度
-        height: 100,     // 信息窗口高度
-        title : "重庆雅秋文化传播有限公司" , // 信息窗口标题
-        message:"雅秋文化"
-    }
-    var infoWindow = new BMapGL.InfoWindow("地址：重庆市九龙坡区渝州路珠江华轩", opts);  // 创建信息窗口对象
-    marker.addEventListener("click", function(){
-        map.openInfoWindow(infoWindow, point); //开启信息窗口
-    });
-</script>
+<script src="foreground/general/js/mine/document/contact-us.js"></script>
 </html>
