@@ -81,10 +81,12 @@ public class ContentServiceImpl implements ContentService {
      * @author CiaoLee
      */
     @Override
-    public void adminPublish(String title, String mainContent, String columnId, Byte weight) {
+    public String adminPublish(String title, String mainContent, String columnId, Byte weight) {
         /* 初始化Content对象 */
-        Content content = new Content(UUIDUtil.getUUID(), title, 0, 0, 0, ADMIN_USERNAME, null, DateUtil.getCurrentDateTime(), columnId, ACTIVE_STATUS, weight, mainContent);
+        String id = UUIDUtil.getUUID();
+        Content content = new Content(id, title, 0, 0, 0, ADMIN_USERNAME, null, DateUtil.getCurrentDateTime(), columnId, ACTIVE_STATUS, weight, mainContent);
         contentMapper.insert(content);
+        return id;
     }
 
     /**

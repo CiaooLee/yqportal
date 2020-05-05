@@ -12,7 +12,7 @@ public interface ContentService {
 
     Map<String, Object> getSpecifiedContent(Map<String, Object> params);
 
-    void adminPublish(String title, String mainContent, String columnId, Byte weight);
+    String adminPublish(String title, String mainContent, String columnId, Byte weight);
 
     List<Map> getCaseTopNine(Map<String, Object> params);
 

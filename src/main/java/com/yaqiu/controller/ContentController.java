@@ -1,5 +1,6 @@
 package com.yaqiu.controller;
 
+import com.yaqiu.entity.Content;
 import com.yaqiu.entity.DomainColumn;
 import com.yaqiu.pojo.Page;
 import com.yaqiu.pojo.Result;
@@ -98,12 +99,17 @@ public class ContentController {
      */
     @GetMapping("getSpecifiedContent")
     public Result getSpecifiedContent(String id) {
+        /* 从Redis中取出指定内容 */
+        if(redisUtil.hHasKey("contents", id)) return new Result(SUCCESS, redisUtil.hget("contents", id));
         /* 初始化参数/返回集 */
         Map<String, Object> params = new HashMap<>();
         Map<String, Object> specifiedContent = null;
         params.put("id", id);
         try {
+            //从数据库中查询内容
             specifiedContent = contentService.getSpecifiedContent(params);
+            //存入Redis
+            redisUtil.hset("contents", (String)specifiedContent.get("id"), specifiedContent, 0);
         } catch(Exception e) {
             System.err.println("查询Content：'"+id+"'连接数据库失败");
             return new Result(ERROR, null);
@@ -127,7 +133,10 @@ public class ContentController {
         mainContent = mainContent.replaceAll(" ", "&nbsp;");
         /* 执行新增 */
         try {
-            contentService.adminPublish(title, mainContent, columnId, weight);
+            //新增
+            String id = contentService.adminPublish(title, mainContent, columnId, weight);
+            //存入Redis 调用友军 暴力解决
+            getSpecifiedContent(id);
         } catch(Exception e) {
             System.err.println("管理员新增Content错误，连接数据库失败");
             return new Result(ERROR, null);
