@@ -37,6 +37,9 @@ public class GlobalConstant {
     /* 文章点击量每次增加的差距值 */
     public static final Integer HITS_UP_INTERVAL = 1;
 
+    /* 文章评论量每次增加的差距值 */
+    public static final Integer COMMENT_NUM_UP_INTERVAL = 1;
+
     /* 游客头像张数 */
     public static final Integer VISITOR_PROFILE_PICTURE_COUNT = 8;
 }

@@ -21,4 +21,6 @@ public interface ContentService {
     List<Map> getForumTopNine(Map<String, Object> params);
 
     void contentHitsUp(Map<String, Object> params);
+
+    void contentCommentNumUp(Map<String, Object> params);
 }

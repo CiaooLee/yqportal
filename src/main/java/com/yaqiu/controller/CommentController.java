@@ -3,6 +3,7 @@ package com.yaqiu.controller;
 import com.yaqiu.entity.Comment;
 import com.yaqiu.pojo.Result;
 import com.yaqiu.service.CommentService;
+import com.yaqiu.service.ContentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,9 @@ public class CommentController {
     @Resource
     private CommentService commentService;
 
+    @Resource
+    private ContentService contentService;
+
     /**
      * @Description 游客发表评论
      * @param contentId 文章主键
@@ -33,7 +37,12 @@ public class CommentController {
     public Result visitorCommentPublish(String contentId, String creatorNickname, String mainContent, String phoneNumber) {
         /* 执行新增 */
         try {
+            //新增评论
             commentService.visitorCommentPublish(contentId, creatorNickname, mainContent, phoneNumber);
+            //文章评论数++
+            Map<String, Object> params = new HashMap<>();
+            params.put("id", contentId);
+            contentService.contentCommentNumUp(params);
         } catch(Exception e) {
             System.err.println("游客评论错误，连接数据库失败");
             return new Result(ERROR, null);

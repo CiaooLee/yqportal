@@ -432,4 +432,10 @@
         content.hits_real=content.hits_real+#{hitsUpInterval}
     where content.id=#{id}
   </update>
+  <!-- 文章评论量增加 -->
+  <update id="contentCommentNumUp" parameterType="map">
+    update content
+    set content.comment_num=content.comment_num+#{commentNumUpInterval}
+    where content.id=#{id}
+  </update>
 </mapper>

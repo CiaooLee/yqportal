@@ -132,4 +132,15 @@ public class ContentServiceImpl implements ContentService {
         params.put("hitsUpInterval", HITS_UP_INTERVAL);
         contentMapper.contentHitsUp(params);
     }
+
+    /**
+     * @Description 文章评论量增加
+     * @param params=> contentId Content表主键
+     * @author CiaoLee
+     */
+    @Override
+    public void contentCommentNumUp(Map<String, Object> params) {
+        params.put("commentNumUpInterval", COMMENT_NUM_UP_INTERVAL);
+        contentMapper.contentCommentNumUp(params);
+    }
 }

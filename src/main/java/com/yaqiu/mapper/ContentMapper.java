@@ -45,4 +45,6 @@ public interface ContentMapper {
     int updateByPrimaryKey(Content record);
 
     void contentHitsUp(Map<String, Object> params);
+
+    void contentCommentNumUp(Map<String, Object> params);
 }

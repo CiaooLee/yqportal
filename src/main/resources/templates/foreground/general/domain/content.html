@@ -139,7 +139,7 @@
                         <a :href="'domain?type=' + content.identifier">{{content.column_name}}</a>
                     </span>
                     <span class="question-figure">{{content.hits_show}} 查看</span>
-                    <span class="question-figure">{{content.comment_num}} 回复</span>
+                    <span id="comment-num" class="question-figure">0 回复</span>
                 </div>
                 <!-- 主要-内容区域-发帖详情 -->
                 <div class="question-content markdown-body">
@@ -538,6 +538,7 @@
             success: function(rtnData) {
                 if(rtnData.code === "success") {
                     contentVue.comments = rtnData.data;
+                    $("#comment-num").html(rtnData.data==null?0:rtnData.data.length + " 回复");
                 }
                 if(rtnData.code === "error") {
                     $(".ptilte").html("评论区加载失败，请刷新页面");
