@@ -64,6 +64,10 @@ public class ThymeleafController {
         /* 从session中获取deviceType */
         String deviceType = (String)session.getAttribute("deviceType");
         map.addAttribute("contentId", id);
+        /* 将[OPERATION_LOG]日志信息存入session 交给[VisitorLogInterceptor]类的afterComplement方法处理 */
+        session.setAttribute("operationLogType", GlobalConstant.PAGE_VISIT_OPERATION_LOG_TYPE);
+        session.setAttribute("operationLogContent", "查看了文章["+id+"]");
+        session.setAttribute("operationLogCreateTime", DateUtil.getCurrentDateTime());
         //if("Mobile".equals(deviceType)) return "foreground/mobile/domain/content.html";
         /* 如果访问者使用电脑 或者不明类型设备访问 则跳至通用主页 */
         return "foreground/general/domain/content.html";

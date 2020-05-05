@@ -41,12 +41,12 @@ public class VisitorLogInterceptor implements HandlerInterceptor {
         /* 获取session */
         HttpSession session = SessionUtil.get();
         /* 根据[isNewSession]判断 如果是新会话 则生成[SESSION_LOG表]记录 */
-        /*if((boolean) session.getAttribute("isNewSession")) {
+        if((boolean) session.getAttribute("isNewSession")) {
             VisitorUtil.generateSessionLog();
-        }*/
+        }
         /* 生成本次请求的[OPERATION_LOG]表操作记录 */
-        /*if(ObjectUtil.isNotEmpty(session.getAttribute("operationLogType"))) {
+        if(ObjectUtil.isNotEmpty(session.getAttribute("operationLogType"))) {
             VisitorUtil.generateOperationLog();
-        }*/
+        }
     }
 }
