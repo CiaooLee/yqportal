@@ -42,4 +42,8 @@ public class GlobalConstant {
 
     /* 游客头像张数 */
     public static final Integer VISITOR_PROFILE_PICTURE_COUNT = 8;
+
+    /* 阿里云全球IP地址归属地查询 */
+    public static final String ALIYUN_IP_SERVER_HOST = "https://api01.aliyun.venuscn.com";
+    public static final String ALIYUN_IP_APPCODE = "a3b57416215f43a7b3f16af89911b1d0";
 }

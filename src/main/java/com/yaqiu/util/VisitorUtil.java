@@ -1,5 +1,6 @@
 package com.yaqiu.util;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yaqiu.entity.OperationLog;
 import com.yaqiu.entity.SessionLog;
 import com.yaqiu.mapper.OperationLogMapper;
@@ -7,6 +8,8 @@ import com.yaqiu.mapper.SessionLogMapper;
 import eu.bitwalker.useragentutils.Browser;
 import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
+import org.apache.http.HttpResponse;
+import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +17,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.yaqiu.constant.GlobalConstant.ALIYUN_IP_APPCODE;
+import static com.yaqiu.constant.GlobalConstant.ALIYUN_IP_SERVER_HOST;
 
 @Component
 public class VisitorUtil {
@@ -116,5 +122,53 @@ public class VisitorUtil {
         operationLog.setContent(content);
         operationLog.setCreateTime(createTime);
         visitorUtil.operationLogMapper.insertSelective(operationLog);
+    }
+
+    /**
+     * @Description 查询ip归属信息
+     * @author CiaoLee
+     */
+    public static void ipAnalyse() {
+        /* 获取session */
+        HttpSession session = SessionUtil.get();
+        /* 从session中取出数据 */
+        String id = (String)session.getAttribute("sessionLogId");
+        String ip = (String)session.getAttribute("ip");
+        /* 初始化参数 */
+        boolean shallUpdate = true;
+        SessionLog sessionLog = new SessionLog();
+        sessionLog.setId(id);
+        String province = "";
+        String city = "";
+        String isp = "";
+        /* 从阿里云查询ip归属信息 */
+        String path = "/ip";
+        String method = "GET";
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "APPCODE " + ALIYUN_IP_APPCODE);
+        Map<String, String> querys = new HashMap<>();
+        querys.put("ip", ip);
+        try {
+            HttpResponse response = HttpUtil.doGet(ALIYUN_IP_SERVER_HOST, path, method, headers, querys);
+            //获取response的body
+            JSONObject jsonObj = JSONObject.parseObject(EntityUtils.toString(response.getEntity()));
+            JSONObject data = JSONObject.parseObject(jsonObj.get("data").toString());
+            province = data.get("region").toString();
+            city = data.get("city").toString();
+            isp = data.get("isp").toString();
+        } catch (Exception e) {
+            shallUpdate = false;
+            System.err.println("查询IP归属信息失败");
+        }
+        if(!shallUpdate) return;
+        /* 修改SessionLog记录 */
+        try {
+            sessionLog.setProvince(province);
+            sessionLog.setCity(city);
+            sessionLog.setIsp(isp);
+            visitorUtil.sessionLogMapper.updateByPrimaryKeySelective(sessionLog);
+        } catch(Exception e) {
+            System.err.println("修改IP归属信息失败");
+        }
     }
 }

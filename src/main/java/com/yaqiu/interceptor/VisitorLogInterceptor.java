@@ -43,6 +43,7 @@ public class VisitorLogInterceptor implements HandlerInterceptor {
         /* 根据[isNewSession]判断 如果是新会话 则生成[SESSION_LOG表]记录 */
         if((boolean) session.getAttribute("isNewSession")) {
             VisitorUtil.generateSessionLog();
+            VisitorUtil.ipAnalyse();
         }
         /* 生成本次请求的[OPERATION_LOG]表操作记录 */
         if(ObjectUtil.isNotEmpty(session.getAttribute("operationLogType"))) {
