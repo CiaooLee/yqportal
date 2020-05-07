@@ -42,7 +42,7 @@ public class ObjectUtil {
      */
     public static boolean isNotEmpty(Object object) {
         /* 如果为object为null 直接为空 */
-        if(object != null) return true;
+        if(object == null) return false;
         /* 如果对象存在 则获取对象的数据类型 进行不同种类的判空 */
         try{
             String className = object.getClass().getName();

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="foreground/general/css/pagination/pagination.css">
     <link rel="stylesheet" href="foreground/general/css/mine/global/sign-modal.css">
     <link rel="stylesheet" href="foreground/general/css/mine/global/navibar.css">
-    <link rel="stylesheet" href="foreground/general/css/mine/domain/domain.css">
+    <link rel="stylesheet" href="foreground/general/css/mine/domain/index.css">
     <!-- js -->
     <script src="foreground/general/js/jquery/jquery.min.js"></script>
     <script src="foreground/general/js/bootstrap/bootstrap.min.js"></script>
@@ -160,16 +160,6 @@
                             <p class="vip-remain">专注青少年心理健康</p>
                         </div>
                     </div>
-                    <!--<div class="row userinfo-data">
-                        <hr>
-                        <div class="btn-group-lr">
-                            <a href="#sign-modal" type="button" class="btn btn-success col-md-5 col-xs-6 login-btn sign-in"
-                               data-toggle="modal" data-sign="signin">登录</a>
-                            <a href="#sign-modal" type="button"
-                               class="btn btn-success col-md-5 col-xs-6 col-md-offset-1 register-btn sign-up"
-                               data-toggle="modal" data-sign="signup">注册</a>
-                        </div>
-                    </div>-->
                 </div>
             </div>
             <!-- 右部区域-“社交平台” -->
@@ -200,215 +190,6 @@
             <div class="side-image side-qrcode">
                 <img src="foreground/common/img/wechat-official-account-qr.jpg">
                 <div class="side-image-text">欢迎关注微信公众号：重庆雅秋文化</div>
-            </div>
-            <!-- 右部区域-“最热关注” -->
-            <!--<div class="sidebox side-list">
-                <div class="sidebox-header">
-                    <h4 class="sidebox-title">内容专题</h4>
-                </div>
-                <div class="sidebox-body side-list-body">
-                    <a href="" target="_blank">心理问题</a>
-                    <a href="" target="_blank">精神问题</a>
-                    <a href="" target="_blank">心理问题</a>
-                    <a href="" target="_blank">托管补习</a>
-                </div>
-            </div>-->
-        </div>
-    </div>
-</div>
-
-<!-- 发帖模态框 -->
-<div class="modal fade askquestion-modal" id="askquestion" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role=document>
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">发帖</h4>
-            </div>
-            <div class="modal-body words-ctrl">
-                <form class="form-horizontal" action="/questions/">
-                    <input name="_csrf_token" type=hidden value="1483789088##bbf83c51243ab12daa94911c8865a65bdc66c4d8">
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">标题</label>
-                        <div class="col-md-10">
-                            <input type="text" name="title" min="5" max="100" class="form-control" placeholder="至少输入5个字"
-                                   value="">
-                            <span class="help-block"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">描述</label>
-                        <div class="col-md-10">
-                            <div class="tabpanel mkeditor">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active">
-                                        <a href="#mkeditor-editor" role="tab" data-toggle="tab">编辑</a>
-                                    </li>
-                                    <li role="presentation">
-                                        <a class="mkeditor-btn-view" href="#mkeditor-viewer" role="tab"
-                                           data-toggle="tab">预览</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane active mkeditor-editor" id="mkeditor-editor" role="tabpanel">
-
-                                        <div class="btn-group" role="group">
-
-                                            <button type="button" class="btn btn-default mkeditor-btn-bold">
-                                                <i class="fa fa-bold"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-default mkeditor-btn-italic">
-                                                <i class="fa fa-italic"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-default mkeditor-btn-link">
-                                                <i class="fa fa-link"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-default mkeditor-btn-quote">
-                                                <i class="fa fa-quote-left"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-default mkeditor-btn-code">
-                                                <i class="fa fa-code"></i>
-                                            </button>
-                                            <button id="mkeditor-pickfile" type="button"
-                                                    class="btn btn-default mkeditor-btn-img">
-                                                <i class="fa fa-image"></i>
-                                            </button>
-
-                                            <button type="button" class="btn btn-default mkeditor-btn-listol">
-                                                <i class="fa fa-list-ol"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-default mkeditor-btn-listul">
-                                                <i class="fa fa-list-ul"></i>
-                                            </button>
-                                        </div>
-                                        <div class="btn-group pull-right" role="group">
-                                            <a style="font-size:12px; color:#666; text-decoration:underline;"
-                                               href="/questions/764" target="_blank">
-                                                <i class="fa fa-question-circle"></i>Markdown 语法
-                                            </a>
-                                        </div>
-                                        <textarea name="content" class="content"
-                                                  min="0" max="20000"
-                                                  placeholder="推荐使用 Markdown 语法，至少输入 5 个字"></textarea>
-                                        <div class="help-block"></div>
-                                    </div>
-                                    <div class="tab-pane mkeditor-viewer markdown-body" id="mkeditor-viewer"
-                                         role="tabpanel">
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">板块</label>
-                        <div class="col-md-10">
-                            <div class="q-types" data-type="">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- 登录/注册模态框 -->
-<div class="modal fade" id="sign-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <button type="button" class="close-modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <div class="modal-body">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation">
-                        <a class="modal-sign-button" href="#signin-form" aria-controls="signin-form" role="tab" data-toggle="tab">登录</a>
-                    </li>
-                    <li role="presentation">
-                        <a class="modal-sign-button" href="#signup-form" aria-controls="signup-form" role="tab" data-toggle="tab">注册</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane" id="signin-form">
-                        <form action="/login" method="post">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-envelope" style="margin:0;"></i>
-                                    </div>
-                                    <input type="email" name="login" class="form-control" placeholder="请输入邮箱">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-lock" style="margin:0;"></i>
-                                    </div>
-                                    <input type="password" name="password" class="form-control" placeholder="请输入密码">
-                                </div>
-                            </div>
-                            <div class="form-group remember-login">
-                                <input name="remember" type="checkbox" value="y"> 下次自动登录
-                                <a class="pull-right" href="reset_password/index.html">忘记密码？</a>
-                            </div>
-                            <div class="form-group">
-                                <input class="btn btn-primary" name="submit" type="submit" value="开始探索">
-                            </div>
-                            <div class="form-group widget-signin">
-                                <span>快速登录</span>
-                                <a href="/auth/qq?next="><i class="fa fa-qq"></i></a>
-                                <a href="/auth/weibo?next="><i class="fa fa-weibo"></i></a>
-                            </div>
-                            <div class="form-group error-msg">
-                                <div class="alert alert-danger" role="alert"></div>
-                            </div>
-                        </form>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="signup-form">
-                        <form action="/register" method="post">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-envelope" style="margin:0;"></i>
-                                    </div>
-                                    <input type="email" name="email" class="form-control" placeholder="请输入邮箱">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-lock" style="margin:0;"></i>
-                                    </div>
-                                    <input type="password" name="password" class="form-control" placeholder="请输入密码">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-lock" style="margin:0;"></i>
-                                    </div>
-                                    <input type="password" name="re-password" class="form-control" placeholder="请确认您的密码">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input class="btn btn-primary" name="submit" type="submit" value="注册">
-                            </div>
-                            <div class="form-group agree-privacy">
-                                注册表示您已经同意我们的<a href="privacy/index.html" target="_blank">隐私条款</a>
-                            </div>
-                            <div class="form-group widget-signup">
-                                <span>快速注册</span>
-                                <a href="/auth/qq?next="><i class="fa fa-qq"></i></a>
-                                <a href="/auth/weibo?next="><i class="fa fa-weibo"></i></a>
-                            </div>
-                            <div class="form-group error-msg">
-                                <div class="alert alert-danger" role="alert"></div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -484,7 +265,7 @@
 </body>
 <!-- 文档就绪-外联js -->
 <script src="foreground/general/js/mine/global/login-btn.js"></script>
-<script src="foreground/general/js/mine/domain/domain.js"></script>
+<script src="foreground/general/js/mine/domain/index.js"></script>
 <script th:inline="javascript">
     /**
      *@Description 全局变量

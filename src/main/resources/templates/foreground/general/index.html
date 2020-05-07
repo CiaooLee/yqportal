@@ -25,10 +25,6 @@
     <script src="foreground/general/js/jquery/jquery.min.js"></script>
     <script src="foreground/general/js/bootstrap/bootstrap.min.js"></script>
     <script src="foreground/general/js/vue/vue.js"></script>
-    <!-- 内联样式 -->
-    <style>
-
-    </style>
 </head>
 <body>
 <!-- 导航栏 -->
@@ -77,7 +73,7 @@
                         <img src="foreground/general/img/portal/title.png"/>
                     </a>
                     <div style="margin-top:24px; border-radius: 60px;">
-                        <a id="course-btn" class="course-btn btn btn-lg" href="tel:13320337453">联系我们</a>
+                        <a id="course-btn" class="course-btn btn btn-lg" href="/contactUs">联系我们</a>
                     </div>
                 </div>
             </div>
@@ -90,37 +86,37 @@
     <div class="container">
         <div class="row">
             <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/domain?type=case'">
-                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/student-problem.gif" alt="雅秋心理-学生问题"/></a></div>
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/gif-loading.png" alt="雅秋心理-学生问题"/></a></div>
                 <div><span class="introduce-span">学生问题：厌学、叛逆、早恋、颓废、无兴趣爱好、亲情淡漠、学习无动力、考试紧张、注意力不集中、痴迷于游戏</span></div>
             </div>
             <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/domain?type=case'">
-                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/psychological-problems.gif" alt="雅秋心理-心理问题"/></a></div>
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/gif-loading.png" alt="雅秋心理-心理问题"/></a></div>
                 <div><span class="introduce-span">心理问题：抑郁症、焦虑症、恐惧症、强迫症、疑病症、洁癖、自卑、自闭、失眠、情绪暴躁、心胸狭隘</span></div>
             </div>
             <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/domain?type=case'">
-                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/mental-problem.gif" alt="雅秋心理-精神问题"/></a></div>
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/gif-loading.png" alt="雅秋心理-精神问题"/></a></div>
                 <div><span class="introduce-span">精神问题：幻听、幻觉、妄想、孤僻、亢奋、偏执、猜疑、行为退缩、思维破裂、回避社交、双向情感障碍、逻辑思维混乱</span></div>
             </div>
             <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/domain?type=case'">
-                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/coaching-problem.gif" alt="雅秋心理-托管补习"/></a></div>
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/gif-loading.png" alt="雅秋心理-托管补习"/></a></div>
                 <div><span class="introduce-span">托管补习：对于学习方面令家长抓狂的学生，我们可以因材施教，提供针对于中小学生各科的学习辅导</span></div>
             </div>
         </div>
         <div class="row">
             <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/domain?type=case'">
-                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/case.gif" alt="雅秋文化-经典案例"/></a></div>
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/gif-loading.png" alt="雅秋文化-经典案例"/></a></div>
                 <div><span class="introduce-span">经典案例</span></div>
             </div>
             <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/domain?type=news'">
-                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/news.gif" alt="雅秋文化-新闻动态"/></a></div>
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/gif-loading.png" alt="雅秋文化-新闻动态"/></a></div>
                 <div><span class="introduce-span">实时信息</span></div>
             </div>
             <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/domain?type=forum'">
-                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/forum.gif" alt="雅秋文化-讨论区"/></a></div>
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/gif-loading.png" alt="雅秋文化-讨论区"/></a></div>
                 <div><span class="introduce-span">讨论交流</span></div>
             </div>
             <div class="introduce-unit col-sm-6 col-md-3" onclick="location.href='/contactUs'">
-                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/contact-us.gif" alt="雅秋文化-联系我们"/></a></div>
+                <div><a class="introduce-img"><img class="brief-img" src="foreground/general/img/portal/gif-loading.png" alt="雅秋文化-联系我们"/></a></div>
                 <div><span class="introduce-span">联系我们</span></div>
             </div>
         </div>
@@ -144,10 +140,10 @@
                                data-follow-url="/courses/1/follow"></i>
                         </div>
                         <div class="course-img">
-                            <img class="news-img" :src="'foreground/general/img/portal/news-'+ index +'.jpg'" alt="雅秋文化-实时信息一">
+                            <img class="news-img" src="foreground/general/img/portal/jpg-loading.png" :alt="'雅秋文化-实时信息专题'+(index+1)">
                         </div>
                         <div class="course-body">
-                            <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="雅秋文化-实时信息一">{{content.title}}</span>
+                            <span class="course-title" data-toggle="tooltip" data-placement="bottom" :title="'雅秋文化-实时信息专题'+(index+1)">{{content.title}}</span>
                         </div>
                         <div class="course-footer">
 			            <span class="course-per-num pull-left">
@@ -182,10 +178,10 @@
                                data-follow-url="/courses/1/follow"></i>
                         </div>
                         <div class="course-img">
-                            <img class="forum-img" :src="'foreground/general/img/portal/forum-'+ index +'.jpg'" alt="雅秋文化-讨论区专题一">
+                            <img class="forum-img" src="foreground/general/img/portal/jpg-loading.png" :alt="'雅秋文化-讨论交流专题'+(index+1)">
                         </div>
                         <div class="course-body">
-                            <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="雅秋文化-讨论区专题一">{{content.title}}</span>
+                            <span class="course-title" data-toggle="tooltip" data-placement="bottom" :title="'雅秋文化-讨论交流专题'+(index+1)">{{content.title}}</span>
                         </div>
                         <div class="course-footer">
 			            <span class="course-per-num pull-left">
@@ -220,10 +216,10 @@
                             <i class="fa fa-star-o course-follow pull-right"></i>
                         </div>
                         <div class="course-img">
-                            <img class="case-img" :src="'foreground/general/img/portal/case-'+ index +'.jpg'" alt="雅秋文化-经典案例-专题一">
+                            <img class="case-img" src="foreground/general/img/portal/lg-jpg-loading.png" :alt="'雅秋文化-经典案例专题'+(index+1)">
                         </div>
                         <div class="course-body">
-                            <span class="course-title" data-toggle="tooltip" data-placement="bottom" title="经典案例-专题一">{{content.title}}</span>
+                            <span class="course-title" data-toggle="tooltip" data-placement="bottom" :title="'雅秋文化-经典案例专题'+(index+1)">{{content.title}}</span>
                         </div>
                         <div class="course-footer">
 			            <span class="course-per-num pull-left">
@@ -237,104 +233,6 @@
             <div class="clearfix item-footer">
                 <div class="pull-right watch-all">
                     <a href="/domain?type=case">查看更多 ></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- 登录/注册模态框 -->
-<div class="modal fade" id="sign-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <button type="button" class="close-modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <div class="modal-body">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation">
-                        <a class="modal-sign-button" href="#signin-form" aria-controls="signin-form" role="tab" data-toggle="tab">登录</a>
-                    </li>
-                    <li role="presentation">
-                        <a class="modal-sign-button" href="#signup-form" aria-controls="signup-form" role="tab" data-toggle="tab">注册</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane" id="signin-form">
-                        <form action="/login" method="post">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-envelope" style="margin:0;"></i>
-                                    </div>
-                                    <input type="email" name="login" class="form-control" placeholder="请输入邮箱">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-lock" style="margin:0;"></i>
-                                    </div>
-                                    <input type="password" name="password" class="form-control" placeholder="请输入密码">
-                                </div>
-                            </div>
-                            <div class="form-group remember-login">
-                                <input name="remember" type="checkbox" value="y"> 下次自动登录
-                                <a class="pull-right" href="reset_password/index.html">忘记密码？</a>
-                            </div>
-                            <div class="form-group">
-                                <input class="btn btn-primary" name="submit" type="submit" value="开始探索">
-                            </div>
-                            <div class="form-group widget-signin">
-                                <span>快速登录</span>
-                                <a href="/auth/qq?next="><i class="fa fa-qq"></i></a>
-                                <a href="/auth/weibo?next="><i class="fa fa-weibo"></i></a>
-                            </div>
-                            <div class="form-group error-msg">
-                                <div class="alert alert-danger" role="alert"></div>
-                            </div>
-                        </form>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="signup-form">
-                        <form action="/register" method="post">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-envelope" style="margin:0;"></i>
-                                    </div>
-                                    <input type="email" name="email" class="form-control" placeholder="请输入邮箱">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-lock" style="margin:0;"></i>
-                                    </div>
-                                    <input type="password" name="password" class="form-control" placeholder="请输入密码">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-lock" style="margin:0;"></i>
-                                    </div>
-                                    <input type="password" name="re-password" class="form-control" placeholder="请确认您的密码">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input class="btn btn-primary" name="submit" type="submit" value="注册">
-                            </div>
-                            <div class="form-group agree-privacy">
-                                注册表示您已经同意我们的<a href="privacy/index.html" target="_blank">隐私条款</a>
-                            </div>
-                            <div class="form-group widget-signup">
-                                <span>快速注册</span>
-                                <a href="/auth/qq?next="><i class="fa fa-qq"></i></a>
-                                <a href="/auth/weibo?next="><i class="fa fa-weibo"></i></a>
-                            </div>
-                            <div class="form-group error-msg">
-                                <div class="alert alert-danger" role="alert"></div>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>

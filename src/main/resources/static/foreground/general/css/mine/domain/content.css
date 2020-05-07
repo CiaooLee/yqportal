@@ -1,0 +1,31 @@
+/* 标题 */
+.question-headline {
+    text-align: center;
+}
+
+/* 发布人信息 */
+.question-author {
+    text-align: center;
+}
+
+/* 发布评论模态框 */
+#comment {
+    width: 80%;
+    height: 60px;
+    margin-left: 10%;
+    border-radius: 15px;
+}
+
+#nickname {
+    text-align: center;
+    width: 50%;
+    margin-left: 25%;
+    border-radius: 10px;
+}
+
+#phone-number {
+    text-align: center;
+    width: 50%;
+    margin-left: 25%;
+    border-radius: 10px;
+}
