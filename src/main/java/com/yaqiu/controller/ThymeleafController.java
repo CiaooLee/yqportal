@@ -1,16 +1,23 @@
 package com.yaqiu.controller;
 
 import com.yaqiu.constant.GlobalConstant;
+import com.yaqiu.entity.Content;
 import com.yaqiu.util.DateUtil;
+import com.yaqiu.util.RedisUtil;
 import com.yaqiu.util.SessionUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 public class ThymeleafController {
+    @Resource
+    private RedisUtil redisUtil;
+
     /**
      * @Description 前台-首页跳转映射
      * @author CiaoLee
@@ -64,9 +71,15 @@ public class ThymeleafController {
         /* 从session中获取deviceType */
         String deviceType = (String)session.getAttribute("deviceType");
         map.addAttribute("contentId", id);
+        String logContent = "查看了文章["+id+"]";
+        /* 获取文章标题 */
+        if(redisUtil.hHasKey("contents", id)) {
+            Map content = (Map)redisUtil.hget("contents", id);
+            logContent = "查看了文章["+(String)content.get("title")+"]";
+        }
         /* 将[OPERATION_LOG]日志信息存入session 交给[VisitorLogInterceptor]类的afterComplement方法处理 */
         session.setAttribute("operationLogType", GlobalConstant.PAGE_VISIT_OPERATION_LOG_TYPE);
-        session.setAttribute("operationLogContent", "查看了文章["+id+"]");
+        session.setAttribute("operationLogContent", logContent);
         session.setAttribute("operationLogCreateTime", DateUtil.getCurrentDateTime());
         //if("Mobile".equals(deviceType)) return "foreground/mobile/domain/content.html";
         /* 如果访问者使用电脑 或者不明类型设备访问 则跳至通用主页 */

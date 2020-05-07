@@ -49,22 +49,22 @@ public class ObjectUtil {
             //若是字符串 则需要判断是否为空字符串
             if(className.contains("String")) {
                 String realObject = (String)object;
-                if(realObject.length() >= 1) return true;
+                if(realObject.length() == 1) return false;
             }
             //若是Map 则需要判断size是否为0
             if(className.contains("Map")) {
                 Map realObject = (Map)object;
-                if(realObject.size() >=1) return true;
+                if(realObject.size() == 1) return false;
             }
             //若是List 则需要判断size是否为0
             if(className.contains("List")) {
                 List realObject = (List)object;
-                if(realObject.size() >= 1) return true;
+                if(realObject.size() == 1) return false;
             }
         } catch(Exception e) {
             System.err.println(object.toString() + "|对象判不空出错");
         }
-        return false;
+        return true;
     }
 
     /**
