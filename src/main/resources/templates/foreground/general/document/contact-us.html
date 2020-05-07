@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -29,6 +28,7 @@
     <script type="text/javascript" src="https://api.map.baidu.com/api?v=1.0&type=webgl&ak=Ms1xaHAOHlRSsQPseriYRLKGlCwcN7F8"></script>
 </head>
 <body>
+
 <!-- 导航栏 -->
 <nav class="navbar navbar-default navbar-fixed-top header">
     <div class="container">
@@ -75,8 +75,8 @@
                 </div>
                 <div class="row privacy-row">
                     <p>地址：重庆市九龙坡区渝州路珠江华轩</p>
-                    <p>固定电话：023-68833733 (工作时间：周一到周日9:00-17:00)</p>
-                    <p>咨询师手机：13320337453 (余老师 7*24小时欢迎咨询)</p>
+                    <p>固定电话：<a class="tel" href="tel:023-68833733">023-68833733</a> (工作时间：周一到周日9:00-17:00)</p>
+                    <p>咨询师手机：<a class="tel" href="tel:023-13320337453">13320337453</a> (余老师 7*24小时欢迎咨询)</p>
                     <br/>
                     <br/>
 
@@ -101,104 +101,6 @@
                     <h3 class="privacy-h3">地图</h3>
                     <div id="map-container" class="col-md-12" style="height: 600px;">
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- 登录/注册模态框 -->
-<div class="modal fade" id="sign-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <button type="button" class="close-modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <div class="modal-body">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation">
-                        <a class="modal-sign-button" href="#signin-form" aria-controls="signin-form" role="tab" data-toggle="tab">登录</a>
-                    </li>
-                    <li role="presentation">
-                        <a class="modal-sign-button" href="#signup-form" aria-controls="signup-form" role="tab" data-toggle="tab">注册</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane" id="signin-form">
-                        <form action="/login" method="post">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-envelope" style="margin:0;"></i>
-                                    </div>
-                                    <input type="email" name="login" class="form-control" placeholder="请输入邮箱">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-lock" style="margin:0;"></i>
-                                    </div>
-                                    <input type="password" name="password" class="form-control" placeholder="请输入密码">
-                                </div>
-                            </div>
-                            <div class="form-group remember-login">
-                                <input name="remember" type="checkbox" value="y"> 下次自动登录
-                                <a class="pull-right" href="reset_password/index.html">忘记密码？</a>
-                            </div>
-                            <div class="form-group">
-                                <input class="btn btn-primary" name="submit" type="submit" value="开始探索">
-                            </div>
-                            <div class="form-group widget-signin">
-                                <span>快速登录</span>
-                                <a href="/auth/qq?next="><i class="fa fa-qq"></i></a>
-                                <a href="/auth/weibo?next="><i class="fa fa-weibo"></i></a>
-                            </div>
-                            <div class="form-group error-msg">
-                                <div class="alert alert-danger" role="alert"></div>
-                            </div>
-                        </form>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="signup-form">
-                        <form action="/register" method="post">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-envelope" style="margin:0;"></i>
-                                    </div>
-                                    <input type="email" name="email" class="form-control" placeholder="请输入邮箱">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-lock" style="margin:0;"></i>
-                                    </div>
-                                    <input type="password" name="password" class="form-control" placeholder="请输入密码">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-lock" style="margin:0;"></i>
-                                    </div>
-                                    <input type="password" name="re-password" class="form-control" placeholder="请确认您的密码">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input class="btn btn-primary" name="submit" type="submit" value="注册">
-                            </div>
-                            <div class="form-group agree-privacy">
-                                注册表示您已经同意我们的<a href="privacy/index.html" target="_blank">隐私条款</a>
-                            </div>
-                            <div class="form-group widget-signup">
-                                <span>快速注册</span>
-                                <a href="/auth/qq?next="><i class="fa fa-qq"></i></a>
-                                <a href="/auth/weibo?next="><i class="fa fa-weibo"></i></a>
-                            </div>
-                            <div class="form-group error-msg">
-                                <div class="alert alert-danger" role="alert"></div>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
