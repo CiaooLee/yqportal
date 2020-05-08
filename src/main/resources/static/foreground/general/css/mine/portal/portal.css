@@ -8,7 +8,7 @@
 }
 
 .navbar-banner {
-    background-image: url("/foreground/general/img/portal/homepage-0.jpg");
+    background-image: url("https://yqportal.oss-cn-chengdu.aliyuncs.com/general/portal/homepage-0.jpg");
     background-size: auto 100%;
     background-repeat: no-repeat;
 }

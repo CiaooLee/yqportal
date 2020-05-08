@@ -41,7 +41,7 @@ let contentVue = new Vue({
  */
 function firstLineGifReplace() {
     for(let i=0; i<4; i++) {
-        $(gifs[i]).attr("src", "foreground/general/img/portal/gif-"+i+".gif");
+        $(gifs[i]).attr("src", "https://yqportal.oss-cn-chengdu.aliyuncs.com/general/portal/gif-"+i+".gif");
     }
 }
 
@@ -51,7 +51,7 @@ function firstLineGifReplace() {
  */
 function secondLineGifReplace() {
     for(let i=4; i<8; i++) {
-        $(gifs[i]).attr("src", "foreground/general/img/portal/gif-"+i+".gif");
+        $(gifs[i]).attr("src", "https://yqportal.oss-cn-chengdu.aliyuncs.com/general/portal/gif-"+i+".gif");
     }
 }
 
@@ -62,7 +62,7 @@ function secondLineGifReplace() {
 function newsImgReplace() {
     let newsImgs = $(".news-img");
     for(let i=0; i<newsImgs.length; i++) {
-        $(newsImgs[i]).attr("src", "foreground/general/img/portal/news-"+i+".jpg");
+        $(newsImgs[i]).attr("src", "https://yqportal.oss-cn-chengdu.aliyuncs.com/general/portal/news-"+i+".jpg");
     }
 }
 
@@ -73,7 +73,7 @@ function newsImgReplace() {
 function forumImgReplace() {
     let forumImgs = $(".forum-img");
     for(let i=0; i<forumImgs.length; i++) {
-        $(forumImgs[i]).attr("src", "foreground/general/img/portal/forum-"+i+".jpg");
+        $(forumImgs[i]).attr("src", "https://yqportal.oss-cn-chengdu.aliyuncs.com/general/portal/forum-"+i+".jpg");
     }
 }
 
@@ -84,7 +84,7 @@ function forumImgReplace() {
 function caseImgReplace() {
     let caseImgs = $(".case-img");
     for(let i=0; i<caseImgs.length; i++) {
-        $(caseImgs[i]).attr("src", "foreground/general/img/portal/case-"+i+".jpg");
+        $(caseImgs[i]).attr("src", "https://yqportal.oss-cn-chengdu.aliyuncs.com/general/portal/case-"+i+".jpg");
     }
 }
 
