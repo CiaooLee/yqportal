@@ -1,7 +1,6 @@
 package com.yaqiu.controller;
 
 import com.yaqiu.constant.GlobalConstant;
-import com.yaqiu.entity.Content;
 import com.yaqiu.util.DateUtil;
 import com.yaqiu.util.RedisUtil;
 import com.yaqiu.util.SessionUtil;
@@ -27,7 +26,7 @@ public class ThymeleafController {
         /* 获取session */
         HttpSession session = SessionUtil.get();
         /* 从session中获取deviceType */
-        String deviceType = (String)session.getAttribute("deviceType");
+        //String deviceType = (String)session.getAttribute("deviceType");
         /* 将[OPERATION_LOG]日志信息存入session 交给[VisitorLogInterceptor]类的afterComplement方法处理 */
         session.setAttribute("operationLogType", GlobalConstant.PAGE_VISIT_OPERATION_LOG_TYPE);
         session.setAttribute("operationLogContent", "访问了[首页]");
@@ -46,15 +45,16 @@ public class ThymeleafController {
      */
     @RequestMapping("domain")
     public String toDomain(String type, ModelMap map) {
+        /* 初始化返回参数 */
+        map.addAttribute("identifier", type);
         /* 获取session */
         HttpSession session = SessionUtil.get();
         /* 从session中获取deviceType */
-        String deviceType = (String)session.getAttribute("deviceType");
+        //String deviceType = (String)session.getAttribute("deviceType");
         /* 将[OPERATION_LOG]日志信息存入session 交给[VisitorLogInterceptor]类的afterComplement方法处理 */
         session.setAttribute("operationLogType", GlobalConstant.PAGE_VISIT_OPERATION_LOG_TYPE);
-        session.setAttribute("operationLogContent", "访问了[内容板块-"+type+"]");
+        session.setAttribute("operationLogContent", "访问了板块["+type+"]");
         session.setAttribute("operationLogCreateTime", DateUtil.getCurrentDateTime());
-        map.addAttribute("identifier", type);
         //if("Mobile".equals(deviceType)) return "foreground/mobile/domain/index.html";
         /* 如果访问者使用电脑 或者不明类型设备访问 则跳至通用主页 */
         return "foreground/general/domain/index.html";
@@ -66,20 +66,21 @@ public class ThymeleafController {
      */
     @RequestMapping("content")
     public String toContent(String id, ModelMap map) {
+        /* 初始化返回参数 */
+        map.addAttribute("contentId", id);
         /* 获取session */
         HttpSession session = SessionUtil.get();
         /* 从session中获取deviceType */
-        String deviceType = (String)session.getAttribute("deviceType");
-        map.addAttribute("contentId", id);
-        String logContent = "查看了文章["+id+"]";
-        /* 获取文章标题 */
+        //String deviceType = (String)session.getAttribute("deviceType");
+        /* 组成LogContent */
+        String title = id;
         if(redisUtil.hHasKey("contents", id)) {
             Map content = (Map)redisUtil.hget("contents", id);
-            logContent = "查看了文章["+(String)content.get("title")+"]";
+            title = (String)content.get("title");
         }
         /* 将[OPERATION_LOG]日志信息存入session 交给[VisitorLogInterceptor]类的afterComplement方法处理 */
         session.setAttribute("operationLogType", GlobalConstant.PAGE_VISIT_OPERATION_LOG_TYPE);
-        session.setAttribute("operationLogContent", logContent);
+        session.setAttribute("operationLogContent", "查看了文章["+ title +"]");
         session.setAttribute("operationLogCreateTime", DateUtil.getCurrentDateTime());
         //if("Mobile".equals(deviceType)) return "foreground/mobile/domain/content.html";
         /* 如果访问者使用电脑 或者不明类型设备访问 则跳至通用主页 */
@@ -95,7 +96,7 @@ public class ThymeleafController {
         /* 获取session */
         HttpSession session = SessionUtil.get();
         /* 从session中获取deviceType */
-        String deviceType = (String)session.getAttribute("deviceType");
+        //String deviceType = (String)session.getAttribute("deviceType");
         /* 将[OPERATION_LOG]日志信息存入session 交给[VisitorLogInterceptor]类的afterComplement方法处理 */
         session.setAttribute("operationLogType", GlobalConstant.PAGE_VISIT_OPERATION_LOG_TYPE);
         session.setAttribute("operationLogContent", "访问了[联系我们]");

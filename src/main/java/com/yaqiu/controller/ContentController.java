@@ -1,11 +1,12 @@
 package com.yaqiu.controller;
 
-import com.yaqiu.entity.Content;
 import com.yaqiu.entity.DomainColumn;
 import com.yaqiu.pojo.Page;
 import com.yaqiu.pojo.Result;
 import com.yaqiu.service.ContentService;
 import com.yaqiu.util.RedisUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,8 @@ import static com.yaqiu.constant.GlobalConstant.*;
 @RestController
 @RequestMapping("content")
 public class ContentController {
+    private static final Logger logger = LoggerFactory.getLogger(ContentController.class);
+
     @Resource
     private ContentService contentService;
 
@@ -57,7 +60,7 @@ public class ContentController {
             //排序方式：最热
             if("hot".equals(sortType)) currentPage = contentService.getSpecifiedPageOfHottest(params);
         } catch(Exception e) {
-            System.err.println("查询指定页内容 连接数据库失败");
+            logger.error("查询栏目["+ identifier +"]最["+ sortType +"]的第["+ pageIndex +"]页失败");
             return new Result(ERROR, null);
         }
         return new Result(SUCCESS, currentPage);
@@ -86,7 +89,7 @@ public class ContentController {
             int specifiedPageCount = specifiedContentsCount%PAGE_SIZE==0? specifiedContentsCount/PAGE_SIZE: specifiedContentsCount/PAGE_SIZE+1;
             page = new Page(specifiedPageCount);
         } catch(Exception e) {
-            System.err.println("查询指定栏目的分页参数 连接数据库失败");
+            logger.error("查询栏目["+ identifier +"]的分页参数失败");
             return new Result(ERROR, null);
         }
         return new Result(SUCCESS, page);
@@ -111,7 +114,12 @@ public class ContentController {
             //存入Redis
             redisUtil.hset("contents", (String)specifiedContent.get("id"), specifiedContent, 0);
         } catch(Exception e) {
-            System.err.println("查询Content：'"+id+"'连接数据库失败");
+            String title = id;
+            if(redisUtil.hHasKey("contents", id)) {
+                Map content = (Map)redisUtil.hget("contents", id);
+                title = (String)content.get("title");
+            }
+            logger.error("查询文章["+ title +"]失败");
             return new Result(ERROR, null);
         }
         return new Result(SUCCESS, specifiedContent);
@@ -138,7 +146,7 @@ public class ContentController {
             //存入Redis 调用友军 暴力解决
             getSpecifiedContent(id);
         } catch(Exception e) {
-            System.err.println("管理员新增Content错误，连接数据库失败");
+            logger.error("管理员新增文章["+ title +"]失败");
             return new Result(ERROR, null);
         }
         return new Result(SUCCESS, null);
@@ -163,7 +171,7 @@ public class ContentController {
             /* 查询“讨论交流”板块Top4 */
             rtnMap.put("forum", contentService.getForumTopNine(params));
         } catch(Exception e) {
-            System.err.println("获取首页内容错误，连接数据库失败");
+            logger.error("获取首页内容错误，连接数据库失败");
             return new Result(ERROR, null);
         }
         return new Result(SUCCESS, rtnMap);
@@ -183,7 +191,12 @@ public class ContentController {
         try{
             contentService.contentHitsUp(params);
         } catch(Exception e) {
-            System.err.println("文章点击量增加错误，连接数据库失败");
+            String title = contentId;
+            if(redisUtil.hHasKey("contents", contentId)) {
+                Map content = (Map)redisUtil.hget("contents", contentId);
+                title = (String)content.get("title");
+            }
+            logger.error("文章["+ title +"]点击量++失败");
         }
     }
 }

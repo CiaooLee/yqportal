@@ -4,6 +4,9 @@ import com.yaqiu.entity.Comment;
 import com.yaqiu.pojo.Result;
 import com.yaqiu.service.CommentService;
 import com.yaqiu.service.ContentService;
+import com.yaqiu.util.RedisUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +22,11 @@ import static com.yaqiu.constant.GlobalConstant.*;
 @RestController
 @RequestMapping("comment")
 public class CommentController {
+    private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
+
+    @Resource
+    private RedisUtil redisUtil;
+
     @Resource
     private CommentService commentService;
 
@@ -44,7 +52,12 @@ public class CommentController {
             params.put("id", contentId);
             contentService.contentCommentNumUp(params);
         } catch(Exception e) {
-            System.err.println("游客评论错误，连接数据库失败");
+            String title = contentId;
+            if(redisUtil.hHasKey("contents", contentId)) {
+                Map content = (Map)redisUtil.hget("contents", contentId);
+                title = (String)content.get("title");
+            }
+            logger.error("游客"+ creatorNickname +"在文章["+ title +"]发布评论失败");
             return new Result(ERROR, null);
         }
         return new Result(SUCCESS, null);
@@ -62,7 +75,12 @@ public class CommentController {
         try {
             specifiedComments = commentService.getSpecifiedComments(contentId);
         } catch(Exception e) {
-            System.err.println("加载评论区失败");
+            String title = contentId;
+            if(redisUtil.hHasKey("contents", contentId)) {
+                Map content = (Map)redisUtil.hget("contents", contentId);
+                title = (String)content.get("title");
+            }
+            logger.error("加载文章["+ title +"]的评论区失败");
             return new Result(ERROR, null);
         }
         return new Result(SUCCESS, specifiedComments);

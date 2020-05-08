@@ -4,6 +4,8 @@ import com.yaqiu.entity.DomainColumn;
 import com.yaqiu.pojo.Result;
 import com.yaqiu.service.DomainColumnService;
 import com.yaqiu.util.RedisUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +20,8 @@ import static com.yaqiu.constant.GlobalConstant.SUCCESS;
 @RestController
 @RequestMapping("domainColumn")
 public class DomainColumnController {
+    private static final Logger logger = LoggerFactory.getLogger(DomainColumnController.class);
+
     @Resource
     private DomainColumnService domainColumnService;
 
@@ -42,6 +46,7 @@ public class DomainColumnController {
                 redisUtil.hset("domain-columns-map", domainColumn.getIdentifier(), domainColumn, 0);
             }
         } catch (Exception e) {
+            logger.error("获取所有板块栏目失败");
             return new Result(ERROR, null);
         }
         return new Result(SUCCESS, domainColumns);
