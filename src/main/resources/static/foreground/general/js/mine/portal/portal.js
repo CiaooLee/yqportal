@@ -19,21 +19,25 @@ let contentVue = new Vue({
     beforeCreate() {
         /* 获取首页内容-各版块TopX */
         portalContentOnload();
-    },
-    mounted() {
-        let that = this;
-        /* 替换第一行gif */
-        firstLineGifReplace();
-        /* 替换第二行gif */
-        setTimeout(secondLineGifReplace, 2000);
-        /* 替换“实时信息”4张图 */
-        setTimeout(newsImgReplace, 3000);
-        /* 替换“讨论交流”4张图 */
-        setTimeout(forumImgReplace, 3000);
-        /* 替换“经典案例”9张图 */
-        setTimeout(caseImgReplace, 3000);
     }
 });
+
+/**
+ *@Description 文档就绪事件
+ *@author CiaoLee
+ */
+window.onload=function() {
+    /* 替换“实时信息”4张图 */
+    newsImgReplace();
+    /* 替换第一行gif */
+    setTimeout(firstLineGifReplace,2000);
+    /* 替换第二行gif */
+    setTimeout(secondLineGifReplace, 3000);
+    /* 替换“讨论交流”4张图 */
+    setTimeout(forumImgReplace, 2000);
+    /* 替换“经典案例”9张图 */
+    setTimeout(caseImgReplace, 2000);
+};
 
 /**
  *@Description 替换第一行gif
