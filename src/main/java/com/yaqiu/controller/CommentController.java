@@ -22,7 +22,7 @@ import static com.yaqiu.constant.GlobalConstant.*;
 @RestController
 @RequestMapping("comment")
 public class CommentController {
-    private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
+    private final Logger logger = LoggerFactory.getLogger(CommentController.class);
 
     @Resource
     private RedisUtil redisUtil;

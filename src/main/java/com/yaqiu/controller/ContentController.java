@@ -22,7 +22,7 @@ import static com.yaqiu.constant.GlobalConstant.*;
 @RestController
 @RequestMapping("content")
 public class ContentController {
-    private static final Logger logger = LoggerFactory.getLogger(ContentController.class);
+    private final Logger logger = LoggerFactory.getLogger(ContentController.class);
 
     @Resource
     private ContentService contentService;

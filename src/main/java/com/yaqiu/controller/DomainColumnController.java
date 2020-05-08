@@ -20,7 +20,7 @@ import static com.yaqiu.constant.GlobalConstant.SUCCESS;
 @RestController
 @RequestMapping("domainColumn")
 public class DomainColumnController {
-    private static final Logger logger = LoggerFactory.getLogger(DomainColumnController.class);
+    private final Logger logger = LoggerFactory.getLogger(DomainColumnController.class);
 
     @Resource
     private DomainColumnService domainColumnService;

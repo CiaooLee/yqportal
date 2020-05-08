@@ -1,9 +1,13 @@
 package com.yaqiu.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 import java.util.Map;
 
 public class ObjectUtil {
+    private static final Logger logger = LoggerFactory.getLogger(ObjectUtil.class);
     /**
      *@Description 判断对象是否存在/为空
      *@author CiaoLee
@@ -30,7 +34,7 @@ public class ObjectUtil {
                 if(realObject.size() == 0) return true;
             }
         } catch (Exception e) {
-            System.err.println(object.toString() + "|对象判空出错");
+            logger.error(object.toString() + "|对象判空出错");
         }
 
         return false;
@@ -62,7 +66,7 @@ public class ObjectUtil {
                 if(realObject.size() == 1) return false;
             }
         } catch(Exception e) {
-            System.err.println(object.toString() + "|对象判不空出错");
+            logger.error(object.toString() + "|对象判不空出错");
         }
         return true;
     }
