@@ -90,6 +90,13 @@
     from operation_log
     where id = #{id,jdbcType=CHAR}
   </select>
+  <select id="getOperationLogsToday" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from operation_log
+    where date(create_time) = curdate()
+    order by create_time asc
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from operation_log
     where id = #{id,jdbcType=CHAR}

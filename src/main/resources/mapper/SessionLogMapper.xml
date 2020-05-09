@@ -10,7 +10,6 @@
     <result column="browser_version" property="browserVersion" jdbcType="VARCHAR" />
     <result column="os_name" property="osName" jdbcType="VARCHAR" />
     <result column="os_group" property="osGroup" jdbcType="VARCHAR" />
-    <result column="user_id" property="userId" jdbcType="CHAR" />
     <result column="create_time" property="createTime" jdbcType="CHAR" />
     <result column="province" property="province" jdbcType="VARCHAR" />
     <result column="city" property="city" jdbcType="VARCHAR" />
@@ -76,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, ip, device_type, browser_name, browser_group, browser_version, os_name, os_group, 
-    user_id, create_time, province, city, isp
+    create_time, province, city, isp
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yaqiu.entity.SessionLogExample" >
     select
@@ -99,6 +98,13 @@
     from session_log
     where id = #{id,jdbcType=CHAR}
   </select>
+  <select id="getSessionLogsToday" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from session_log
+    where date(create_time)=curdate()
+    order by create_time asc
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from session_log
     where id = #{id,jdbcType=CHAR}
@@ -112,14 +118,14 @@
   <insert id="insert" parameterType="com.yaqiu.entity.SessionLog" >
     insert into session_log (id, ip, device_type, 
       browser_name, browser_group, browser_version, 
-      os_name, os_group, user_id, 
-      create_time, province, city, 
-      isp)
+      os_name, os_group, create_time, 
+      province, city, isp
+      )
     values (#{id,jdbcType=CHAR}, #{ip,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR}, 
       #{browserName,jdbcType=VARCHAR}, #{browserGroup,jdbcType=VARCHAR}, #{browserVersion,jdbcType=VARCHAR}, 
-      #{osName,jdbcType=VARCHAR}, #{osGroup,jdbcType=VARCHAR}, #{userId,jdbcType=CHAR}, 
-      #{createTime,jdbcType=CHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
-      #{isp,jdbcType=VARCHAR})
+      #{osName,jdbcType=VARCHAR}, #{osGroup,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{isp,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.yaqiu.entity.SessionLog" >
     insert into session_log
@@ -147,9 +153,6 @@
       </if>
       <if test="osGroup != null" >
         os_group,
-      </if>
-      <if test="userId != null" >
-        user_id,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -188,9 +191,6 @@
       </if>
       <if test="osGroup != null" >
         #{osGroup,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=CHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=CHAR},
@@ -239,9 +239,6 @@
       <if test="record.osGroup != null" >
         os_group = #{record.osGroup,jdbcType=VARCHAR},
       </if>
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=CHAR},
-      </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=CHAR},
       </if>
@@ -269,7 +266,6 @@
       browser_version = #{record.browserVersion,jdbcType=VARCHAR},
       os_name = #{record.osName,jdbcType=VARCHAR},
       os_group = #{record.osGroup,jdbcType=VARCHAR},
-      user_id = #{record.userId,jdbcType=CHAR},
       create_time = #{record.createTime,jdbcType=CHAR},
       province = #{record.province,jdbcType=VARCHAR},
       city = #{record.city,jdbcType=VARCHAR},
@@ -302,9 +298,6 @@
       <if test="osGroup != null" >
         os_group = #{osGroup,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=CHAR},
-      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=CHAR},
       </if>
@@ -329,7 +322,6 @@
       browser_version = #{browserVersion,jdbcType=VARCHAR},
       os_name = #{osName,jdbcType=VARCHAR},
       os_group = #{osGroup,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=CHAR},
       create_time = #{createTime,jdbcType=CHAR},
       province = #{province,jdbcType=VARCHAR},
       city = #{city,jdbcType=VARCHAR},

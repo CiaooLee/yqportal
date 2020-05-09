@@ -16,7 +16,6 @@ public class SessionLog {
     private String browserVersion;
     private String osName;
     private String osGroup;
-    private String userId;
     private String createTime;
     private String province;
     private String city;

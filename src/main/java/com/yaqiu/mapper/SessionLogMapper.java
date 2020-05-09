@@ -2,9 +2,9 @@ package com.yaqiu.mapper;
 
 import com.yaqiu.entity.SessionLog;
 import com.yaqiu.entity.SessionLogExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 public interface SessionLogMapper {
     int countByExample(SessionLogExample example);
@@ -20,6 +20,8 @@ public interface SessionLogMapper {
     List<SessionLog> selectByExample(SessionLogExample example);
 
     SessionLog selectByPrimaryKey(String id);
+
+    List<SessionLog> getSessionLogsToday();
 
     int updateByExampleSelective(@Param("record") SessionLog record, @Param("example") SessionLogExample example);
 

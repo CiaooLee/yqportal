@@ -21,6 +21,8 @@ public interface OperationLogMapper {
 
     OperationLog selectByPrimaryKey(String id);
 
+    List<OperationLog> getOperationLogsToday();
+
     int updateByExampleSelective(@Param("record") OperationLog record, @Param("example") OperationLogExample example);
 
     int updateByExample(@Param("record") OperationLog record, @Param("example") OperationLogExample example);
