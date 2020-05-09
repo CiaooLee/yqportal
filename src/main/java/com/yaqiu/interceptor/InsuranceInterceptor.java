@@ -16,7 +16,9 @@ public class InsuranceInterceptor implements HandlerInterceptor {
         /* 百度站点验证文件 */
         if("/baidu_verify_LL4bi1KNwx.html".equals(uri)) return true;
         /* 搜狗站点验证工具 */
+        if("/sogousiteverification.txt".equals(uri)) return true;
         /* 360站点验证工具 */
+        if("/88c8c55531347c01a765008b814386b4.txt".equals(uri)) return true;
         return false;
     }
 }
