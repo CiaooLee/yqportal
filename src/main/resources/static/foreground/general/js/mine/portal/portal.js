@@ -28,36 +28,12 @@ let contentVue = new Vue({
  */
 window.onload=function() {
     /* 替换“实时信息”4张图 */
-    newsImgReplace();
-    /* 替换第一行gif */
-    setTimeout(firstLineGifReplace,2000);
-    /* 替换第二行gif */
-    setTimeout(secondLineGifReplace, 3000);
+    setTimeout(newsImgReplace, 1000);
     /* 替换“讨论交流”4张图 */
     setTimeout(forumImgReplace, 2000);
     /* 替换“经典案例”9张图 */
-    setTimeout(caseImgReplace, 2000);
+    setTimeout(caseImgReplace, 3000);
 };
-
-/**
- *@Description 替换第一行gif
- *@author CiaoLee
- */
-function firstLineGifReplace() {
-    for(let i=0; i<4; i++) {
-        $(gifs[i]).attr("src", "https://yqportal.oss-cn-chengdu.aliyuncs.com/general/portal/gif-"+i+".gif");
-    }
-}
-
-/**
- *@Description 替换第二行gif
- *@author CiaoLee
- */
-function secondLineGifReplace() {
-    for(let i=4; i<8; i++) {
-        $(gifs[i]).attr("src", "https://yqportal.oss-cn-chengdu.aliyuncs.com/general/portal/gif-"+i+".gif");
-    }
-}
 
 /**
  *@Description 替换“实时信息”4张图
