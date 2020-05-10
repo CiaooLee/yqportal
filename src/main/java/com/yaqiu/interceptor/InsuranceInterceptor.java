@@ -17,6 +17,8 @@ public class InsuranceInterceptor implements HandlerInterceptor {
         String uri = request.getRequestURI();
         /* 百度站点验证文件 */
         if(BAIDU_VALIDATION_FILE_URI.equals(uri)) return true;
+        /* 今日头条站点验证文件 */
+        if(BYTEDANCE_VALIDATION_FILE_URI.equals(uri)) return true;
         return false;
     }
 }

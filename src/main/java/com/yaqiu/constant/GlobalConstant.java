@@ -55,4 +55,6 @@ public class GlobalConstant {
     public static final String BAIDU_VALIDATION_FILE_URI = "/baidu_verify_LL4bi1KNwx.html"; //百度
     public static final String SOGOU_VALIDATION_FILE_URI = "/sogousiteverification.txt"; //搜狗
     public static final String TSZ_VALIDATION_FILE_URI = "/88c8c55531347c01a765008b814386b4.txt"; //360
+    public static final String BING_VALIDATION_FILE_URI = "/BingSiteAuth.xml"; //必应
+    public static final String BYTEDANCE_VALIDATION_FILE_URI = "/ByteDanceVerify.html"; //今日头条
 }

@@ -59,7 +59,7 @@ public class StatisticsScheduler {
                 //获取SessionLog主键
                 String sessionLogId = sessionLog.getId();
                 //生成SessionLog日志
-                logger.info(">>>>["+sessionLog.getCity()+" "+sessionLog.getIsp()+"]用户于["+sessionLog.getCreateTime()+"]访问了站点<<<<");
+                logger.info(">>>>["+sessionLog.getProvince()+" "+sessionLog.getCity()+" "+sessionLog.getIsp()+"]游客于["+sessionLog.getCreateTime()+"]访问了站点<<<<");
                 logger.info(">>>>ID："+sessionLogId);
                 logger.info(">>>>IP："+sessionLog.getIp());
                 logger.info(">>>>浏览器："+sessionLog.getBrowserGroup());
