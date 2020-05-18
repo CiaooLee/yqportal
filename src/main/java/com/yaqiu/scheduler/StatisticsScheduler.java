@@ -68,6 +68,7 @@ public class StatisticsScheduler {
                 visitorOrigin += ObjectUtil.isNotEmpty(city)?city+" ":"";
                 visitorOrigin += isp;
                 if("".equals(visitorOrigin)) visitorOrigin = "未知归属地";
+                visitorOrigin = visitorOrigin.trim(); //去除前后空格=> 归属地查询不完全时 尾部会出现空格
                 //编辑访问者类型信息=>游客or爬虫
                 String browserGroup = sessionLog.getBrowserGroup();
                 String visitorType = "游客";
