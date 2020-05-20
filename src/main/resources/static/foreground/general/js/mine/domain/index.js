@@ -118,6 +118,8 @@ function getSpecifiedPage() {
     //如果全局内容管理对象中有当前页 则直接拿给Vue渲染
     if(contentsExpected!=null && contentsExpected[sortType]!=null && contentsExpected[sortType][currentPageIndex]!=null) {
         contentVue.currentPage = contentsExpected[sortType][currentPageIndex];
+        /* 获取指定栏目的页签栏 */
+        getSpecifiedPagination();
         return;
     }
     /* 如果没有当前页 Compromise=>查库 */
