@@ -38,20 +38,22 @@ public class StatisticsScheduler {
         /* 获取今天的时间 */
         String dateToday = DateUtil.getCurrentDate();
         try {
+            /* 查询今日所有的SessionLog */
+            List<SessionLog> sessionLogsToday = sessionLogService.getSessionLogsToday();
+            /* 查询今日所有的OperationLog */
+            List<OperationLog> operationLogsToday = operationLogService.getOperationLogsToday();
             /* 生成日志开始 */
             logger.info("===============["+dateToday+"流量统计]===============");
             /* 初始化设备数量计数器 */
-            int mobileCount = 0;
-            int computerCount = 0;
-            int crawlerCount = 0;
-            /* 查询今日所有的SessionLog */
-            List<SessionLog> sessionLogsToday = sessionLogService.getSessionLogsToday();
+            int mobileCount = 0; //移动端访问
+            int computerCount = 0; //电脑端访问
+            int crawlerCount = 0; //爬虫访问
+            int localVisitorCount = 0; //本地游客访问
+            /* 分析今日SessionLog */
             int visitorCount = sessionLogsToday.size();
             logger.info(">>>>今日访问流量："+visitorCount);
             logger.info(">>>>设备类型统计位于文档末尾");
             logger.info("");
-            /* 查询今日所有的OperationLog */
-            List<OperationLog> operationLogsToday = operationLogService.getOperationLogsToday();
             /* 获取每个游客的操作记录 */
             for(SessionLog sessionLog : sessionLogsToday) {
                 //记录设备类型
@@ -67,14 +69,21 @@ public class StatisticsScheduler {
                 String visitorOrigin = ObjectUtil.isNotEmpty(province)?province+" ":"";
                 visitorOrigin += ObjectUtil.isNotEmpty(city)?city+" ":"";
                 visitorOrigin += isp;
-                if("".equals(visitorOrigin)) visitorOrigin = "未知归属地";
+                if(ObjectUtil.isEmpty(visitorOrigin)) visitorOrigin = "未知归属地";
                 visitorOrigin = visitorOrigin.trim(); //去除前后空格=> 归属地查询不完全时 尾部会出现空格
-                //编辑访问者类型信息=>游客or爬虫
+                //编辑访问者类型信息=>游客or爬虫or阿里云/腾讯云
                 String browserGroup = sessionLog.getBrowserGroup();
                 String visitorType = "游客";
                 if(browserGroup.contains("Robot") || browserGroup.contains("Spider") || browserGroup.contains("Tool")) {
                     visitorType = "爬虫";
                     crawlerCount++;
+                }
+                if("阿里云".equals(isp) || "腾讯云".equals(isp)) {
+                    visitorType = "";
+                    crawlerCount++;
+                }
+                if("重庆".equals(province) || "重庆".equals(city)) {
+                    localVisitorCount++;
                 }
                 //生成SessionLog日志
                 logger.info(">>>>["+visitorOrigin+"]"+visitorType+"于["+sessionLog.getCreateTime()+"]访问了站点<<<<");
@@ -99,6 +108,7 @@ public class StatisticsScheduler {
             logger.info(">>>>爬虫访问："+crawlerCount);
             logger.info(">>>>电脑端访问："+computerCount);
             logger.info(">>>>手机端访问："+mobileCount);
+            logger.info(">>>>本地游客访问："+localVisitorCount);
             logger.info(">>>>未知设备访问："+(visitorCount-computerCount-mobileCount-crawlerCount));
             logger.info("===============["+dateToday+"流量统计结束]===============");
         } catch(Exception e) {
